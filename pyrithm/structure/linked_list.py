@@ -41,7 +41,7 @@ class LinkedList():
         export_list = []
         while working_node:
             export_list.append(working_node.obj)
-            working_node = working_node.next
+            working_node = working_node.child
         
         return export_list
 
@@ -63,8 +63,6 @@ class LinkedList():
 
         working_node.child = new_node
 
-    
 
-
-
-
+    ##
+    #

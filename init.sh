@@ -6,7 +6,7 @@
 # .venv and will look for some modules which we will install from this init script in order to
 # provide you with important functionality such as static code analysis.
 
-# IMPORTANT: Your Python 3 interpreted is expected to be available as 'python3'.
+# IMPORTANT: Your Python 3 interpreter is expected to be available as 'python3'.
 # - For developers on MacOS:
 # Homebrew is by far the best way to install Python on your Mac and is also even more preferred when
 # you want to run both Python 2 and Python 3 on the same system. When Homebrew is used, Python 3
@@ -44,7 +44,7 @@ python3 -m pip install -r requirements.txt
 # For development in an IDE, you will may need to configure the IDE to recognize and automatically
 # activate the new python virtual environment, however many popular IDEs such as VSCode can
 # automatically see and activate this environment in the .venv directory in which we create it,
-# at the base of the project dir.
+# at the base of the project directory or repository.
 ####################################################################################################
 
 # PyLint install notes:
@@ -67,4 +67,3 @@ python3 -m pip install -r requirements.txt
 
 ##
 #
-
