@@ -1,11 +1,11 @@
 """
-Data structures
+Pyrithm
 """
 
-from . import linked_list
+from . import structure
 
 __all__ = [
-    'linked_list'
+    'structure'
     ]
 
 

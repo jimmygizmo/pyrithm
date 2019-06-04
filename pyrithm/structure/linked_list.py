@@ -44,15 +44,21 @@ class LinkedList():
         """Insert a node with the payload obj at the last position of the linked-list. This
         operation does no change the head or the existing nodes of the list but it does require
         traversal of the entire list in order to locate the last node so that the new node can be
-        made a child of the last node.
+        made a child of the last node. If the linked-list is empty then a new node is created and
+        head is pointed to it.
         """
         new_node = Node(obj)
-        node = self.head
-        # Locating the last node must be done by traversal.
-        while node.child is not None:
-            node = node.child
 
-        node.child = new_node
+        if self.head == None:
+            self.head = new_node
+            return
+
+        current_node = self.head
+        # Locating the last node must be done by traversal.
+        while current_node.child is not None:
+            current_node = current_node.child
+
+        current_node.child = new_node
 
     def export(self):
         """Return a standard list object consisting of a sequence of all of the payload objects
@@ -80,7 +86,7 @@ class LinkedList():
         # in making such an equivalence comparison. A more robust implementation would detect
         # or enforce specific data types for obj and handle the comparison appropriately.
         # == will not work in all cases but is fine for this illustrative implementation.
-        if node.obj == obj
+        if node.obj == obj:
             return node
         
         # Recursively call _find again, passing the child node of the current node.
@@ -101,7 +107,7 @@ class LinkedList():
         previous_node = None
 
         # See comments above in _find() about equality comparisons of obj using == or !=.
-        while ((current_node != None) and (current_node.obj != obj):
+        while ((current_node != None) and (current_node.obj != obj)):
             # Loop continues when the two conditions are both NOT met:
             # 1. We have not currently on the last node yet.
             # 2. We do not have a match for obj
@@ -119,7 +125,7 @@ class LinkedList():
 
     def insert_before(self, locator_obj, obj):
         """Locate the node with the obj payload that matches locator_obj and insert a node before
-        that node with the payload obj.
+        that new node with the provided payload obj.
         """
         if self.head == None:
             raise ValueError('Cannot perform insert_before on an empty linked-list.')
@@ -133,7 +139,7 @@ class LinkedList():
 
         # We locate the node to insert_before exactly as we did above in the delete method where
         # the comments provide some additional detail.
-        while ((current_node != None) and (current_node.obj != obj):
+        while ((current_node != None) and (current_node.obj != obj)):
             previous_node = current_node
             current_node = current_node.child
 
@@ -151,6 +157,28 @@ class LinkedList():
         # So if we arrive here in this method, it means we could not find locator_obj.
         raise ValueError('The node specified to insert_before could not be found.')
 
+    def insert_after(self, locator_obj, obj):
+        """Locate the node with the obj payload that matches locator_obj and insert a node after
+        that new node with the provided payload obj.
+        """
+        # What is the most correct behavior when the linked-list is empty and an insert_after is
+        # attempted? We will allow the insert_after to be the insertion of the first node, but
+        # we could also disallow it with the following error. What is most correct is up to
+        # the designer of the class to determine, especially if the most-correct behavior is
+        # not logical or obvious. In this case we will allow it, so this error-check will be
+        # be disabled:
+        # if self.head == None:
+        #     raise ValueError('Cannot perform insert_after on an empty linked-list.')
+
+        current_node = self.head
+
+        # Again, same method of location.
+        while ((current_node != None) and (current_node.obj != obj)):
+            current_node = current_node.child
+
+        if current_node != None:
+            current_node.child = Node(obj, current_node.child)
+        
 
     ##
     #

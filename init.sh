@@ -30,7 +30,11 @@ python3 -m pip install --upgrade setuptools
 python3 -m pip install pylint
 
 # Install project-specific python depdendencies
-python3 -m pip install -r requirements.txt
+#python3 -m pip install -r requirements.txt  # This is more for deployment and usage.
+# For development, we will install this project's package using the -e option so that pip will
+# install it into the venv using symlinks. In this way we can make changes to the module which will
+# be picked up upon each new execution using the module.
+python3 -m pip install -e .
 
 
 ####################################################################################################
