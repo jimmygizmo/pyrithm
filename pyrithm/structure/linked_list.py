@@ -54,6 +54,7 @@ class LinkedList():
             return
 
         current_node = self.head
+        
         # Locating the last node must be done by traversal.
         while current_node.child is not None:
             current_node = current_node.child
@@ -148,7 +149,7 @@ class LinkedList():
             return
 
         # For consistency, as we did in the delete method, if we cannot find the specified
-        # locator_node, we raise a specific error. It is best to be explicit, but conventions
+        # locator_obj, we raise a specific error. It is best to be explicit, but conventions
         # such as returning nothing silently are OK to use as long as that behavior is done
         # consistently and makes logical sense to the user of the class such that returning
         # nothing will not be misinterpreted or be inconsistent with how other methods of
