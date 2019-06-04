@@ -45,7 +45,7 @@ python3 -m pip install -e .
 # the same thing as this command:
 #### source .venv/bin/activate
 #
-# For development in an IDE, you will may need to configure the IDE to recognize and automatically
+# For development in an IDE, you may need to configure the IDE to recognize and automatically
 # activate the new python virtual environment, however many popular IDEs such as VSCode can
 # automatically see and activate this environment in the .venv directory in which we create it,
 # at the base of the project directory or repository.

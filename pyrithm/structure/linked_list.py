@@ -140,7 +140,7 @@ class LinkedList():
 
         # We locate the node to insert_before exactly as we did above in the delete method where
         # the comments provide some additional detail.
-        while ((current_node != None) and (current_node.obj != obj)):
+        while ((current_node != None) and (current_node.obj != locator_obj)):
             previous_node = current_node
             current_node = current_node.child
 
@@ -174,7 +174,7 @@ class LinkedList():
         current_node = self.head
 
         # Again, same method of location.
-        while ((current_node != None) and (current_node.obj != obj)):
+        while ((current_node != None) and (current_node.obj != locator_obj)):
             current_node = current_node.child
 
         if current_node != None:
