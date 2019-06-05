@@ -23,9 +23,10 @@ print('= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 print('Example Usage and Basic Tests of pyrithm.structure.linked_list')
 print()
-print('Each node of the linked list can hold a payload object of any type and to '
-      'illustrate this, tuples are used.')
-print('First we instantiate a linked-list by calling the constructor:')
+print("""
+Each node of the linked list can hold a payload object of any type and to illustrate
+this, tuples are used. First we instantiate a linked-list by calling the constructor:
+""")
 print()
 print(r'll = pyrithm.structure.linked_list.LinkedList()')
 print()
@@ -84,11 +85,12 @@ print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
 print('TEST 3')
-print()
 
-print ('The nodes which were deleted will now be put back in place using the four methods, '
-       'insert_first(), insert_last(), insert_after() and insert_before(). The resulting '
-       'linked-list should be the original list, who\'s export should be:')
+print("""
+The nodes which were deleted will now be put back in place using the four methods,
+insert_first(), insert_last(), insert_after() and insert_before(). The resulting
+linked-list should be the original list, who\'s export should be:
+""")
 print(r"[('a', 1), ('b', 2), ('c', 3), ('d', 4), ('e', 5), ('f', 6), ('g', 7), ('h', 8)]")
 
 print()
@@ -108,12 +110,32 @@ print(ll.export())
 print()
 
 print(r"ll.insert_before(('f', 6), ('e', 5))")
-locator_obj = objects[5]
+locator_obj = ('f', 6)
 obj = ('e', 5)
 ll.insert_before(locator_obj, obj)
 print(ll.export())
 print()
 
+print(r"ll.insert_after(('b', 2), ('c', 3))")
+locator_obj = ('b', 2)
+obj = ('c', 3)
+ll.insert_before(locator_obj, obj)
+print(ll.export())
+print()
+
+print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
+
+print(
+"""
+This has been a basic illustration and test of the pyrithm LinkedList class. There are
+many other tests which can be performed to stress edge cases and various operations
+in different contexts. Since object equivalence and non-equivalence is fundamental to
+the operation of this class and since there are many considerations to be made in this
+area with respect to different types of objects which could be used as payload objects,
+much more testing can and should be done for real-world usage. Please see pyrithm/tests
+for more thorough testing of this class through formal unit testing and other types of
+testing.
+""")
 
 ##
 #
