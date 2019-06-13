@@ -5,7 +5,7 @@
 
 import colorama
 
-
+# Cyan decorator
 def cyan(any_function):
     # This is a decorator function, so it takes a function as an argument.
     # This and the other decorators here are designed to colorize our log function.
@@ -20,12 +20,14 @@ def cyan(any_function):
         return any_function(*args, **kwargs)
     return inner
 
+# Yellow decorator
 def yellow(any_function):
     def inner(*args, **kwargs):
         print(colorama.Fore.YELLOW, end='')
         return any_function(*args, **kwargs)
     return inner
 
+# Green decorator
 def green(any_function):
     def inner(*args, **kwargs):
         print(colorama.Fore.GREEN, end='')
