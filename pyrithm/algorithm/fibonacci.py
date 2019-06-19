@@ -14,11 +14,58 @@
 
 # Starting with 
 
+#TODO: Update the init.sh file for reformatting, better info and autopep8 install
+
+
+# TODO: Replace the contents of the class with recursive_fibonacci.
+# This cache speeds things up in a MASSIVE way.
+# Able to go to n=1100 and probably way beyond even though the python/system stack limit is 1000
+# import sys
+# print(sys.getrecursionlimit())
+# Still running super fast at n=1100 and number of digits is probably 400-500 at that point.
+# TODO: Fix the highest_n_cached cache optimizer. has a little error currently.
+#
+fibo_cache = {}
+highest_n_cached = 0
+
+def recursive_fibonacci(n):
+    #if n < highest_n_cached:  # Optimization but not yet defined error. huh?
+    if n in fibo_cache:
+        return fibo_cache[n]
+    if n<=1:
+        fibo_cache[n] = n
+        #highest_n_cached = n
+        return n
+    else:
+        value = recursive_fibonacci(n-1) + recursive_fibonacci(n-2)
+        fibo_cache[n] = value
+        #highest_n_cached = value
+        return value
+
+
+# TODO: Would be very interesting to do multiple speed comparisions:
+# 1. Iteration method below once it is fixed.
+# 2. recursive_fibonacci(n) raw, no optimizations.
+# 3. recursive_fibonacci(n) with just caching using the if in keys search.
+# 4. recursive_fibonacci(n) with the caching and the highest_n_cached optimization
+# Number just does an integer comparision rather than having to many or all dict keys.
+# Even though scanning the keys appears to go very quickly at least up to near the recursion
+# depth limit, noting that we might be able to go way past this recursion limit because of some
+# Python or OS feature.
+
+
 class Fibonacci():
 
     def __init__(self):
         pass
     
+    # TODO: FIX. Back to basics for the fix. At any position/member 'n', to calculate the member's
+    # value, we must know the two preceeding members. At n=0, there are zero preceeding members.
+    # At n=1, there is only one preceeding member, so for both n=0 and n=1 we a have a special
+    # edge case.
+    # That's TWO positions of members we have the edge case for AND it is TWO members we need to
+    # satisfy the calculation input requirements for .. so ..
+    # have the 2 preceeding values
     def by_iteration_alpha(self, target_n: int) -> int:
         """Return the nth element of the Fibonacci sequence by iteratively calculating it."""
         # We call the argument target_n so we can refer to n in comments without confusion.
@@ -68,3 +115,14 @@ class Fibonacci():
 
 ##
 #
+
+class fib_member():
+    def __init__(self, fib_member: two_previous, fib_member: one_previous, value: int):
+        self.two_previous = two_previous
+        self.one_previous = one_previous
+        self.value = value
+    
+    sef advance_one(self):
+
+
+
