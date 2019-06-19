@@ -6,10 +6,11 @@
 
 
 # The generated iterator always has a finite limit.
+# When the max is exceeded, the standard iterator exception of StopIteration will be raised.
 def flip_flop_generator(max_flip_flops=4):
-    """Generates an iterator which returns alternating values of 'flip' or 'flop' up to the maximum of
-    max_flip_flops times. If not specified, the max is 4. The first value returned will be 'flip'.
-    When the max is exceeded, the standard iterator exception of StopIteration will be raised.
+    # TODO: Make the docstring more according to PEP8, multi-line.
+    """Generate an iterator which returns alternating values of 'flip' or 'flop' up to the maximum
+    of max_flip_flops times. If not specified, the max is 4. The first value returned will be 'flip'.
     """
     # Initialize iterator
     state = 'flop'
@@ -27,7 +28,8 @@ def flip_flop_generator(max_flip_flops=4):
 
 # The generated iterator is capable of unlimited iterations.
 def binary_flip_flop_generator(max_flip_flops=0):
-    """Generates an iterator which returns alternating values of 0 or 1 up to the maximum of
+    # TODO: Make the docstring more according to PEP8, multi-line.
+    """Generate an iterator which returns alternating values of 0 or 1 up to the maximum of
     max_flip_flops times, with the ability to iterate an unlimited number of times. If not specified,
     the max is infinite/unlimited iterations, which is specified by setting max_flip_flops to 0. The
     first value returned will be 0. If a non-zero max is specified and is then exceeded, the standard
