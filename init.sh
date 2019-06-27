@@ -30,9 +30,10 @@ source .venv/bin/activate
 python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade setuptools
 
-# Install packages to support and enhance IDE operation
-python3 -m pip install pylint
-python3 -m pip install autopep8
+# Install packages to support and enhance IDE operation, particularly VSCode.
+python3 -m pip install pylint  # Static code analysis for Python
+python3 -m pip install autopep8  # Automatic PEP8 code reformatting
+python3 -m pip install rope  # Python code refactoring library
 
 # Install project-specific python depdendencies
 python3 -m pip install -r requirements.txt
@@ -75,6 +76,7 @@ python3 -m pip install -e .
 # autopep8==1.4.4
 # pycodestyle==2.5.0
 
+# Modules installed to support rope
+# rope==0.14.0
 
-##
-#
+
