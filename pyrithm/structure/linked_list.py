@@ -1,3 +1,4 @@
+# TODO: Reformat this code for proper PEP8 formatting.
 
 ####################################################################################################
 # Linked List
@@ -180,6 +181,3 @@ class LinkedList():
         if current_node != None:
             current_node.child = Node(obj, current_node.child)
         
-
-    ##
-    #

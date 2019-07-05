@@ -18,7 +18,8 @@ class Fibonacci():
         pass
 
     def member(self, n):
-        """Return the nth member of the sequence. Use caching."""
+        """Return the nth member of the sequence. Use caching. Use cache
+        lookup optimization."""
 
         if n <= Fibonacci.max_cache_n:
             if n in Fibonacci.member_cache:  # TODO: Always redundant?
@@ -39,6 +40,6 @@ class Fibonacci():
         if n <= 1:
             return n
         else:
-            member_value = self.member(n - 1) + self.member(n - 2)
+            member_value = self.member_slow(n - 1) + self.member_slow(n - 2)
             return member_value
 

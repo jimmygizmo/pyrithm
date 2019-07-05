@@ -1,3 +1,4 @@
+# TODO: Reformat this code for proper PEP8 formatting.
 
 ####################################################################################################
 # This module provides generator methods. It is not necessary to provide a class which creates
@@ -52,6 +53,3 @@ def binary_flip_flop_generator(max_flip_flops=0):
                 iterate = False
         yield state
 
-
-##
-#
