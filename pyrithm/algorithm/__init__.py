@@ -3,9 +3,10 @@ Algorithms - Illustrative examples
 """
 
 from . import fibonacci
-#from . import golden  # Enable and add below when complete.
+from . import golden
 
 __all__ = [
-    'fibonacci'
+    'fibonacci',
+    'golden'
     ]
 

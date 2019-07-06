@@ -1,5 +1,4 @@
 
-
 import pyrithm.algorithm.fibonacci as fibonacci
 
 
@@ -22,8 +21,19 @@ class Golden():
         of the specified number of digits."""
         self.digits: int = digits
     
-# TODO: Complete this module and the user/example code to demonstrate it.
-# I am still debating whether or not to use the typing module and static
-# type checking here, since I generally want to start doing this, but it
-# may not be justifiable for smaller modules such as this.
+    # TODO: Complete this module and the user/example code to demonstrate it.
+    # I am still debating whether or not to use the typing module and static
+    # type checking here, since I generally want to start doing this, but it
+    # may not be justifiable for smaller modules such as this.
+
+    def find_accurate_ratio(self):
+        n = 0
+        ratios = []
+
+
+
+    
+    def has_enough_digits(self, value: str):
+        return len(value) >= self.digits
+
 
