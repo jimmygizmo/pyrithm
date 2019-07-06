@@ -137,5 +137,3 @@ for more thorough testing of this class through formal unit testing and other ty
 testing.
 """)
 
-##
-#

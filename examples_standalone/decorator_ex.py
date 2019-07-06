@@ -203,6 +203,3 @@ print(log_trace.__doc__)
 # Works like magic! Now your decorated functions can be introspected and
 # __name__ and __doc__ will work correctly.
 
-
-##
-#

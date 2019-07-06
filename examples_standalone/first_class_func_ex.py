@@ -98,6 +98,3 @@ print('And it works using the reference to our original function just as well:')
 re_mapped_list_two = mapper(my_variable_is_a_function, list_of_ints)
 print(re_mapped_list_two)
 
-
-##
-#

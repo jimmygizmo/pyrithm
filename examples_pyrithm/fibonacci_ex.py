@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import pyrithm
 
 fibonacci = pyrithm.algorithm.fibonacci.Fibonacci()
