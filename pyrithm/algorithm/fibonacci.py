@@ -162,3 +162,31 @@ class FibbonacciIteratorZeroBasedSimple():
         self.prev = value
         return value
 
+
+# Fibbonacci as a generator. Also 0-based:
+def fibbonacci_generator():
+    prev, curr = 0, 1
+    zero_member = True
+    while True:
+        if zero_member == True:
+            zero_member = False  # So this edge case happens only once.
+            yield 0
+            continue  # So we don't do the following yield in this edge case.
+        yield curr
+        prev, curr = curr, prev + curr
+
+
+# I don't personally like Fibbonacci series which are 1-based but it seems
+# you always have to have edge-case code in any kind of implementation when
+# you want a 0-based series. I just think 0-based is more correct for multiple
+# reasons, however, you can see here how if you want a 1-based Fibbonacci
+# series, the implementations get cleaner/simpler. This is the cleanest
+# implementation I know of. (Assuming you are ok with 1-based.)
+
+# Fibbonacci as a generator. Simpler but less-desirable 1-based style:
+def fibbonacci_generator_one_based():
+    prev, curr = 0, 1
+    while True:
+        yield curr
+        prev, curr = curr, prev + curr
+
