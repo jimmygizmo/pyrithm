@@ -82,3 +82,52 @@ class FibbonacciIterator():
         self.prev = value
         return value
 
+
+class FibbonacciIteratorZeroBase():
+
+    """
+
+    Implement the Fibonacci sequence using an iterator.
+
+    """
+
+    # This is an attempt to make the iterator solution begin the sequence at
+    # 0 just like the recursive solution does. See relevant comments above.
+
+    # TODO: How about implementing caching (a massive performance benefit to
+    # the recursive implementation) to this iterator implementation .. or is
+    # it even necessary?
+    # NOTE: The iterator solutions seem to run very fast and my not need
+    # caching, but we need to test more at higher n values and analyze the
+    # design a bit more to be sure.
+
+    def __init__(self):
+        # self.prev_prev is actually non-existent at the point of
+        # initialization since this would equate to member for n = -1 which
+        # is not part of the definition of the Fibbonacci sequence, but we
+        # have chosen a style of the sequence which starts at n=0 where this
+        # 'first' memeber is 0 and to make this iterator implementation work
+        # correctly, this is how we have to initialize it. The implementation
+        # details are not important. What is important is that we have
+        # consistent behavior and everything works, regardless of the
+        # implementation details.
+        self.prev_prev = 0
+        self.prev = 0
+        self.curr = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        # We must save the previous value before we shift everything because we
+        # want a Fibbonacci sequence that starts at 0, not at 1. An iterator
+        # solution is a lot simpler if we just let it start at 1 but we want
+        # a sequence identical to the recursive implementation and have already
+        # made this style choice, which in my opinion more closely matches the
+        # definition and starting at zero inherenently 'feels' more correct.
+        return_val = self.prev  # Essential for a sequence that starts at 0.
+        self.prev_prev = self.prev
+        self.prev = self.curr
+        self.curr = self.prev + self.prev_prev
+        return return_val  # We had to save it to be able to return it here.
+
