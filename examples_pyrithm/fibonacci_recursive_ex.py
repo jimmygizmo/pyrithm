@@ -35,5 +35,6 @@ print('To run these examples, change the below code and try out different '
 print('n  nth Fibonacci sequence member')
 print('-  -----------------------------')
 for n in range(0, 40):
-    print(f"{n}  {fibonacci.member_slow(n)}")
+    print(f"{n}  {fibonacci.member_slow(n)}")  # Slow with call stack limits.
+    #print(f"{n}  {fibonacci.member(n)}")  # Fast! Uses caching.
 

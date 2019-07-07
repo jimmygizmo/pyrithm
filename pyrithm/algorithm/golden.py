@@ -26,14 +26,26 @@ class Golden():
     # type checking here, since I generally want to start doing this, but it
     # may not be justifiable for smaller modules such as this.
 
-    def find_accurate_ratio(self):
+    # WIll return a string because if we returned floats (which is actually
+    # the true data type) then because we might want to see many many decimal
+    # places, we my see exponential notation being applied which is not what
+    # we want. Maybe there is a way to turn off exponential notation or use
+    # a special math/number class so we can still return a float but be able
+    # to see up to maybe 60-80 decimal places. One of the goals of pyrithm's
+    # fibonacci and golden modules is to see the interesting numbers up to
+    # a very high accuracy level and to play around with the desired accuracy
+    # level and see how it all works.
+    def find_accurate_ratio(self) -> str:
         n = 0
         ratios = []
 
 
 
     
-    def has_enough_digits(self, value: str):
+    def has_enough_digits(self, value: str) -> bool:
         return len(value) >= self.digits
 
-
+    def identical_digits(self, a: str, b: str) -> int:
+        la = len(a)
+        lb = len(b)
+        identical_digits = 0
