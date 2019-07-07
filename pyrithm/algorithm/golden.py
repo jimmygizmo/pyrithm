@@ -38,7 +38,8 @@ class Golden():
     def find_accurate_ratio(self) -> str:
         n = 0
         ratios = []
-
+        # TODO: Finish the main logic in this method. A few helper methods
+        # are started below. We might need one or two more helper methods.
 
 
     
@@ -49,3 +50,4 @@ class Golden():
         la = len(a)
         lb = len(b)
         identical_digits = 0
+        # TODO: Finish this method
