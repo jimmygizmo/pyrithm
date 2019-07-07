@@ -48,56 +48,19 @@ class FibbonacciIterator():
 
     """
 
-    Implement the Fibonacci sequence using an iterator.
-
-    """
-
-    # NOTE: This implementation differs from the above recursive implementation
-    # in that the sequence it can generate begins with the value 1, whereas
-    # the above recursive implementation begins with the value 0, followed by
-    # 1 etc. Different sources define the Fibbonacci sequence in either way
-    # and it seems to be a matter of preference if you define it as:
-    # 0, 1, 1, 2, 3, 5, 8, 13, 21 ...
-    # or as:
-    # 1, 1, 2, 3, 5, 8, 13, 21 ...
-    # In this case the iterator implementation simply lends itself to starting
-    # at 1 as it is currently written.
-    # TODO: Can we make a simple modification of this iterator implementation
-    # which will begin at 0 like the above recursive implementation?
-    # TODO: How about implementing caching (a massive performance benefit to
-    # the recursive implementation) to this iterator implementation .. or is
-    # it even necessary?
-    # Both of these TODOs would be excellent to explore further.
-
-    def __init__(self):
-        self.prev = 0
-        self.curr = 1
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        value = self.curr
-        self.curr += self.prev
-        self.prev = value
-        return value
-
-
-class FibbonacciIteratorZeroBase():
-
-    """
-
-    Implement the Fibonacci sequence using an iterator.
+    Implement the Fibonacci sequence using an iterator. Produce the sequence
+    in the style which is based at 0 like the recursive implementation above
+    is.
 
     """
 
     # This is an attempt to make the iterator solution begin the sequence at
-    # 0 just like the recursive solution does. See relevant comments above.
+    # 0 just like the recursive solution does.
 
     # TODO: How about implementing caching (a massive performance benefit to
     # the recursive implementation) to this iterator implementation .. or is
-    # it even necessary?
-    # NOTE: The iterator solutions seem to run very fast and my not need
+    # it even necessary or possible in a similar way? Maybe not.
+    # NOTE: The iterator solutions seem to run very fast and may not need
     # caching, but we need to test more at higher n values and analyze the
     # design a bit more to be sure.
 
@@ -130,4 +93,38 @@ class FibbonacciIteratorZeroBase():
         self.prev = self.curr
         self.curr = self.prev + self.prev_prev
         return return_val  # We had to save it to be able to return it here.
+
+
+class FibbonacciIteratorOneBased():
+
+    """
+
+    Implement the Fibonacci sequence using an iterator which provides the
+    sequence based at 1 instead of 0 for comparison with the above. This is
+    not the style we want, but include it here to show that this is actually
+    simpler to implement than the zero-based solution we do want (above) when
+    using an iterator.
+
+    """
+
+    # It seems to be a matter of preference if you define the sequence as:
+    # 0, 1, 1, 2, 3, 5, 8, 13, 21 ...
+    # or as:
+    # 1, 1, 2, 3, 5, 8, 13, 21 ...
+    # In this case the iterator implementation simply lends itself more simply
+    # to starting at 1 as it is currently written gere. Notice the above
+    # implementation of choice is a little bit more complex.
+
+    def __init__(self):
+        self.prev = 0
+        self.curr = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        value = self.curr
+        self.curr += self.prev
+        self.prev = value
+        return value
 

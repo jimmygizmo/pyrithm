@@ -2,7 +2,7 @@
 
 import pyrithm
 
-fib_iter = pyrithm.algorithm.fibonacci.FibbonacciIteratorZeroBase()
+fib_iter = pyrithm.algorithm.fibonacci.FibbonacciIterator()
 
 print('n  nth Fibonacci sequence member')
 print('-  -----------------------------')
