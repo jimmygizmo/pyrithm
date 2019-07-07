@@ -128,3 +128,37 @@ class FibbonacciIteratorOneBased():
         self.prev = value
         return value
 
+
+class FibbonacciIteratorZeroBasedSimple():
+
+    """
+
+    Implement the Fibonacci sequence using an iterator which provides the
+    sequence based at 0 and do so in the cleanest and simplest code possible.
+    The above FibbonacciIterator() seems a bit more complex than it needs
+    to be, so this is an attempt at simplification.
+
+    """
+
+    def __init__(self):
+        self.prev = 0
+        self.curr = 1
+        self.n = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        # This if-else block handles the edge case to provide the first member
+        # of the sequence
+        if self.n == 0:  # This will only happen once, for the first member.
+            self.n = 1
+            return 0
+        # else:  # This else block is not even necessary unless we wanted to
+        #     # support tracking of n and perhaps return it with the value.
+        #     n += 1
+        value = self.curr
+        self.curr += self.prev
+        self.prev = value
+        return value
+

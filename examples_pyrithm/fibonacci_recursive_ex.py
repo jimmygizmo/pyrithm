@@ -2,7 +2,7 @@
 
 import pyrithm
 
-fibonacci = pyrithm.algorithm.fibonacci.Fibonacci()
+fib_recur = pyrithm.algorithm.fibonacci.Fibonacci()
 
 print()
 print('Calculate the Fibonacci sequence using recursion and compare '
@@ -35,6 +35,6 @@ print('To run these examples, change the below code and try out different '
 print('n  nth Fibonacci sequence member')
 print('-  -----------------------------')
 for n in range(0, 40):
-    print(f"{n}  {fibonacci.member_slow(n)}")  # Slow with call stack limits.
-    #print(f"{n}  {fibonacci.member(n)}")  # Fast! Uses caching.
+    print(f"{n}  {fib_recur.member_slow(n)}")  # Slow with call stack limits.
+    #print(f"{n}  {fib_recur.member(n)}")  # Fast! Uses caching.
 
