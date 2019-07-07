@@ -1,8 +1,8 @@
 #! /usr/bin/env python3
 
-import pyrithm
+import pyrithm.algorithm.fibonacci as fibonacci
 
-fib_recur = pyrithm.algorithm.fibonacci.Fibonacci()
+fib_recur = fibonacci.Fibonacci()
 
 print()
 print('Calculate the Fibonacci sequence using recursion and compare '

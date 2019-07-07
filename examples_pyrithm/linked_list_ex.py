@@ -1,9 +1,8 @@
 #! /usr/bin/env python3
 
-#import pyrithm.structure.linked_list
-import pyrithm
+import pyrithm.structure.linked_list as linked_list
 
-ll = pyrithm.structure.linked_list.LinkedList()
+ll = linked_list.LinkedList()
 
 # Some data to work with. Arbitrary objects. Tuples in this case.
 # Tuples consisting of a character and an integer. These make it easy to see ordering.
@@ -119,7 +118,7 @@ print()
 print(r"ll.insert_after(('b', 2), ('c', 3))")
 locator_obj = ('b', 2)
 obj = ('c', 3)
-ll.insert_before(locator_obj, obj)
+ll.insert_after(locator_obj, obj)
 print(ll.export())
 print()
 
