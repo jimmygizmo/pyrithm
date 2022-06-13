@@ -1,4 +1,11 @@
 #! /usr/bin/env bash
+
+# TODO: As noted in other such files recently, a NEW VERSION OF THIS IS NEEDED.
+# I now use Pyenv and Pyenv Virtualenv exclusively so the virtual environment
+# aspect as changed. The lower part of this init.sh file will likely not change
+# much.
+
+# TODO: Update. Below here, instructions RE virtual env are now deprecated.
 ###############################################################################
 # This script will create your Python virtual environment in a best-practice
 # configuration which also maximises compatibility with the VSCode IDE. VSCode
@@ -23,6 +30,20 @@ python3 -m venv .venv
 # Activate the new python virtual environment.
 source .venv/bin/activate
 
+# TODO: NOTE: Below here the instructions should be mostly or totally valid.
+# A re-write of this file is pending. I need to write a master Pyenv instruction
+# doc to include in all of my Python projects.
+# NOTE: Under Pyenv/Pyenv-Virtualenv, you can use the python3 command as below
+# but it is fine and probably preferable to just use 'python'. The usage of
+# 'python3' was more relevant a few years ago when there was a lot more Python 2
+# still in use and also it was more relevant when I was mostly using Homebrew-
+# installed Python. Using Pyenv is much better, even required .. so you can
+# properly match all versions and properly manage Python and libraries
+# for many projects.
+###############################################################################
+
+
+
 # Upgrade the virtual environment's setuptools and pip.
 # New virtual environments created with the 'venv' module frequently come with
 # a setuptools and pip that are many versions back. In most cases it is a good
@@ -35,7 +56,7 @@ python3 -m pip install pylint  # Static code analysis for Python
 python3 -m pip install autopep8  # Automatic PEP8 code reformatting
 python3 -m pip install rope  # Python code refactoring library
 
-# Install project-specific python depdendencies
+# Install project-specific python dependencies
 python3 -m pip install -r requirements.txt
 
 # Install this project's package
@@ -78,5 +99,4 @@ python3 -m pip install -e .
 
 # Modules installed to support rope
 # rope==0.14.0
-
 
