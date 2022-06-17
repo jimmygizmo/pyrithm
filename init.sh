@@ -100,3 +100,40 @@ python3 -m pip install -e .
 # Modules installed to support rope
 # rope==0.14.0
 
+# TODO: Check and update. This is the recent output of pip freeze now under a much higher Python
+# version (3.10.4). About 3 years have past so the amount of change will be interesting to see:
+# I see some new modules (dependencies 2nd or nth gen.): dill, platformdirs, toml, tomli, tomlkit.
+# Some modules are gone now: six, typed-ast.
+# Six is probably gone now because a lot of Python 2 to Python 3 migration work has been completed.
+# All versions have gone up as expected.
+# Wow, I did not expect to see this git format for the Pyrithm local "editable" install. I expected
+# only that the install was done using a symlink so I will need to learn more about the git reference.
+# ** The -e option is so that pip does not copy but rather links the files so you can work on them live
+# and test them live, so that is more for developers of Pyrithm (myself) and users could probably leave off
+# the -e but I honestly don't know exactly how the -e option and the '.' path interact with pip install
+# with respect to this surprising git URL in the pip freeze. I know you can in stall from git URLs but in this
+# this case I did not expect that from my "pip install -e ." step to install Pyrithm itself (from the current
+# dir.
+# I'm not going to continue tracking which 2nd and nth gen dependencies came from what 1st gen as I was
+# doing before. I will just list the pip freeze output, unless there is something really important to note.
+# Version pinning strategies are another matter with some overlapping concerns.
+
+#(ve.pyrithm) ➜  pyrithm git:(master) ✗ date
+#Thu Jun 16 19:35:43 PDT 2022
+#(ve.pyrithm) ➜  pyrithm git:(master) pip freeze
+#astroid==2.11.6
+#autopep8==1.6.0
+#dill==0.3.5.1
+#isort==5.10.1
+#lazy-object-proxy==1.7.1
+#mccabe==0.7.0
+#platformdirs==2.5.2
+#pycodestyle==2.8.0
+#pylint==2.14.2
+#-e git+ssh://git@github.com/jimmygizmo/pyrithm.git@5d090504b53d762b26c3d197731fdbee48cea03f#egg=Pyrithm
+#rope==1.1.1
+#toml==0.10.2
+#tomli==2.0.1
+#tomlkit==0.11.0
+#wrapt==1.14.1
+
