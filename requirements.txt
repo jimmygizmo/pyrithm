@@ -1,12 +1,32 @@
+################################################################################
+####    requirements.txt    -    Unversioned Project Dependencies           ####
+################################################################################
 
-####################################################################################################
-# Project-specific Python dependencies
+# WARNING:
+# Only use this file when it is acceptable or desirable to allow any module
+# to possibly upgrade one or more versions of dependencies automatically and
+# out of your control. Extra testing is required when this file is used and
+# then a new version-pinned requirements-pinned.txt file may be created with
+# known and tested set of dependency versions which are much more under your
+# control. For the best possible version-fixing, a final stable Docker base
+# image or similar strategy should be used to eliminate any installs of an
+# external nature for some pipeline steps.
 
-# This requirements.txt file should be located in the root directory of this project/repository.
+# Least-control, highest-risk: Using THIS file, but you get the latest versions.
+# Good control, minimal risk: Using the version-pinned requirements file.
+# Full control: Use a stable, tested, hardened base Docker image (dev mostly.)
+
+################################################################################
+
+# TODO: Confirm why I put colorama into the requirements.txt? That's the kind of
+# thing I might also install in the init.sh. Anyhow, I will probably move init.sh
+# into all requirements.txt files and just comment the different modules, noting
+# that sometimes an app might share a dependency of some generation with
+# something installed only for dev, testing or to enhance the IDE for developers.
+# ANSWER: I'm using it in decorator_ex.py in examples_standalone
 
 colorama
 
 
 ##
 #
-

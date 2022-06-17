@@ -75,7 +75,7 @@ def magenta(any_function):
 # levels or in different situations. We can use the above decorators as a very
 # simple and clean way to change the colorization of these log functions. In
 # the real world you would probably use decorators for more complex situations,
-# especially when it was not practical or desireable to modify the original
+# especially when it was not practical or desirable to modify the original
 # functions themselves. Obviously in this example, we could just add a
 # different colorizing line of code to each logging function, but the purpose
 # here is to show how decorators are implemented and used with a simple and
@@ -152,8 +152,8 @@ print()
 # __doc__ which are sometimes important things to be able to do, especially
 # when trying to figure out how code is working under mysterious or complex
 # circumstances or with large applications or APIs. Actually there are many
-# important reasons you want these internal properties to be correct. There is
-# a soluton and it is a special decorator provided by the functools module:
+# good reasons you want these internal properties to be correct. There is
+# a solution, and it is a special decorator provided by the functools module:
 # @functools.wraps
 
 # The below @cyan decorator is a little bit different than the others.
