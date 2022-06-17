@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python
 
 # These are examples showing the usage of pyrithm.generator.flip_flop
 

@@ -1,4 +1,4 @@
-#! /usr/bin/env/python3
+#! /usr/bin/env python
 ####################################################################################################
 
 # First class functions are a feature of Python and other languages like Javascript. This means

@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python
 
 import pyrithm.structure.linked_list as linked_list
 

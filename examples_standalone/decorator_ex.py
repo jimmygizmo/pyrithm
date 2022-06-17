@@ -1,4 +1,4 @@
-#! /usr/bin/env/python3
+#! /usr/bin/env python
 
 # A colorful illustration of decorators and tutorial on their basic
 # functionality.

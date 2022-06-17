@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python
 
 import pyrithm.algorithm.fibonacci as fibonacci
 
