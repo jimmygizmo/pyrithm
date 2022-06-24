@@ -44,13 +44,24 @@ source .venv/bin/activate
 
 
 
+
 # Upgrade the virtual environment's setuptools and pip.
 # New virtual environments created with the 'venv' module frequently come with
 # a setuptools and pip that are many versions back. In most cases it is a good
 # idea to upgrade these tools to the latest versions.
 python3 -m pip install --upgrade pip
+
+# TODO: NEW: ADDING wheel here to install or more specifically to upgrade. We're getting into wheel installs and
+# pre-building/storing the archives needed to build a container for a python app. Eliminate remote repos.
+# (Not necessarily for Pyrithm, but this is the init.sh file I will be using for all Python projects, including
+# many that run in containers and for which you want stable images with changes under control.)
+python3 -m pip install --upgrade wheel
+
 python3 -m pip install --upgrade setuptools
 
+
+
+# TODO: This stuff is great but there are newer strategies to incorporate now, some 3 years later.
 # Install packages to support and enhance IDE operation, particularly VSCode.
 python3 -m pip install pylint  # Static code analysis for Python
 python3 -m pip install autopep8  # Automatic PEP8 code reformatting
