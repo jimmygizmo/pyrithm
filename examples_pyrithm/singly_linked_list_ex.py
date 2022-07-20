@@ -1,8 +1,8 @@
 #! /usr/bin/env python
 # TODO: Reword things and rename some variables to make it clear this example goes with SinglyLinkedList.
 # TODO: Make another class for DoublyLinkedList and also make it's accompanying example usage script.
-import pyrithm.structure.singly_linked_list as singly_linked_list
-# Alternatively: from pyrithm.structure.singly_linked_list import *
+import pyrithm.structure.linked_list as linked_list
+# Alternatively: from pyrithm.structure.linked_list import *
 # Then we would: sll = SinglyLinkedList()
 # TODO: Consider a single module linked_list and then with that we could define the different
 # types/classes, including distinguishing the Node class types so they can live side by side,
@@ -12,7 +12,7 @@ import pyrithm.structure.singly_linked_list as singly_linked_list
 # changing the class structure later on, probably means needing to update client code simultaneously, so it
 # is worthy of some early planning.
 
-sll = singly_linked_list.SinglyLinkedList()
+sll = linked_list.SinglyLinkedList()
 
 # Some data to work with. Arbitrary objects. Tuples in this case.
 # Tuples consisting of a character and an integer. These make it easy to see
@@ -39,7 +39,7 @@ illustrate this, tuples are used. First we instantiate a linked-list by
 calling the constructor:
 """)
 print()
-print(r'll = pyrithm.structure.singly_linked_list.SinglyLinkedList()')
+print(r'll = pyrithm.structure.linked_list.SinglyLinkedList()')
 print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
