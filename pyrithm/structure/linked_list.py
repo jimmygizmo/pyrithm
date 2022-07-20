@@ -4,21 +4,21 @@
 # Linked List
 # This is the default form which is a singly-linked-list.
 # Implemented using two classes; one for a single element or Node and one for the linked-list data
-# structure itself. The LinkedList class has a set of methods for basic operations. Nodes can
+# structure itself. The SinglyLinkedList class has a set of methods for basic operations. Nodes can
 # each carry a payload of any kind of data, i.e. a single reference to any object.
 
 
-class Node():
-    """Node of a linked-list which is a single element of the linked-list structure, which is an
+class Node:
+    """Node of a singly-linked list which is a single element of the linked-list structure, which is an
     ordered sequence of elements. Each node instance has two fields, obj and child. obj is an
     object of any type of data. child is a reference to the next item in the linked-list.
     """
-    def __init__(self, obj, child_node = None):
+    def __init__(self, obj, child_node=None):
         self.obj = obj  # obj can be of any data type. This is the payload/data the node contains.
         self.child = child_node  # A reference to the single child node of this node.
 
 
-class LinkedList():
+class SinglyLinkedList:
     """Creates a singly-linked list. An ordered sequence of elements or nodes. The constructor
     defines the head of the linked-list which is not a Node instance but is a reference to the
     first Node instance. The last node's child field is a reference to None. If the linked-list
@@ -50,7 +50,7 @@ class LinkedList():
         """
         new_node = Node(obj)
 
-        if self.head == None:
+        if self.head is None:
             self.head = new_node
             return
 
@@ -98,7 +98,7 @@ class LinkedList():
         """Delete the node with the matching obj payload. This method uses the private _find()
         method to locate the node to delete.
         """
-        if self.head == None:
+        if self.head is None:
             raise ValueError('Cannot perform delete on an empty linked-list.')
 
         if self.head.obj == obj:
@@ -109,7 +109,7 @@ class LinkedList():
         previous_node = None
 
         # See comments above in _find() about equality comparisons of obj using == or !=.
-        while ((current_node != None) and (current_node.obj != obj)):
+        while (current_node is not None) and (current_node.obj is not obj):
             # Loop continues when the two conditions are both NOT met:
             # 1. We have not currently on the last node yet.
             # 2. We do not have a match for obj
@@ -118,7 +118,7 @@ class LinkedList():
             previous_node = current_node
             current_node = current_node.child
         
-        if current_node == None:  # Reached the end
+        if current_node is None:  # Reached the end
             raise ValueError('The node specified for deletion could not be found.')
 
         previous_node.child = current_node.child  # Effectively discards the current node
@@ -129,7 +129,7 @@ class LinkedList():
         """Locate the node with the obj payload that matches locator_obj and insert a node before
         that new node with the provided payload obj.
         """
-        if self.head == None:
+        if self.head is None:
             raise ValueError('Cannot perform insert_before on an empty linked-list.')
         
         if self.head.obj == locator_obj:
@@ -141,11 +141,11 @@ class LinkedList():
 
         # We locate the node to insert_before exactly as we did above in the delete method where
         # the comments provide some additional detail.
-        while ((current_node != None) and (current_node.obj != locator_obj)):
+        while (current_node is not None) and (current_node.obj is not locator_obj):
             previous_node = current_node
             current_node = current_node.child
 
-        if current_node != None:  # Unless we have gone past the end of the linked-list
+        if current_node is not None:  # Unless we have gone past the end of the linked-list
             previous_node.child = Node(obj, current_node)
             return
 
@@ -175,9 +175,9 @@ class LinkedList():
         current_node = self.head
 
         # Again, same method of location.
-        while ((current_node != None) and (current_node.obj != locator_obj)):
+        while (current_node is not None) and (current_node.obj is not locator_obj):
             current_node = current_node.child
 
-        if current_node != None:
+        if current_node is not None:
             current_node.child = Node(obj, current_node.child)
         

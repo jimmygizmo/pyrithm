@@ -1,8 +1,9 @@
 #! /usr/bin/env python
-
+# TODO: Reword things and rename some variables to make it clear this example goes with SinglyLinkedList.
+# TODO: Make another class for DoublyLinkedList and also make it's accompanying example usage script.
 import pyrithm.structure.linked_list as linked_list
 
-ll = linked_list.LinkedList()
+ll = linked_list.SinglyLinkedList()
 
 # Some data to work with. Arbitrary objects. Tuples in this case.
 # Tuples consisting of a character and an integer. These make it easy to see
@@ -29,7 +30,7 @@ illustrate this, tuples are used. First we instantiate a linked-list by
 calling the constructor:
 """)
 print()
-print(r'll = pyrithm.structure.linked_list.LinkedList()')
+print(r'll = pyrithm.structure.linked_list.SinglyLinkedList()')
 print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
@@ -128,10 +129,9 @@ print(ll.export())
 print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
-
-print(
-"""
-This has been a basic illustration and test of the pyrithm LinkedList class.
+# TODO: Update wording to match introduction of another class and ex script for DoublyLinkedList
+print("""
+This has been a basic illustration and test of the pyrithm SinglyLinkedList class.
 There are many other tests which can be performed to stress edge cases and
 various operations in different contexts. Since object equivalence and
 non-equivalence is fundamental to the operation of this class and since there
