@@ -2,9 +2,9 @@
 Data structures
 """
 
-from . import linked_list
+from . import singly_linked_list
 
 __all__ = [
-    'linked_list'
+    'singly_linked_list'
     ]
 

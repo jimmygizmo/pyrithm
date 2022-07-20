@@ -1,9 +1,18 @@
 #! /usr/bin/env python
 # TODO: Reword things and rename some variables to make it clear this example goes with SinglyLinkedList.
 # TODO: Make another class for DoublyLinkedList and also make it's accompanying example usage script.
-import pyrithm.structure.linked_list as linked_list
+import pyrithm.structure.singly_linked_list as singly_linked_list
+# Alternatively: from pyrithm.structure.singly_linked_list import *
+# Then we would: sll = SinglyLinkedList()
+# TODO: Consider a single module linked_list and then with that we could define the different
+# types/classes, including distinguishing the Node class types so they can live side by side,
+# such as: SinglyLinkedNode vs. DoublyLinkedNode.
+# This might be a good way to organize modules/classes in a medium to large application. Coming up with a good
+# class hierarchy is an art and it can change over time as makes sense. Try to get it right the first time since
+# changing the class structure later on, probably means needing to update client code simultaneously, so it
+# is worthy of some early planning.
 
-ll = linked_list.SinglyLinkedList()
+sll = singly_linked_list.SinglyLinkedList()
 
 # Some data to work with. Arbitrary objects. Tuples in this case.
 # Tuples consisting of a character and an integer. These make it easy to see
@@ -30,7 +39,7 @@ illustrate this, tuples are used. First we instantiate a linked-list by
 calling the constructor:
 """)
 print()
-print(r'll = pyrithm.structure.linked_list.SinglyLinkedList()')
+print(r'll = pyrithm.structure.singly_linked_list.SinglyLinkedList()')
 print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
@@ -49,8 +58,8 @@ print()
 
 # Create the linked list in the same order as objects using insert_last()
 for obj in objects:
-    ll.insert_last(obj)
-    print(ll.export())
+    sll.insert_last(obj)
+    print(sll.export())
 
 print()
 
@@ -60,7 +69,7 @@ print('TEST 2')
 print("""
 The delete() method will be tested next by deleting four nodes which are the
 1st, 3rd, 5th and 8th (last) nodes. Deletion is performed by locating nodes
-with matching payload data using the Python == operator. The resulting
+with matching payload data using the Python 'is' operator. The resulting
 linked-list will be exported for confirmation of success and it should be:
 """)
 print(r"[('b', 2), ('d', 4), ('f', 6), ('g', 7)]")
@@ -68,21 +77,21 @@ print(r"[('b', 2), ('d', 4), ('f', 6), ('g', 7)]")
 print("""
 The calls to be made are:
 
-ll.delete(('a', 1))
-ll.delete(('c', 3))
-ll.delete(('e', 5))
-ll.delete(('h', 8))
+sll.delete(('a', 1))
+sll.delete(('c', 3))
+sll.delete(('e', 5))
+sll.delete(('h', 8))
 """)
 
 print('TEST 2 RESULTS:')
 
-ll.delete(('a', 1))
-ll.delete(('c', 3))
-ll.delete(('e', 5))
-ll.delete(('h', 8))
+sll.delete(('a', 1))
+sll.delete(('c', 3))
+sll.delete(('e', 5))
+sll.delete(('h', 8))
 print()
 
-print(ll.export())
+print(sll.export())
 
 print()
 
@@ -102,30 +111,30 @@ print()
 print('Each call and the resulting export are shown separately for clarity:')
 print()
 
-print(r"ll.insert_first(('a', 1))")
+print(r"sll.insert_first(('a', 1))")
 obj = ('a', 1)
-ll.insert_first(obj)
-print(ll.export())
+sll.insert_first(obj)
+print(sll.export())
 print()
 
-print(r"ll.insert_last(('h', 8))")
+print(r"sll.insert_last(('h', 8))")
 obj = ('h', 8)
-ll.insert_last(obj)
-print(ll.export())
+sll.insert_last(obj)
+print(sll.export())
 print()
 
-print(r"ll.insert_before(('f', 6), ('e', 5))")
+print(r"sll.insert_before(('f', 6), ('e', 5))")
 locator_obj = ('f', 6)
 obj = ('e', 5)
-ll.insert_before(locator_obj, obj)
-print(ll.export())
+sll.insert_before(locator_obj, obj)
+print(sll.export())
 print()
 
-print(r"ll.insert_after(('b', 2), ('c', 3))")
+print(r"sll.insert_after(('b', 2), ('c', 3))")
 locator_obj = ('b', 2)
 obj = ('c', 3)
-ll.insert_after(locator_obj, obj)
-print(ll.export())
+sll.insert_after(locator_obj, obj)
+print(sll.export())
 print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')

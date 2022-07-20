@@ -1,7 +1,5 @@
-# TODO: Reformat this code for proper PEP8 formatting.
-
 ####################################################################################################
-# Linked List
+# SinglyLinked List
 # This is the default form which is a singly-linked-list.
 # Implemented using two classes; one for a single element or Node and one for the linked-list data
 # structure itself. The SinglyLinkedList class has a set of methods for basic operations. Nodes can
@@ -109,7 +107,7 @@ class SinglyLinkedList:
         previous_node = None
 
         # See comments above in _find() about equality comparisons of obj using == or !=.
-        while (current_node is not None) and (current_node.obj is not obj):
+        while (current_node is not None) and (current_node.obj != obj):
             # Loop continues when the two conditions are both NOT met:
             # 1. We have not currently on the last node yet.
             # 2. We do not have a match for obj
@@ -141,7 +139,7 @@ class SinglyLinkedList:
 
         # We locate the node to insert_before exactly as we did above in the delete method where
         # the comments provide some additional detail.
-        while (current_node is not None) and (current_node.obj is not locator_obj):
+        while (current_node is not None) and (current_node.obj != locator_obj):
             previous_node = current_node
             current_node = current_node.child
 
@@ -175,7 +173,7 @@ class SinglyLinkedList:
         current_node = self.head
 
         # Again, same method of location.
-        while (current_node is not None) and (current_node.obj is not locator_obj):
+        while (current_node is not None) and (current_node.obj != locator_obj):
             current_node = current_node.child
 
         if current_node is not None:
