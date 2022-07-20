@@ -1,18 +1,40 @@
 #! /usr/bin/env python
-# TODO: Reword things and rename some variables to make it clear this example goes with SinglyLinkedList.
 # TODO: Make another class for DoublyLinkedList and also make it's accompanying example usage script.
-import pyrithm.structure.linked_list as linked_list
-# Alternatively: from pyrithm.structure.linked_list import *
-# Then we would: sll = SinglyLinkedList()
-# TODO: Consider a single module linked_list and then with that we could define the different
-# types/classes, including distinguishing the Node class types so they can live side by side,
-# such as: SinglyLinkedNode vs. DoublyLinkedNode.
-# This might be a good way to organize modules/classes in a medium to large application. Coming up with a good
-# class hierarchy is an art and it can change over time as makes sense. Try to get it right the first time since
-# changing the class structure later on, probably means needing to update client code simultaneously, so it
-# is worthy of some early planning.
 
-sll = linked_list.SinglyLinkedList()
+import pyrithm.structure.linked_list as ll
+
+sll = ll.SinglyLinkedList()
+
+# ######## About import strategies/styles
+#
+# I chose my import and alias style for the following reasons. The short 'll' alias is unique and compact
+# and there are many cases where you need to shorten longer paths to keep code readable and PEP8 compliant, plus I
+# wanted to illustrate this to you. 'll' is not the most readable variable name I will admit, but in this example
+# I like it. In other apps I might use something longer. It would be totally fine to just use the same name for the
+# alias as the lowest level module you are importing, such as: 'import pyrithm.structure.linked_list as linked_list'
+#
+# Obviously, this style of importing allows me to make a shorter call when I initialize the SinglyLinkedList class.
+# Also, Pyrithm is sort of a toolkit style of library in which there are many very related parts, but many of those
+# are standalone and so it is likely that the user will be reaching down into the namespace in which the individual
+# 'tools' (or classes etc) are located, rather than referencing higher level objects as with other kinds of libraries
+# that do things like provide a complex service, in which case many classes/modules are not so standalone.
+# Pyrithm is the type of package/library in which the structure is for organization for the users sake,
+# to reach down into this hierarchy as needed, even for executables such as this example script, so longer
+# names are likely unless aliases are used. Personally I might prefer to just 'import pyrithm',
+# but I wanted to give an illustration of these other concepts which perhaps apply more often in
+# real world applications.
+#
+# In the current program, there would be no problem with 'import pyrithm' because this does not require many
+# resources and this would result in nice and explicit usage, like this:
+# sll = pyrithm.structure.linked_list.SinglyLinkedList()
+# If you wanted to limit what you import a bit more, perhaps to conserve resources then that is another reason you
+# might use one of many styles of importing sub-modules and probably also assigning them aliases in many cases.
+# This is a medium-sized topic, which advanced developers should learn well and you can start here:
+# For more info see the docs on packages: https://docs.python.org/3/tutorial/modules.html#packages
+# This is a sub-topic of the docs on modules: https://docs.python.org/3/tutorial/modules.html#modules
+
+
+# #######  Set up test data
 
 # Some data to work with. Arbitrary objects. Tuples in this case.
 # Tuples consisting of a character and an integer. These make it easy to see
