@@ -1,19 +1,20 @@
 ####################################################################################################
-# SinglyLinked List
-# This is the default form which is a singly-linked-list.
-# Implemented using two classes; one for a single element or Node and one for the linked-list data
+# Singly-Linked List
+# This is an object-oriented implementation of a singly-linked list.
+# Implemented using two classes; one for a single element or node and one for the linked-list data
 # structure itself. The SinglyLinkedList class has a set of methods for basic operations. Nodes can
-# each carry a payload of any kind of data, i.e. a single reference to any object.
+# each carry a payload of any kind of data, i.e. a single reference to any kind of object.
+#
 
 
-class Node:
+class _NodeSinglyLinked:
     """Node of a singly-linked list which is a single element of the linked-list structure, which is an
     ordered sequence of elements. Each node instance has two fields, obj and child. obj is an
     object of any type of data. child is a reference to the next item in the linked-list.
     """
     def __init__(self, obj, child_node=None):
         self.obj = obj  # obj can be of any data type. This is the payload/data the node contains.
-        self.child = child_node  # A reference to the single child node of this node.
+        self.child = child_node  # A reference to the single child node of this node, if one exists (or None).
 
 
 class SinglyLinkedList:
@@ -24,6 +25,8 @@ class SinglyLinkedList:
     """
     def __init__(self):
         # The head is not a separate node, just a reference to the first node in the linked-list.
+        # This is all the instance is; a single attribute/field called 'head' which contains a reference
+        # to the first node or None for an empty list.
         self.head = None
 
     def insert_first(self, obj):
@@ -32,21 +35,21 @@ class SinglyLinkedList:
         first node.
         """
         if self.head is None:
-            self.head = Node(obj)
+            self.head = _NodeSinglyLinked(obj)
         else:
-            new_node = Node(obj)
+            new_node = _NodeSinglyLinked(obj)
             new_node.child = self.head
-            # Or combining the previous two steps:  new_node = Node(obj, self.head)
+            # Or combining the previous two steps:  new_node = _NodeSinglyLinked(obj, self.head)
             self.head = new_node
 
     def insert_last(self, obj):
         """Insert a node with the payload obj at the last position of the linked-list. This
-        operation does no change the head or the existing nodes of the list but it does require
+        operation does not change the head or the existing nodes of the list but it does require
         traversal of the entire list in order to locate the last node so that the new node can be
         made a child of the last node. If the linked-list is empty then a new node is created and
         head is pointed to it.
         """
-        new_node = Node(obj)
+        new_node = _NodeSinglyLinked(obj)
 
         if self.head is None:
             self.head = new_node
@@ -55,6 +58,14 @@ class SinglyLinkedList:
         current_node = self.head
         
         # Locating the last node must be done by traversal.
+        # NOTE: It is interesting how simple this traversal code is. Think through what it is doing. It is recursing
+        # down the list of references to nodes, starting at head, repeating for each child until it finds 'None'.
+        # We know this 'recursion' will end eventually and we can use this coding style because of the nature of our
+        # data structure as we have defined it. This LOOKS a bit like recursive traversal, but because there is no
+        # function call or stack involved, I personally tend not to call it recursion, although it does resemble that.
+        # TODO: Research this a little. Folks might call this a simple form of recursion or the
+        #   actual definition of recursion might require function calls and a stack.
+        #   I'm really not sure and I like terminology and semantics to be accurate.
         while current_node.child is not None:
             current_node = current_node.child
 
@@ -78,6 +89,11 @@ class SinglyLinkedList:
         The node argument is the starting point for the search which progresses towards the
         end of the linked-list in a recursive manner. Returns False if the end of the list is
         reached before a match is found.
+          NOTE: This private _find() method is not currently used in this class but is included for illustration.
+          This method is not very useful for singly-linked lists because for many practical operations
+          you do need to know which node is the parent node or the previous node etc. So this shows
+          that doubly-linked lists are often more useful since each node knows its parent, or one might
+          also say that this _find() needs some additional features to actually be useful within this class.
         """
         if node is None:
             return False
@@ -93,8 +109,7 @@ class SinglyLinkedList:
         return self._find(node.child, obj)
 
     def delete(self, obj):
-        """Delete the node with the matching obj payload. This method uses the private _find()
-        method to locate the node to delete.
+        """Delete the node with the matching obj payload.
         """
         if self.head is None:
             raise ValueError('Cannot perform delete on an empty linked-list.')
@@ -103,6 +118,7 @@ class SinglyLinkedList:
             self.head = self.head.child  # Effectively discards the first node.
             return
 
+        # Set things up before starting traversal
         current_node = self.head
         previous_node = None
 
@@ -113,8 +129,10 @@ class SinglyLinkedList:
             # 2. We do not have a match for obj
             # Conversely, we exit the loop when we have passed the last node and arrived at None
             # or we have matched obj.
-            previous_node = current_node
-            current_node = current_node.child
+            previous_node = current_node  # This changes during this loop but is not conditional for our loop
+            current_node = current_node.child  # This changes our while condition so we might exit the while now.
+            # The whole point of this loop is what values for previous_node and current_node
+            # we are left with when we exit the loop.
         
         if current_node is None:  # Reached the end
             raise ValueError('The node specified for deletion could not be found.')
@@ -144,7 +162,7 @@ class SinglyLinkedList:
             current_node = current_node.child
 
         if current_node is not None:  # Unless we have gone past the end of the linked-list
-            previous_node.child = Node(obj, current_node)
+            previous_node.child = _NodeSinglyLinked(obj, current_node)
             return
 
         # For consistency, as we did in the delete method, if we cannot find the specified
@@ -177,5 +195,32 @@ class SinglyLinkedList:
             current_node = current_node.child
 
         if current_node is not None:
-            current_node.child = Node(obj, current_node.child)
-        
+            current_node.child = _NodeSinglyLinked(obj, current_node.child)
+
+
+####################################################################################################
+# Doubly-Linked List
+# This is an object-oriented implementation of a doubly-linked list.
+# Implemented using two classes; one for a single element or node and one for the linked-list data
+# structure itself. The DoublyLinkedList class has a set of methods for basic operations. Nodes can
+# each carry a payload of any kind of data, i.e. a single reference to any kind of object.
+#
+
+
+class _NodeDoublyLinked:
+    """Node of a doubly-linked list which is a single element of the linked-list structure, which is an
+    ordered sequence of elements. Each node instance has three fields, obj, parent and child. obj is an
+    object of any type of data. parent is a reference to the previous item in the linked-list.
+    child is a reference to the next item in the linked-list. the first node will always have a parent
+    value of None. the last node will always have a child value of None.
+    """
+    def __init__(self, obj, parent_node=None, child_node=None):
+        self.obj = obj  # obj can be of any data type. This is the payload/data the node contains.
+        self.parent = parent_node  # A reference to the single parent node of this node, if one exists (or None).
+        self.child = child_node  # A reference to the single child node of this node, if one exists (or None).
+
+
+class DoublyLinkedList:
+    # TODO: Coming within hours.
+    pass
+
