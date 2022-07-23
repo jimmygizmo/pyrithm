@@ -236,8 +236,22 @@ class DoublyLinkedList:
         self.head = None
 
     def insert_first(self, obj):
-        # TODO: Coming soon!
-        pass
+        """Insert a node with the payload obj at the start position of the linked-list, thus
+        making the old list begin as a child of this new node. The head will point to this new
+        first node. The original first node will have it's parent attribute changed from None
+        to be the new first node which will itself then have a parent attribute of None.
+        """
+        if self.head is None:
+            # This node constructor give us a parent and child of None by default, which is what is required here.
+            self.head = _NodeDoublyLinked(obj)
+        else:
+            new_node = _NodeDoublyLinked(obj)
+            # We need de-reference and save the previous first node so that we can fix its parent before moving it
+            # down the list and also, this makes the code easier to understand.
+            previous_first_node = self.head  # De-reference and save this.
+            previous_first_node.parent = new_node  # Fix the parent value to be correct for the new position.
+            new_node.child = previous_first_node  # Fix the child value for the new node to be the previous first node.
+            self.head = new_node  # Make this doubly-linked list's instance's head point to the new first node.
 
     def insert_last(self, obj):
         """Insert a node with the payload obj at the last position of the linked-list. This
