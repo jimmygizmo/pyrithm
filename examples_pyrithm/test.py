@@ -131,18 +131,31 @@ print()
 print('Each call and the resulting export are shown separately for clarity:')
 print()
 
-print(r"sll.insert_first(('aa', 11))")
-obj = ('aa', 11)
+print(r"dll.insert_first(('aa', 11))")
+obj = ('a', 1)
 dll.insert_first(obj)
 print(dll.export())
 print()
 
-print(r"sll.insert_last(('hh', 88))")
-obj = ('hh', 88)
+print(r"dll.insert_last(('hh', 88))")
+obj = ('h', 8)
 dll.insert_last(obj)
 print(dll.export())
 print()
 
+
+print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
+print('TEST 4')
+
+print("""
+DoublyLinkedList has a private _find() method which is not actually used internally
+but is there for illustration. It finds through == object comparison/equivalence which
+is a non-trivial topic one should study. This test starts at the head and compares each
+payload object in detail until it finds the 'equivalent' payload (again .. equivalence
+caveats apply with this technique) and if and when a node payload matches the locator
+object, the found node's memory address is printed. This address can then be compared
+to the dump output from TEST 3 to confirm the correct node was located. Please do so.
+""")
 
 locator_obj = ('dd', 44)
 # Find can be started at any node, but we just start at the head. We could make _find just start at the head always
@@ -152,3 +165,4 @@ print(result)
 
 print()
 
+print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')

@@ -48,7 +48,9 @@ print()
 print(r'dll = pyrithm.structure.linked_list.DoublyLinkedList()')
 print()
 
+
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
+print()
 print('TEST 1')
 print("""
 Testing a total of 8 insert_last() operations to build a linked-list. To view
@@ -69,7 +71,9 @@ for obj in objects:
 
 print()
 
+
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
+print()
 print('TEST 2')
 
 print("""
@@ -115,7 +119,9 @@ print()
 dll.dump()
 print()
 
+
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
+print()
 print('TEST 3')
 
 print("""
@@ -131,48 +137,96 @@ print()
 print('Each call and the resulting export are shown separately for clarity:')
 print()
 
-print(r"sll.insert_first(('aa', 11))")
+print(r"dll.insert_first(('aa', 11))")
 obj = ('a', 1)
 dll.insert_first(obj)
 print(dll.export())
 print()
 
-print(r"sll.insert_last(('hh', 88))")
+print(r"dll.insert_last(('hh', 88))")
 obj = ('h', 8)
 dll.insert_last(obj)
 print(dll.export())
 print()
 
-print(r"sll.insert_before(('ff', 66), ('ee', 55))")
-locator_obj = ('ff', 66)
-obj = ('ee', 55)
-dll.insert_before(locator_obj, obj)
-print(dll.export())
+print('TEST SET 3 - insert_before TEST DISABLED')
+# print(r"dll.insert_before(('ff', 66), ('ee', 55))")
+# locator_obj = ('ff', 66)
+# obj = ('ee', 55)
+# dll.insert_before(locator_obj, obj)
+# print(dll.export())
+# print()
+
+print('TEST SET 3 - insert_before TEST DISABLED')
+# print(r"dll.insert_after(('bb', 22), ('cc', 33))")
+# locator_obj = ('bb', 22)
+# obj = ('cc', 33)
+# dll.insert_after(locator_obj, obj)
+# print(dll.export())
 print()
 
-print(r"sll.insert_after(('bb', 22), ('cc', 33))")
-locator_obj = ('bb', 22)
-obj = ('cc', 33)
-dll.insert_after(locator_obj, obj)
-print(dll.export())
+
+print("""
+Again, we dump the full detail of the doubly-linked list, showing memory addresses
+of the objects and especially the parent and child links. Please manualy verify that
+all links are correct. The formatting of this output makes it pretty easy.
+""")
+
+print()
+dll.dump()
 print()
 
 
-# TODO:
-# Incorporate a test for _find. Example:
-#     locator_obj = ('dd', 44)
-#     # Find can be started at any node, but we just start at the head. We could make _find just start at the head always
-#     # and remove the optional starting point argument. TODO: Consider doing this for both linked list types.
-#     result = dll._find(dll.head, locator_obj)
-#     print(result)
-#
-#     print()
+print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
+print()
+print('TEST 4')
 
+print("""
+DoublyLinkedList has a private _find() method which is not actually used internally
+but is there for illustration. It finds through == object comparison/equivalence which
+is a non-trivial topic one should study. This test starts at a specified node and in
+our test we specify the head and then the find traverses the list downwards and
+compares each payload object in detail until it finds the 'equivalent' payload
+(again .. equivalence caveats apply with this technique) and if and when
+a node payload matches the locator object, the found node's memory address
+is printed. This address can then be compared to the dump output from TEST 3
+to confirm the correct node was located. Please do so.
+
+NOTE: On indicating 'private' with underscore: I realize I am calling a private method
+from an external test but Python does not enforce against this. The leading underscore in
+the _find() method name does cause a highlighted warning in my IDE to go
+along with the convention of such an underscore. I could make a public find method,
+which is fine, but I will leave this method private and leave these comments, because
+the conventions around private methods and naming in Python are also important to
+learn. Most IDEs will highlight and warn about leading underscore private access issues
+'import *' wildcard imports and some other factors are actually affected, so in truth,
+there ARE functional issues with _private_method_name() leading underscore naming
+and it is more than just a convention or tradition. There is no effect on what can be
+called or accessed from where, however as Python remains a very permissive,
+free-form language, which is why Python is so great!
+
+The call which will be made is this:
+
+dll._find(dll.head, ('dd', 44))
+
+This call looks for the object payload for node number 2. Please check the memory address
+shown here to that from the dump output in the preceding TEST 3.
+""")
+
+locator_obj = ('dd', 44)
+# Find can be started at any node, but we just start at the head. We could make _find just start at the head always
+# and remove the optional starting point argument. TODO: Consider doing this for both linked list types.
+result = dll._find(dll.head, locator_obj)
+print(result)
+
+print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
 
 print("""
-This has been a basic illustration and test of the pyrithm DoublyLinkedList class.
+DoublyLinkedList TESTS CONCLUSION
+
+This has been a basic illustration and test of the Pyrithm DoublyLinkedList class.
 There are many other tests which can be performed to stress edge cases and
 various operations in different contexts. Since object equivalence and
 non-equivalence is fundamental to the operation of this class and since there
@@ -189,4 +243,7 @@ there are other differences in its features and of course many aspects of the
 implementation are different. It is an excellent learning exercise to carefully
 study and compare both.
 """)
+
+print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
+print()
 

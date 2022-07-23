@@ -297,7 +297,7 @@ class DoublyLinkedList:
         """
         current_node = self.head  # Start at first node as the entire list will be dumped.
 
-        print(f"CURRENT INSTANCE: self: \n{self.__dict__}\n")
+        print(f"CURRENT INSTANCE of DoublyLinkedList: self: \n{self.__dict__}\n")
 
         node_counter = 0
         while current_node:
@@ -334,8 +334,8 @@ class DoublyLinkedList:
           know about their parents as well as their children and this makes finding a node a more useful thing
           for a special private function, because we have to maintain this info separatly if the node cannot
           provide it and then such a find function would really only make code more confusing and not better;
-          referring to the singly-linked list case. We might consider putting it to use in this class, but again
-          it is here for illustrative purposes.
+          referring to the singly-linked list case. We might consider putting it to use in this doubly-linked
+          class, but again it is here for illustrative purposes primarily.
         """
         if node is None:
             return False
@@ -349,7 +349,7 @@ class DoublyLinkedList:
 
         # TODO: Since we have the parent attributes we can implement a reverse find, which might be a great
         #         illustration and in-fact we might want to implement other things that operate in reverse because
-        #         that is essentially the big power boost that the double part of doubly-linked gives you.
+        #         that is essentially the big power boost that the 'double' aspect of 'doubly-linked' gives you.
 
         # Recursively call _find again, passing the child node of the current node.
         return self._find(node.child, obj)
