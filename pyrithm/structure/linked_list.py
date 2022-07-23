@@ -234,9 +234,9 @@ class DoublyLinkedList:
         # This is all the instance is; a single attribute/field called 'head' which contains a reference
         # to the first node or None for an empty list.
         self.head = None
-    # TODO: Coming within hours.
 
     def insert_first(self, obj):
+        # TODO: Coming soon!
         pass
 
     def insert_last(self, obj):
@@ -246,10 +246,12 @@ class DoublyLinkedList:
         made a child of the last node. If the linked-list is empty then a new node is created and
         head is pointed to it.
         """
-        new_node = _NodeSinglyLinked(obj)
+        new_node = _NodeDoublyLinked(obj)
 
         if self.head is None:
             self.head = new_node
+            # By default this new node will have None for both parent and child attributes. These are the defaults
+            # from the _NodeDoublyLinked class constructor, but they are also the correct values for this new node here.
             return
 
         current_node = self.head
@@ -257,7 +259,9 @@ class DoublyLinkedList:
         while current_node.child is not None:
             current_node = current_node.child
 
-        current_node.child = new_node
+        new_node.parent = current_node  # Fix the new node's parent to be the current (last) node.
+        # None is already the value of new_node.child because of the _NodeDoublyLinked constructor defaults.
+        current_node.child = new_node  # Now link the new node as the child of the current, thus making a new last node.
 
     def export(self):
         """Return a standard list object consisting of a sequence of all of the payload objects
@@ -272,6 +276,40 @@ class DoublyLinkedList:
 
         return export_list
 
+    def dump(self):
+        """Iterate over the nodes of the doubly-linked list and display the contents, including the references in the
+        parent and child attributes so that it is possible to validate correct parent and child reference setting
+        and reference fixing for operations like delete and others. This is a deeper debug output to show references.
+        """
+        current_node = self.head  # Start at first node as the entire list will be dumped.
+
+        print(f"CURRENT INSTANCE: self: \n{self.__dict__}\n")
+
+        node_counter = 0
+        while current_node:
+            print(f"CURRENT NODE INDEX: {node_counter}")
+            print(f"CURRENT NODE ADDRESS/ID (hex): {hex(id(current_node))}")
+            # print(f"CURRENT NODE ADDRESS/ID (decimal): {id(current_node)}")
+            if current_node.parent is not None:
+                print(f"CURRENT NODE PARENT ID (hex): {current_node.parent}")
+            else:
+                print(f"CURRENT NODE PARENT: None")
+
+            if current_node.obj is not None:
+                print(f"CURRENT NODE DATA/PAYLOAD: {current_node.obj}")
+            else:
+                print(f"CURRENT NODE DATA/PAYLOAD: None")
+
+            if current_node.child is not None:
+                print(f"CURRENT NODE CHILD ID (hex): {current_node.child}")
+            else:
+                print(f"CURRENT NODE CHILD: None")
+
+            print(f"\n")
+
+            current_node = current_node.child  # At the last node, this will be None, thus exiting the loop.
+            node_counter += 1
+
     def _find(self):
         # TODO: IMPLEMENT!
         pass
@@ -283,7 +321,12 @@ class DoublyLinkedList:
             raise ValueError('Cannot perform delete on an empty linked-list.')
 
         if self.head.obj == obj:
-            self.head = self.head.child  # Effectively discards the first node.
+            # Before discarding the first node, we will need to fix the parent attribute of the second node by making
+            # its parent attribute None, then we can put it into place. This takes two steps since we have to first
+            # de-reference that current first node's child out of head.
+            new_first_node = self.head.child
+            new_first_node.parent = None
+            self.head = new_first_node  # Effectively discards the first node.
             return
 
         # Set things up before starting traversal
@@ -292,9 +335,6 @@ class DoublyLinkedList:
 
         # See comments above in SinglyLinkedList._find() about equality comparisons of obj using == or !=.
         while (current_node is not None) and (current_node.obj != obj):
-
-            # TODO: IMPLEMENTATION POINT IS HERE.
-
             previous_node = current_node
             current_node = current_node.child
 

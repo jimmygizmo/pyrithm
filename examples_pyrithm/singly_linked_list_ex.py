@@ -177,7 +177,7 @@ testing.
 
 Please also see the related example script: doubly_linked_list_ex.py
 The linked_list module also contains the DoublyLinkedList class with similar examples.
-A double-linked list takes up more memory but can be faster for certain operations and
+A doubly-linked list takes up more memory but can be faster for certain operations and
 there are other differences in its features and of course many aspects of the
 implementation are different. It is an excellent learning exercise to carefully
 study and compare both.

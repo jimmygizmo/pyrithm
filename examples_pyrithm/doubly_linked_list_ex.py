@@ -100,6 +100,19 @@ print()
 
 print(dll.export())
 
+print("""
+Doubly-linked lists have almost twice the complexity within their implementation
+as a singly linked list and there are more special edge-cases. The export() method
+we have been using is not enough to show that our links to parent and child are
+correct across operations. So we have the dump() method. This will show the full
+detail of the IDs of the nodes and the references to nodes in the parent and child
+attributes or None if that is the case. This allows full validation/debugging.
+The following is the dump of our doubly-linked list after these 4 delete operations:
+""")
+
+print()
+print()
+dll.dump()
 print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
@@ -111,43 +124,43 @@ methods, insert_first(), insert_last(), insert_after() and insert_before().
 The resulting linked-list should be the original list, who\'s export should
 be:
 """)
-print(r"[('a', 1), ('b', 2), ('c', 3), ('d', 4), ('e', 5), ", end="")
-print(r"('f', 6), ('g', 7), ('h', 8)]")
+print(r"[('aa', 11), ('bb', 22), ('cc', 33), ('dd', 44), ('ee', 55), ", end="")
+print(r"('ff', 66), ('gg', 77), ('hh', 88)]")
 
 print()
 print('Each call and the resulting export are shown separately for clarity:')
 print()
 
-print(r"sll.insert_first(('a', 1))")
+print(r"sll.insert_first(('aa', 11))")
 obj = ('a', 1)
-sll.insert_first(obj)
-print(sll.export())
+dll.insert_first(obj)
+print(dll.export())
 print()
 
-print(r"sll.insert_last(('h', 8))")
+print(r"sll.insert_last(('hh', 88))")
 obj = ('h', 8)
-sll.insert_last(obj)
-print(sll.export())
+dll.insert_last(obj)
+print(dll.export())
 print()
 
-print(r"sll.insert_before(('f', 6), ('e', 5))")
-locator_obj = ('f', 6)
-obj = ('e', 5)
-sll.insert_before(locator_obj, obj)
-print(sll.export())
+print(r"sll.insert_before(('ff', 66), ('ee', 55))")
+locator_obj = ('ff', 66)
+obj = ('ee', 55)
+dll.insert_before(locator_obj, obj)
+print(dll.export())
 print()
 
-print(r"sll.insert_after(('b', 2), ('c', 3))")
-locator_obj = ('b', 2)
-obj = ('c', 3)
-sll.insert_after(locator_obj, obj)
-print(sll.export())
+print(r"sll.insert_after(('bb', 22), ('cc', 33))")
+locator_obj = ('bb', 22)
+obj = ('cc', 33)
+dll.insert_after(locator_obj, obj)
+print(dll.export())
 print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
 
 print("""
-This has been a basic illustration and test of the pyrithm SinglyLinkedList class.
+This has been a basic illustration and test of the pyrithm DoublyLinkedList class.
 There are many other tests which can be performed to stress edge cases and
 various operations in different contexts. Since object equivalence and
 non-equivalence is fundamental to the operation of this class and since there
@@ -157,9 +170,9 @@ and should be done for real-world usage. Please see pyrithm/tests for more
 thorough testing of this class through formal unit testing and other types of
 testing.
 
-Please also see the related example script: doubly_linked_list_ex.py
-The linked_list module also contains the DoublyLinkedList class with similar examples.
-A double-linked list takes up more memory but can be faster for certain operations and
+Please also see the related example script: singly_linked_list_ex.py
+The linked_list module also contains the SinglyLinkedList class with similar examples.
+A singly-linked list takes up less memory but can be slower for certain operations and
 there are other differences in its features and of course many aspects of the
 implementation are different. It is an excellent learning exercise to carefully
 study and compare both.
