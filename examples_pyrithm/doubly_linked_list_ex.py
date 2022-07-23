@@ -138,13 +138,13 @@ print('Each call and the resulting export are shown separately for clarity:')
 print()
 
 print(r"dll.insert_first(('aa', 11))")
-obj = ('a', 1)
+obj = ('aa', 11)
 dll.insert_first(obj)
 print(dll.export())
 print()
 
 print(r"dll.insert_last(('hh', 88))")
-obj = ('h', 8)
+obj = ('hh', 88)
 dll.insert_last(obj)
 print(dll.export())
 print()
@@ -162,6 +162,30 @@ print('TEST SET 3 - insert_after TEST DISABLED')
 # obj = ('cc', 33)
 # dll.insert_after(locator_obj, obj)
 # print(dll.export())
+print()
+
+
+print("""
+Let's do one more insert_before and target the first node so we test this special case.
+We will use a unique payload. This is one of those important edge cases to test.
+Notice how the type structure of the payload actually changed. '00' is a string now
+whereas all the other items in this position were integers. This is totally allowed.
+The type of object contained in each node can be anything at all. Just remember that
+since we completely compare all aspects of the objects that are involved in using
+this class as payloads or locators/query-items and initializers .. the caveats of
+object equivalence apply and this technique can be SLOW, relatively speaking,
+but very flexible. Also, there are many ways to speed things up for specific use-cases
+of a doubly-linked list.
+""")
+
+print(r"dll.insert_before(('aa', 11), ('##', 00))")
+locator_obj = ('aa', 11)
+obj = ('##', '00')
+dll.insert_before(locator_obj, obj)
+
+print()
+print(r"An export of the resulting final linked list. Please veryify correctness:")
+print(dll.export())
 print()
 
 

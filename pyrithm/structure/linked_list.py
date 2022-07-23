@@ -431,6 +431,7 @@ class DoublyLinkedList:
         #         unit test suites because that is a pretty massive topic and deserves the very
         #         best treatment. Top-notch unit-testing and other testing is very important
         #         in this industry and as a core skill for leading professional developers.
+        # UPDATE: A test of this was added to the example script. Comments on unit tests still apply.
         if self.head.obj == locator_obj:
             self.insert_first(obj)  # Leverage the existing insert_first method
             return
