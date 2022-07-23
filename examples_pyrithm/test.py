@@ -132,61 +132,23 @@ print('Each call and the resulting export are shown separately for clarity:')
 print()
 
 print(r"sll.insert_first(('aa', 11))")
-obj = ('a', 1)
+obj = ('aa', 11)
 dll.insert_first(obj)
 print(dll.export())
 print()
 
 print(r"sll.insert_last(('hh', 88))")
-obj = ('h', 8)
+obj = ('hh', 88)
 dll.insert_last(obj)
 print(dll.export())
 print()
 
-print(r"sll.insert_before(('ff', 66), ('ee', 55))")
-locator_obj = ('ff', 66)
-obj = ('ee', 55)
-dll.insert_before(locator_obj, obj)
-print(dll.export())
+
+locator_obj = ('dd', 44)
+# Find can be started at any node, but we just start at the head. We could make _find just start at the head always
+# and remove the optional starting point argument. TODO: Consider doing this for both linked list types.
+result = dll._find(dll.head, locator_obj)
+print(result)
+
 print()
-
-print(r"sll.insert_after(('bb', 22), ('cc', 33))")
-locator_obj = ('bb', 22)
-obj = ('cc', 33)
-dll.insert_after(locator_obj, obj)
-print(dll.export())
-print()
-
-
-# TODO:
-# Incorporate a test for _find. Example:
-#     locator_obj = ('dd', 44)
-#     # Find can be started at any node, but we just start at the head. We could make _find just start at the head always
-#     # and remove the optional starting point argument. TODO: Consider doing this for both linked list types.
-#     result = dll._find(dll.head, locator_obj)
-#     print(result)
-#
-#     print()
-
-
-print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
-
-print("""
-This has been a basic illustration and test of the pyrithm DoublyLinkedList class.
-There are many other tests which can be performed to stress edge cases and
-various operations in different contexts. Since object equivalence and
-non-equivalence is fundamental to the operation of this class and since there
-are many considerations to be made in this area with respect to different
-types of objects which could be used as payload objects, much more testing can
-and should be done for real-world usage. Please see pyrithm/tests for more
-thorough testing of this class through formal unit testing and other types of
-testing.
-
-Please also see the related example script: singly_linked_list_ex.py
-The linked_list module also contains the SinglyLinkedList class with similar examples.
-A singly-linked list takes up less memory but can be slower for certain operations and
-there are other differences in its features and of course many aspects of the
-implementation are different. It is an excellent learning exercise to carefully
-study and compare both.
-""")
 

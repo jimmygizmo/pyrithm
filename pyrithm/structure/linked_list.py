@@ -324,9 +324,35 @@ class DoublyLinkedList:
             current_node = current_node.child  # At the last node, this will be None, thus exiting the loop.
             node_counter += 1
 
-    def _find(self):
-        # TODO: IMPLEMENT!
-        pass
+    def _find(self, node, obj):
+        """Locate the node with the matching obj payload and return the node itself if found.
+        The node argument is the starting point for the search which progresses towards the
+        end of the linked-list in a recursive manner. Returns False if the end of the list is
+        reached before a match is found.
+          NOTE: This private _find() method is not currently used in this class but is included for illustration.
+          Since this method is for doubly-linked lists, it might be more useful to the class methods, sice nodes
+          know about their parents as well as their children and this makes finding a node a more useful thing
+          for a special private function, because we have to maintain this info separatly if the node cannot
+          provide it and then such a find function would really only make code more confusing and not better;
+          referring to the singly-linked list case. We might consider putting it to use in this class, but again
+          it is here for illustrative purposes.
+        """
+        if node is None:
+            return False
+        # The == operator used in the following comparison is really an over-simplification.
+        # Depending on the potential data types of obj, there are many critical factors involved
+        # in making such an equivalence comparison. A more robust implementation would detect
+        # or enforce specific data types for obj and handle the comparison appropriately.
+        # == will not work in all cases but is fine for this illustrative implementation.
+        if node.obj == obj:
+            return node
+
+        # TODO: Since we have the parent attributes we can implement a reverse find, which might be a great
+        #         illustration and in-fact we might want to implement other things that operate in reverse because
+        #         that is essentially the big power boost that the double part of doubly-linked gives you.
+
+        # Recursively call _find again, passing the child node of the current node.
+        return self._find(node.child, obj)
 
     def delete(self, obj):
         """Delete the node with the matching obj payload.
