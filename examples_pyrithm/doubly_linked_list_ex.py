@@ -1,41 +1,22 @@
 #! /usr/bin/env python
-# TODO: Make another class for DoublyLinkedList and also make it's accompanying example usage script.
 
-import pyrithm.structure.linked_list as ll
+import pyrithm
 
-sll = ll.SinglyLinkedList()
+dll = pyrithm.structure.linked_list.DoublyLinkedList()
 
 # ######## About import strategies/styles
+
+# In this example file for a doubly-linked list, I import in a different manner than in the similar example file for
+# a singly-linked list. In this case here, I simply import the entire pyrithm package and because of how I designed
+# the __init__.py files in the package, this import will also import all of the sub-modules. Resources are not
+# of concern in this case, so I don't have any strong reason to only import sub-modules. So now when I initialize,
+# I will need to specify the full path into the class I want to use. See related comments in:
+# singly_linked_list_ex.py in which I do this alternative import: import pyrithm.structure.linked_list as ll
 #
-# I chose my import and alias style for the following reasons. The short 'll' alias is unique and compact
-# and there are many cases where you need to shorten longer paths to keep code readable and PEP8 compliant, plus I
-# wanted to illustrate this to you. 'll' is not the most readable variable name I will admit, but in this example
-# I like it. In other apps I might use something longer. It would be totally fine to just use the same name for the
-# alias as the lowest level module you are importing, such as: 'import pyrithm.structure.linked_list as linked_list'
-#
-# Obviously, this style of importing allows me to make a shorter call when I initialize the SinglyLinkedList class.
-# Also, Pyrithm is sort of a toolkit style of library in which there are many very related parts, but many of those
-# are standalone and so it is likely that the user will be reaching down into the namespace in which the individual
-# 'tools' (or classes etc) are located, rather than referencing higher level objects as with other kinds of libraries
-# that do things like provide a complex service, in which case many classes/modules are not so standalone.
-# Pyrithm is the type of library in which the organization of modules and directories for the user's sake,
-# even for executables such as this example script, so longer names are likely unless aliases are used.
-# Personally I might prefer to just 'import pyrithm', but I wanted to give an illustration of these other concepts
-# which perhaps apply more often in
-# real world applications.
-#
-# In the current program, there would be no problem with 'import pyrithm' because this does not require many
-# resources and this would result in nice and explicit usage, like this:
-# sll = pyrithm.structure.linked_list.SinglyLinkedList()
-# If you wanted to limit what you import a bit more, perhaps to conserve resources then that is another reason you
-# might use one of many styles of importing sub-modules and probably also assigning them aliases in many cases.
 # This is medium-sized topic, which advanced developers should learn well and you can start here:
 # For more info see the docs on packages: https://docs.python.org/3/tutorial/modules.html#packages
 # This is a sub-topic of the docs on modules: https://docs.python.org/3/tutorial/modules.html#modules
 #
-# Note that in the similar example for Doubly Linked List, I do a different import style, to illustrate the options.
-#
-
 
 # #######  Set up test data
 
@@ -43,20 +24,20 @@ sll = ll.SinglyLinkedList()
 # Tuples consisting of a character and an integer. These make it easy to see
 # ordering.
 objects = [
-    ('a', 1),
-    ('b', 2),
-    ('c', 3),
-    ('d', 4),
-    ('e', 5),
-    ('f', 6),
-    ('g', 7),
-    ('h', 8)
+    ('aa', 11),
+    ('bb', 22),
+    ('cc', 33),
+    ('dd', 44),
+    ('ee', 55),
+    ('ff', 66),
+    ('gg', 77),
+    ('hh', 88)
 ]
 
 print()
 print('= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =')
 
-print('Example Usage and Basic Tests of pyrithm.structure.linked_list')
+print('Example Usage and Basic Tests of pyrithm.structure.linked_list.DoublyLinkedList')
 print()
 print("""
 Each node of the linked list can hold a payload object of any type and to
@@ -64,7 +45,7 @@ illustrate this, tuples are used. First we instantiate a linked-list by
 calling the constructor:
 """)
 print()
-print(r'sll = pyrithm.structure.linked_list.SinglyLinkedList()')
+print(r'dll = pyrithm.structure.linked_list.DoublyLinkedList()')
 print()
 
 print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
@@ -75,16 +56,16 @@ the results, the export() method will be called after each insert to show the
 correct functioning. The final export() output should be this list of 8 tuples
 in the original order, as indicated by their data:
 """)
-print(r"[('a', 1), ('b', 2), ('c', 3), ('d', 4), ('e', 5), ", end="")
-print(r"('f', 6), ('g', 7), ('h', 8)]")
+print(r"[('aa', 11), ('bb', 22), ('cc', 33), ('dd', 44), ('ee', 55), ", end="")
+print(r"('ff', 66), ('gg', 77), ('hh', 88)]")
 print()
 print('TEST 1 RESULTS')
 print()
 
 # Create the linked list in the same order as objects using insert_last()
 for obj in objects:
-    sll.insert_last(obj)
-    print(sll.export())
+    dll.insert_last(obj)
+    print(dll.export())
 
 print()
 
@@ -98,26 +79,26 @@ with matching payload data using the Python '==' operator, NOT by position.
 The resulting linked-list will be exported for confirmation of success
 and it should be:
 """)
-print(r"[('b', 2), ('d', 4), ('f', 6), ('g', 7)]")
+print(r"[('bb', 22), ('dd', 44), ('ff', 66), ('gg', 77)]")
 
 print("""
 The calls to be made are:
 
-sll.delete(('a', 1))
-sll.delete(('c', 3))
-sll.delete(('e', 5))
-sll.delete(('h', 8))
+dll.delete(('aa', 11))
+dll.delete(('cc', 33))
+dll.delete(('ee', 55))
+dll.delete(('hh', 88))
 """)
 
 print('TEST 2 RESULTS:')
 
-sll.delete(('a', 1))
-sll.delete(('c', 3))
-sll.delete(('e', 5))
-sll.delete(('h', 8))
+dll.delete(('aa', 11))
+dll.delete(('cc', 33))
+dll.delete(('ee', 55))
+dll.delete(('hh', 88))
 print()
 
-print(sll.export())
+print(dll.export())
 
 print()
 

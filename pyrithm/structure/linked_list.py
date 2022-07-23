@@ -221,6 +221,111 @@ class _NodeDoublyLinked:
 
 
 class DoublyLinkedList:
+    """Creates a doubly-linked list. An ordered sequence of elements or nodes. The constructor
+    defines the head of the linked-list which is not a node instance but is a reference to the
+    first node instance. The last node's child field is a reference to None. The first node's parent
+    field is a reference to None. Each Node contains two attributes in its node class (_NodeDoublyLinked)
+    of parent and child which contain references to these respective nodes as defined. Each node also has
+    an object attribute which contains a reference to the data/payload of that node. If the linked-list
+    is empty, then the head is a reference to None.
+    """
+    def __init__(self):
+        # The head is not a separate node, just a reference to the first node in the linked-list.
+        # This is all the instance is; a single attribute/field called 'head' which contains a reference
+        # to the first node or None for an empty list.
+        self.head = None
     # TODO: Coming within hours.
-    pass
+
+    def insert_first(self, obj):
+        pass
+
+    def insert_last(self, obj):
+        """Insert a node with the payload obj at the last position of the linked-list. This
+        operation does not change the head or the existing nodes of the list but it does require
+        traversal of the entire list in order to locate the last node so that the new node can be
+        made a child of the last node. If the linked-list is empty then a new node is created and
+        head is pointed to it.
+        """
+        new_node = _NodeSinglyLinked(obj)
+
+        if self.head is None:
+            self.head = new_node
+            return
+
+        current_node = self.head
+
+        while current_node.child is not None:
+            current_node = current_node.child
+
+        current_node.child = new_node
+
+    def export(self):
+        """Return a standard list object consisting of a sequence of all of the payload objects
+        from all of the nodes of the linked-list, in the same order as they exist in the
+        linked-list.
+        """
+        current_node = self.head  # Start at first node as the entire list will be exported.
+        export_list = []
+        while current_node:
+            export_list.append(current_node.obj)
+            current_node = current_node.child  # At the last node, this will be None, thus exiting the loop.
+
+        return export_list
+
+    def _find(self):
+        # TODO: IMPLEMENT!
+        pass
+
+    def delete(self, obj):
+        """Delete the node with the matching obj payload.
+        """
+        if self.head is None:
+            raise ValueError('Cannot perform delete on an empty linked-list.')
+
+        if self.head.obj == obj:
+            self.head = self.head.child  # Effectively discards the first node.
+            return
+
+        # Set things up before starting traversal
+        current_node = self.head
+        previous_node = None
+
+        # See comments above in SinglyLinkedList._find() about equality comparisons of obj using == or !=.
+        while (current_node is not None) and (current_node.obj != obj):
+
+            # TODO: IMPLEMENTATION POINT IS HERE.
+
+            previous_node = current_node
+            current_node = current_node.child
+
+        if current_node is None:  # Reached the end
+            raise ValueError('The node specified for deletion could not be found.')
+
+        # We are going to pull the list up to re-connect after we cut out the delete target, but first we need to
+        # fix the parent the lower end of the list will reconnect to. With doubly-linked lists, you have to fix two
+        # references for some operations, whereas with a singly-linked list, you only have to fix one reference.
+        # NOTE: The wording of these variable names is with respect to the node being deleted and its position.
+        #         It is current_node which is being deleted.
+        #
+        new_child_of_previous_node = current_node.child  # Effective delete. Splices the bottom part back up.
+        # NOTE: This could be None if we are trying to delete the last Node, so we need special handling for that
+        #         case in one of our following steps, in which we try to reference an attribute of a node instance,
+        #         because at the last node, that child is not an instance with attributes; it is just None.
+        #
+        new_parent_of_current_node_child = previous_node  # De-references and clarifies as preparation for next step.
+        #
+        # This is where we need special handling since we can't fix a parent in the case of the last node's child
+        # attribute which is None. None has no parent attribute to fix so we cannot attempt that (i.e. reference it.)
+        if new_child_of_previous_node is not None:
+            new_child_of_previous_node.parent = new_parent_of_current_node_child
+        # If it is None, we just leave it that way and it will become the new end of list indicator in the next step.
+
+        # This can all be done is fewer steps and without verbose variables, but is gained? More room for confusion
+        # and bugs. Being very explicit and clear like I have done here has negligible cost on resources in almost
+        # all contexts yet it greatly clarifies exactly what is happening and breaks things up in steps that are
+        # easily coded and understood and can therefore more easily be made to be correct. Another very important
+        # benefit, is this code is now easy for the NEXT programmer to understand and work with correctly.
+
+        # Now we complete the 3 preceding splicing/deleting and fixing steps.
+        previous_node.child = new_child_of_previous_node
 

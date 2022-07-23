@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-# TODO: Make another class for DoublyLinkedList and also make it's accompanying example usage script.
 
 import pyrithm.structure.linked_list as ll
 
@@ -56,7 +55,7 @@ objects = [
 print()
 print('= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =')
 
-print('Example Usage and Basic Tests of pyrithm.structure.linked_list')
+print('Example Usage and Basic Tests of pyrithm.structure.linked_list.SinglyLinkedList')
 print()
 print("""
 Each node of the linked list can hold a payload object of any type and to
