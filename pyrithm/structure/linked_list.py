@@ -55,6 +55,7 @@ class SinglyLinkedList:
             self.head = new_node
             return
 
+        # Prepare for traversal
         current_node = self.head
         
         # Locating the last node must be done by traversal.
@@ -118,9 +119,9 @@ class SinglyLinkedList:
             self.head = self.head.child  # Effectively discards the first node.
             return
 
-        # Set things up before starting traversal
-        current_node = self.head
+        # Prepare for traversal
         previous_node = None
+        current_node = self.head
 
         # See comments above in _find() about equality comparisons of obj using == or !=.
         while (current_node is not None) and (current_node.obj != obj):
@@ -152,6 +153,7 @@ class SinglyLinkedList:
             self.insert_first(obj)  # Leverage the existing insert_first method
             return
 
+        # Prepare for traversal
         previous_node = None  # No node exists in this position before the actual first node.
         current_node = self.head
 
@@ -188,6 +190,7 @@ class SinglyLinkedList:
         # if self.head == None:
         #     raise ValueError('Cannot perform insert_after on an empty linked-list.')
 
+        # Prepare for traversal
         current_node = self.head
 
         # Again, same method of location.
@@ -246,11 +249,11 @@ class DoublyLinkedList:
             self.head = _NodeDoublyLinked(obj)
         else:
             new_node = _NodeDoublyLinked(obj)
-            # We need de-reference and save the previous first node so that we can fix its parent before moving it
+            # We need de-reference and save the prior first node so that we can fix its parent before moving it
             # down the list and also, this makes the code easier to understand.
-            previous_first_node = self.head  # De-reference and save this.
-            previous_first_node.parent = new_node  # Fix the parent value to be correct for the new position.
-            new_node.child = previous_first_node  # Fix the child value for the new node to be the previous first node.
+            prior_first_node = self.head  # De-reference and save this.
+            prior_first_node.parent = new_node  # Fix the parent value to be correct for the new position.
+            new_node.child = prior_first_node  # Fix the child value for the new node to be the prior first node.
             self.head = new_node  # Make this doubly-linked list's instance's head point to the new first node.
 
     def insert_last(self, obj):
@@ -268,6 +271,7 @@ class DoublyLinkedList:
             # from the _NodeDoublyLinked class constructor, but they are also the correct values for this new node here.
             return
 
+        # Prepare for traversal
         current_node = self.head
 
         while current_node.child is not None:
@@ -291,14 +295,13 @@ class DoublyLinkedList:
         return export_list
 
     def dump(self):
+        # TODO: Make dump return a chunk of text. It should not be printing itself. The caller should handle output.
         """Iterate over the nodes of the doubly-linked list and display the contents, including the references in the
         parent and child attributes so that it is possible to validate correct parent and child reference setting
         and reference fixing for operations like delete and others. This is a deeper debug output to show references.
         """
-        current_node = self.head  # Start at first node as the entire list will be dumped.
-
         print(f"CURRENT INSTANCE of DoublyLinkedList: self: \n{self.__dict__}\n")
-
+        current_node = self.head  # Start at first node as the entire list will be dumped.
         node_counter = 0
         while current_node:
             print(f"CURRENT NODE INDEX: {node_counter}")
@@ -319,7 +322,7 @@ class DoublyLinkedList:
             else:
                 print(f"CURRENT NODE CHILD: None")
 
-            print(f"\n")
+            print()
 
             current_node = current_node.child  # At the last node, this will be None, thus exiting the loop.
             node_counter += 1
@@ -369,11 +372,11 @@ class DoublyLinkedList:
             self.head = new_first_node  # Effectively discards the first node.
             return
 
-        # Set things up before starting traversal
-        current_node = self.head
+        # Prepare for traversal
         previous_node = None
+        current_node = self.head
 
-        # See comments above in SinglyLinkedList._find() about equality comparisons of obj using == or !=.
+        # See comments above in DoublyLinkedList._find() about equality comparisons of obj using == or !=.
         while (current_node is not None) and (current_node.obj != obj):
             previous_node = current_node
             current_node = current_node.child
@@ -408,4 +411,51 @@ class DoublyLinkedList:
 
         # Now we complete the 3 preceding splicing/deleting and fixing steps.
         previous_node.child = new_child_of_previous_node
+
+    def insert_before(self, locator_obj, obj):
+        """Locate the node with the obj payload that matches locator_obj and insert a node before
+        that new node with the provided payload obj. If this occurs between existing nodes, fix the
+        references for child and parent in the two nodes around the insertion point. If a new first
+        node is inserted or last node is appended, assign None to the correct child/parent and adjust
+        head if it is a new first node and fix affected child or parent.
+        (Actually, insert_first() is leveraged.) Error if this is an empty list
+        or the locator object cannot be found.
+        """
+        if self.head is None:
+            raise ValueError('Cannot perform insert_before on an empty linked-list.')
+
+        # TODO: We do test insert_first() in an example but this pathway deserves its own test.
+        #         As time allows, it will be good to add a full suite of unit tests, which is an
+        #         upcoming project for all of Pyrithm. I want to get some more algorithms and
+        #         structures in place before going full throttle with a test harness and thorough
+        #         unit test suites because that is a pretty massive topic and deserves the very
+        #         best treatment. Top-notch unit-testing and other testing is very important
+        #         in this industry and as a core skill for leading professional developers.
+        if self.head.obj == locator_obj:
+            self.insert_first(obj)  # Leverage the existing insert_first method
+            return
+
+        # Prepare for traversal
+        previous_node = None  # No node exists in this position before the actual first node.
+        current_node = self.head
+
+        # We locate the node to insert_before exactly as we did above in the delete method where
+        # the comments provide some additional detail.
+        while (current_node is not None) and (current_node.obj != locator_obj):
+            previous_node = current_node
+            current_node = current_node.child
+
+        if current_node is not None:  # Unless we have gone past the end of the linked-list
+            # The new node is instantiated with the links correct for this insert_before().
+            new_node = _NodeDoublyLinked(obj,
+                                         parent_node=previous_node,
+                                         child_node=current_node)
+            previous_node.child = new_node  # This is the insert but one link fix remains.
+
+            # Now also fix the parent link of the current/found node.
+            current_node.parent = new_node
+            return
+
+        # If we arrive here in this method, it means we could not find locator_obj.
+        raise ValueError('The node specified to insert_before could not be found.')
 

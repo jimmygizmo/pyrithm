@@ -149,15 +149,14 @@ dll.insert_last(obj)
 print(dll.export())
 print()
 
-print('TEST SET 3 - insert_before TEST DISABLED')
-# print(r"dll.insert_before(('ff', 66), ('ee', 55))")
-# locator_obj = ('ff', 66)
-# obj = ('ee', 55)
-# dll.insert_before(locator_obj, obj)
-# print(dll.export())
-# print()
+print(r"dll.insert_before(('ff', 66), ('ee', 55))")
+locator_obj = ('ff', 66)
+obj = ('ee', 55)
+dll.insert_before(locator_obj, obj)
+print(dll.export())
+print()
 
-print('TEST SET 3 - insert_before TEST DISABLED')
+print('TEST SET 3 - insert_after TEST DISABLED')
 # print(r"dll.insert_after(('bb', 22), ('cc', 33))")
 # locator_obj = ('bb', 22)
 # obj = ('cc', 33)
@@ -209,8 +208,9 @@ The call which will be made is this:
 
 dll._find(dll.head, ('dd', 44))
 
-This call looks for the object payload for node number 2. Please check the memory address
-shown here to that from the dump output in the preceding TEST 3.
+This call looks for the object payload for of this exact tuple ('dd', 44).
+Please check the memory address shown here to that from the dump output for
+the node for ('dd', 44) in the preceding TEST 3.
 """)
 
 locator_obj = ('dd', 44)
