@@ -181,5 +181,12 @@ A doubly-linked list takes up more memory but can be faster for certain operatio
 there are other differences in its features and of course many aspects of the
 implementation are different. It is an excellent learning exercise to carefully
 study and compare both.
+
+DoublyLinkedList is quite a bit more complex than SinglyLinkedList and has
+more tests/examples and shows the internals of the data structures in the
+example output. It offers a lot more interesting edge cases to learn from.
+Those edge-cases are the things that can bite you, so I covered them thoroughly.
+Please do increase your skills and understanding even further and have a close
+look at DoublyLinkedList, starting with doubly_linked_list_ex.py.
 """)
 
