@@ -181,14 +181,8 @@ class SinglyLinkedList:
         """Locate the node with the obj payload that matches locator_obj and insert a node after
         that new node with the provided payload obj.
         """
-        # What is the most correct behavior when the linked-list is empty and an insert_after is
-        # attempted? We will allow the insert_after to be the insertion of the first node, but
-        # we could also disallow it with the following error. What is most correct is up to
-        # the designer of the class to determine, especially if the most-correct behavior is
-        # not logical or obvious. In this case we will allow it, so this error-check will be
-        # be disabled:
-        # if self.head == None:
-        #     raise ValueError('Cannot perform insert_after on an empty linked-list.')
+        if self.head is None:
+            raise ValueError('Cannot perform insert_after on an empty linked-list.')
 
         # Prepare for traversal
         current_node = self.head
@@ -416,10 +410,10 @@ class DoublyLinkedList:
         """Locate the node with the obj payload that matches locator_obj and insert a node before
         that new node with the provided payload obj. If this occurs between existing nodes, fix the
         references for child and parent in the two nodes around the insertion point. If a new first
-        node is inserted or last node is appended, assign None to the correct child/parent and adjust
-        head if it is a new first node and fix affected child or parent.
-        (Actually, insert_first() is leveraged.) Error if this is an empty list
-        or the locator object cannot be found.
+        node is inserted ensure that None is the parent value and fix the parent link of the prior
+        first node to point at this new node. It is not possible to insert (append) a node at the
+        end of this list by definition of insert_before and the lack of any node to act upon there.
+        Error if this is an empty list or the locator object cannot be found.
         """
         if self.head is None:
             raise ValueError('Cannot perform insert_before on an empty linked-list.')
@@ -459,4 +453,61 @@ class DoublyLinkedList:
 
         # If we arrive here in this method, it means we could not find locator_obj.
         raise ValueError('The node specified to insert_before could not be found.')
+
+    def insert_after(self, locator_obj, obj):
+        """Locate the node with the obj payload that matches locator_obj and insert a node after
+        that node with a new node with the provided payload obj. If this occurs between existing
+        nodes, fix the references for child and parent in the two nodes around the insertion point.
+        If the found node is the last node and a new last node is to be appended, make the new parent link
+        correct and make the child None as this will be the new end of the list. Note that it is
+        not possible to insert a new first node with insert_after(), since we require an object
+        to locate and could not insert_after the head for this reason. We have insert_first() for that.
+        Error if this is an empty list or the locator object cannot be found.
+        """
+
+        if self.head is None:
+            raise ValueError('Cannot perform insert_after on an empty linked-list.')
+
+        # Prepare for traversal
+        # TODO: Will we use previous_node? Just added it for adapting to doubly but might have added it too soon.
+        previous_node = None  # No node exists in this position before the actual first node.
+        current_node = self.head
+        grandchild_node = None  # This will be set within the loop before we test conditions again. Can always be None.
+
+        # Again, same method of location.
+        while (current_node is not None) and (current_node.obj != locator_obj):
+            previous_node = current_node  # TODO: STILL WAITING TO USE THIS. WILL WE?
+            current_node = current_node.child
+            # At this point, current_node could now be None if that was out last node in the list.
+            # We cannot access a non-existent child attribute on a NoneType object, so we have to check first
+            # and then still give grandchild_node the value of None. We do it explicitly and don't just rely
+            # on the None init value we used. When the cost is little, it is MUCH better to be explicit.
+            # To simply rely on the init value of None we used above could be considered lazy and is a style
+            # that can save a few lines of code to no real benefit, yet at the same time increase chances of
+            # some future bug. I prefer to be explicitly clear, even if at times that is a little redundant.
+            # Better safe, than sorry. The exception is when you are doing extreme performance optimization
+            # which in practice is a relatively rare concern. Having bug-free, easy to manage code is however
+            # a constant and ubiquitous concern. Even the Python mantra tells us to be explicit and to be clear.
+            if current_node is not None:
+                grandchild_node = current_node.child
+            else:
+                grandchild_node = None  # Explicit. Not relying on the fall-through init value from above.
+
+        if current_node is not None:  # Unless we have gone past the end of the linked-list
+            # The new node is instantiated with the links correct for this insert_after().
+            new_node = _NodeDoublyLinked(obj,
+                                         parent_node=current_node,
+                                         child_node=grandchild_node)
+            # The grandchild_node still has it's original parent link (or None value) and so we fix that now that
+            # we have new_node, but of course again, to prevent an error for attempting to access a non-existent
+            # attribute on a NoneType object, we have to test for that:
+            if grandchild_node is not None:
+                grandchild_node.parent = new_node
+            # And if it is None, then it stays that way as the indicator of the new end of the list.
+
+            current_node.child = new_node
+            return
+
+        # If we arrive here in this method, it means we could not find locator_obj.
+        raise ValueError('The node specified to insert_after could not be found.')
 

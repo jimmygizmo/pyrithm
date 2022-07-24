@@ -156,15 +156,16 @@ dll.insert_before(locator_obj, obj)
 print(dll.export())
 print()
 
-print('TEST SET 3 - insert_after TEST DISABLED')
-# print(r"dll.insert_after(('bb', 22), ('cc', 33))")
-# locator_obj = ('bb', 22)
-# obj = ('cc', 33)
-# dll.insert_after(locator_obj, obj)
-# print(dll.export())
+print(r"dll.insert_after(('bb', 22), ('cc', 33))")
+locator_obj = ('bb', 22)
+obj = ('cc', 33)
+dll.insert_after(locator_obj, obj)
+print(dll.export())
 print()
 
 
+print('- - - - - - - -')
+print()
 print("""
 Let's do one more insert_before and target the first node so we test this special case.
 We will use a unique payload. This is one of those important edge cases to test.
@@ -184,11 +185,31 @@ obj = ('##', '00')
 dll.insert_before(locator_obj, obj)
 
 print()
-print(r"An export of the resulting final linked list. Please veryify correctness:")
+print(r"An export of the resulting final linked list. Please verify correctness:")
 print(dll.export())
 print()
 
 
+print('- - - - - - - -')
+print()
+print("""
+Also, let's do one more insert_after and target the last node so we test this special case.
+We will use a unique payload. This is one of those important edge cases to test.
+""")
+
+print(r"dll.insert_after(('hh', 88), ('**', 99))")
+locator_obj = ('hh', 88)
+obj = ('**', 99)
+dll.insert_after(locator_obj, obj)
+
+print()
+print(r"An export of the resulting final linked list. Please verify correctness:")
+print(dll.export())
+print()
+
+
+print('- - - - - - - -')
+print()
 print("""
 Again, we dump the full detail of the doubly-linked list, showing memory addresses
 of the objects and especially the parent and child links. Please manualy verify that
