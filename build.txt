@@ -1,0 +1,51 @@
+################################################################################
+####                          BUILD INSTRUCTIONS                            ####
+################################################################################
+
+HOW TO USE requirements.txt AND pinned-requirements.txt
+
+NORMAL BUILDS (max stability, minimum risk):             pinned-requirements.txt
+BUILDS WITH AUTOMATIC UPGRADES (bug/regression risk):           requirements.txt
+
+
+Until there is a good reason to upgrade Python dependencies, the version-pinned
+dependency/requirements file (pinned-requirements.txt) should be used. This
+will prevent any automatic upgrading of modules or their dependencies to occur
+outside of your control. Sometimes you must upgrade modules for a strong
+functional reason or simply because it has not been done lately. However, there
+are times when it is important to NOT upgrade and to maximize stability. This
+might be because senior staff are on vacation or perhaps because there is
+complex development occurring which is already introducing enough rapid change.
+There are many reasons to carefully plan when you want to upgrade dependencies,
+so you need both a pinned and an un-pinned dependency (requirements) file.
+
+
+Use requirements.txt, which always installs the latest versions, ONLY when
+it is acceptable and desired to allow any module the chance to upgrade or
+to have any module cause some dependency of its own to upgrade.
+Any time that a version of any module or child dependency module changes,
+a bug or functional change could be introduced and so extra care and thorough
+testing are required to ensure trouble-free upgrades. It is always possible
+for a new and possibly hard-to-detect bug to be introduced, any time a
+dependency upgrades, so this has to be under your control and that is why for
+standard builds, always use pinned-requirements.txt.
+
+
+Always create a fresh and updated pinned-requirements.txt file after every
+use of the un-pinned (requirements.txt) file, so that you lock down the
+(possibly) new set of versioned dependencies. Use the 'pip freeze' command
+for this. ONLY commit the new pinned-requirements.txt file to the repository
+after thorough testing has validated your application when it is using the newer
+version of one or more dependencies.
+
+
+Dependencies must only ever be upgraded for a specific reason and just staying
+up-to-date is a valid reason, but this involves increased risk and must be
+planned. Wait until a specific fix or change is needed from a newer version
+of a dependency, or wait some reasonable interval like 4-6 months for
+periodic, regular upgrades and then be sure to do extra testing and observe
+your application more closely for a while after allowing the change of any
+version of any module, regardless of how minor its role may be. Bugs caused by
+an un-pinned requirements.txt file can be severe, hard-to-detect and are a
+result of poor change management. Always pin your versions!
+

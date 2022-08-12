@@ -2,31 +2,12 @@
 ####    requirements.txt    -    Un-versioned Project Dependencies          ####
 ################################################################################
 
-# WARNING:
-# Using this file (requirements.txt) only when it is acceptable or desirable
-# to allow any module the chance to upgrade or to have any module cause some
-# other dependency it uses to upgrade. Any time that a version of any module
-# or child dependency module changes, a bug or functional change could be
-# introduced and so extra care and thorough testing are required to ensure
-# trouble-free upgrades, which may or may-not occur, out of your control
-# whenever requirements.txt (the un-pinned version) is used.
+# See build.txt for instructions on pinned vs. un-pinned requirements files.
 
-# Until there is a reason to upgrade modules, the version-pinned dependency
-# file (pinned-requirements.txt) should be used. This will prevent any
-# automatic upgrading of modules or their dependencies to occur outside of
-# your control. Sometimes you must upgrade modules for a strong functional
-# reason or simply because it has not been done lately, however there are
-# times when it is important to NOT upgrade and to maximize stability. This
-# might be because senior staff are on vacation or perhaps because there is
-# complex development occurring which is already introducing enough rapid
-# change. There are many reasons to carefully plan when you want to upgrade
-# dependencies, so you need both a pinned and an un-pinned dependencies
-# (requirements) file.
 
-# Remember to create a fresh and updated pinned-requirements.txt file after
-# every use of the un-pinned (requirements.txt) file, so that you lock down
-# the new set of versioned dependencies. (Of course, sometimes none of the
-# versions will change if this was done recently.)
+
+
+
 
 
 # TODO: Possibly remove these comments about a Docker base image. Move them
