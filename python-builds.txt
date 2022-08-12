@@ -1,11 +1,11 @@
 ################################################################################
-####                          BUILD INSTRUCTIONS                            ####
+####                       PYTHON BUILD INSTRUCTIONS                        ####
 ################################################################################
 
 HOW TO USE requirements.txt AND pinned-requirements.txt
 
 NORMAL BUILDS (max stability, minimum risk):             pinned-requirements.txt
-BUILDS WITH AUTOMATIC UPGRADES (bug/regression risk):           requirements.txt
+BUILDS WITH AUTOMATIC UPGRADES (regression risk):               requirements.txt
 
 
 Until there is a good reason to upgrade Python dependencies, the version-pinned
