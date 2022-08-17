@@ -45,7 +45,8 @@ planned. Wait until a specific fix or change is needed from a newer version
 of a dependency, or wait some reasonable interval like 4-6 months for
 periodic, regular upgrades and then be sure to do extra testing and observe
 your application more closely for a while after allowing the change of any
-version of any module, regardless of how minor its role may be. Bugs caused by
-an un-pinned requirements.txt file can be severe, hard-to-detect and are a
-result of poor change management. Always pin your versions!
+version of any module, regardless of how minor its role may be. Production
+problems caused by an un-pinned requirements.txt file can be severe,
+hard-to-detect and may be considered poor change management.
+Always pin your versions!
 
