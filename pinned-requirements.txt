@@ -1,13 +1,13 @@
 ################################################################################
-####    requirements.txt    -    UN-VERSIONED PROJECT DEPENDENCIES          ####
+####    pinned-requirements.txt    -    VERSIONED PROJECT DEPENDENCIES      ####
 ################################################################################
 
-# See python-builds.txt for instructions on when to use this file.
-# Normally, you should use pinned-requirements.txt.
+# See python-builds.txt for instructions.
+# This is the file you will use for standard builds.
 
 ################################################################################
 
 
 # colorama - Used in decorator_ex.py in examples_standalone
-colorama
+colorama==0.4.5
 
