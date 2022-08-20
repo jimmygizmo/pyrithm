@@ -59,16 +59,20 @@
 # a few versions back. In most cases, it is a good idea to upgrade these tools
 # to the latest versions.
 pip install --upgrade pip
+# This should take pip from version 22.0.4 to 22.2.2
 
 pip install --upgrade setuptools
+# This should take setuptools from version 58.1.0 to 65.1.0
 
 # TODO: We're getting into wheel installs and pre-building/storing the
 #       archives needed to build a container for a python app. Eliminate remote
 #       repos.
-#       (Not necessarily for Pyrithm, but this is the init.sh file I will be
-#       using for all Python projects, including many that run in containers
-#       and for which you want stable images with changes under control.)
+#       (Not necessarily for Pyrithm, but this is the init-project.sh file I
+#       will be using for all Python projects, including many that run in
+#       containers and for which you want stable images with changes under
+#       control.)
 pip install --upgrade wheel
+# This should install wheel 0.37.1
 
 
 # INSTALL MODULES WHICH ENHANCE PYTHON SOFTWARE DEVELOPMENT AND TESTING
@@ -85,11 +89,58 @@ pip install --upgrade wheel
 
 
 pip install pylint  # Static code analysis for Python
+# This brings in the following:
+# astroid==2.11.7
+# dill==0.3.5.1
+# isort==5.10.1
+# lazy-object-proxy==1.7.1
+# mccabe==0.7.0
+# platformdirs==2.5.2
+# pylint==2.14.5
+# tomli==2.0.1
+# tomlkit==0.11.4
+# wrapt==1.14.1
+
+
 pip install autopep8  # Automatic PEP8 code reformatting
+# This brings in the following:
+# autopep8==1.7.0
+# pycodestyle==2.9.1
+# toml==0.10.2
+
+
 pip install rope  # Python code refactoring library
+# This brings in the following:
+# packaging-21.3
+# pyparsing-3.0.9
+# pytoolconfig-1.2.2
+# rope-1.3.0
+
+
+# With only the above modules and their dependencies installed to assist
+# Python development, pip freeze will show:
+# astroid==2.11.7
+# autopep8==1.7.0
+# dill==0.3.5.1
+# isort==5.10.1
+# lazy-object-proxy==1.7.1
+# mccabe==0.7.0
+# packaging==21.3
+# platformdirs==2.5.2
+# pycodestyle==2.9.1
+# pylint==2.14.5
+# pyparsing==3.0.9
+# pytoolconfig==1.2.2
+# rope==1.3.0
+# toml==0.10.2
+# tomli==2.0.1
+# tomlkit==0.11.4
+# wrapt==1.14.1
+
 
 # Install project-specific python dependencies
 pip install -r pinned-requirements.txt
+
 
 # Install this project's package
 # For development, we will install this project's package using the -e option
@@ -104,59 +155,40 @@ pip install -e .
 # For development in an IDE, you may need to configure the IDE to recognize and
 # automatically activate the new python virtual environment, but recent IDEs
 # often need only a little help or no help at all and detect it automatically.
+
 ###############################################################################
 
-# Modules installed to support pylint (versions may differ slightly):
-# astroid==2.2.5
-# isort==4.3.20
-# lazy-object-proxy==1.4.1
-# mccabe==0.6.1
-# pylint==2.3.1
-# six==1.12.0
-# typed-ast==1.4.0
-# wrapt==1.11.1
+# IMPORTANT - Regarding how the installation of Pyrithm itself seems linked to
+# a specific git revision based on pip freeze output:
+#-e git+ssh://git@github.com/jimmygizmo/pyrithm.git@5d090504b53d762b26c3d197731fdbee48cea03f#egg=Pyrithm
 
-# Modules installed to support autopep8 (versions may differ slightly):
-# autopep8==1.4.4
-# pycodestyle==2.5.0
-
-# Modules installed to support rope
-# rope==0.14.0
-
-# TODO: Check and update. This is the recent output of pip freeze now under a much higher Python
-# version (3.10.4). About 3 years have past so the amount of change will be interesting to see:
-# I see some new modules (dependencies 2nd or nth gen.): dill, platformdirs, toml, tomli, tomlkit.
-# Some modules are gone now: six, typed-ast.
-# Six is probably gone now because a lot of Python 2 to Python 3 migration work has been completed.
-# All versions have gone up as expected.
 # Wow, I did not expect to see this git format for the Pyrithm local "editable" install. I expected
 # only that the install was done using a symlink so I will need to learn more about the git reference.
 # ** The -e option is so that pip does not copy but rather links the files so you can work on them live
 # and test them live, so that is more for developers of Pyrithm (myself) and users could probably leave off
 # the -e but I honestly don't know exactly how the -e option and the '.' path interact with pip install
-# with respect to this surprising git URL in the pip freeze. I know you can in stall from git URLs but in this
+# with respect to this surprising git URL in the pip freeze. I know you can install from git URLs but in this
 # this case I did not expect that from my "pip install -e ." step to install Pyrithm itself (from the current
-# dir.
-# I'm not going to continue tracking which 2nd and nth gen dependencies came from what 1st gen as I was
-# doing before. I will just list the pip freeze output, unless there is something really important to note.
-# Version pinning strategies are another matter with some overlapping concerns.
+# dir.)
 
-#(ve.pyrithm) ➜  pyrithm git:(master) ✗ date
-#Thu Jun 16 19:35:43 PDT 2022
-#(ve.pyrithm) ➜  pyrithm git:(master) pip freeze
-#astroid==2.11.6
-#autopep8==1.6.0
-#dill==0.3.5.1
-#isort==5.10.1
-#lazy-object-proxy==1.7.1
-#mccabe==0.7.0
-#platformdirs==2.5.2
-#pycodestyle==2.8.0
-#pylint==2.14.2
-#-e git+ssh://git@github.com/jimmygizmo/pyrithm.git@5d090504b53d762b26c3d197731fdbee48cea03f#egg=Pyrithm
-#rope==1.1.1
-#toml==0.10.2
-#tomli==2.0.1
-#tomlkit==0.11.0
-#wrapt==1.14.1
+# This is our current pip freeze output, not that all project init steps are complete:
+# astroid==2.11.7
+# autopep8==1.7.0
+# colorama==0.4.5
+# dill==0.3.5.1
+# isort==5.10.1
+# lazy-object-proxy==1.7.1
+# mccabe==0.7.0
+# packaging==21.3
+# platformdirs==2.5.2
+# pycodestyle==2.9.1
+# pylint==2.14.5
+# pyparsing==3.0.9
+# -e git+ssh://git@github.com/jimmygizmo/pyrithm.git@a04d85ba25d01658245c34e89b8ea02bca0be88c#egg=Pyrithm
+# pytoolconfig==1.2.2
+# rope==1.3.0
+# toml==0.10.2
+# tomli==2.0.1
+# tomlkit==0.11.4
+# wrapt==1.14.1
 
