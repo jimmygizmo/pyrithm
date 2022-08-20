@@ -47,6 +47,6 @@ periodic, regular upgrades and then be sure to do extra testing and observe
 your application more closely for a while after allowing the change of any
 version of any module, regardless of how minor its role may be. Production
 problems caused by an un-pinned requirements.txt file can be severe,
-hard-to-detect and indicates poor change management practices.
+hard-to-detect and indicates poor change-management practices.
 Always pin your versions!
 
