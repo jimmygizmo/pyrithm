@@ -1,5 +1,0 @@
-{
-    "python.pythonPath": ".venv/bin/python3",
-    "editor.rulers": [79],
-    "workbench.tree.indent": 16
-}
