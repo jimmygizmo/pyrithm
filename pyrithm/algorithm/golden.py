@@ -2,12 +2,12 @@
 import pyrithm.algorithm.fibonacci as fibonacci
 
 
-class Golden():
+class Golden:
 
     """
 
     Calculate the golden ratio to the specified accuracy level using the
-    Fibonacci sequence by increasing n for the comparision of the (n)th to
+    Fibonacci sequence by increasing n for the comparison of the (n)th to
     (n-1)th sequence member value ratios until the required number of digits
     reach stability.
 

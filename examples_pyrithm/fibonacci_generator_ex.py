@@ -3,7 +3,7 @@
 import pyrithm.algorithm.fibonacci as fibonacci
 
 fib_gen = fibonacci.fibbonacci_generator()  # The generator function is called.
-#fib_gen = fibonacci.fibbonacci_generator_one_based()
+# fib_gen = fibonacci.fibbonacci_generator_one_based()
 
 print('n  nth Fibonacci sequence member')
 print('-  -----------------------------')

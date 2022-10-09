@@ -1,6 +1,6 @@
 
 
-class Fibonacci():
+class Fibonacci:
 
     """
 
@@ -69,7 +69,7 @@ class FibbonacciIterator():
         # initialization since this would equate to member for n = -1 which
         # is not part of the definition of the Fibbonacci sequence, but we
         # have chosen a style of the sequence which starts at n=0 where this
-        # 'first' memeber is 0 and to make this iterator implementation work
+        # 'first' member is 0 and to make this iterator implementation work
         # correctly, this is how we have to initialize it. The implementation
         # details are not important. What is important is that we have
         # consistent behavior and everything works, regardless of the
@@ -168,7 +168,7 @@ def fibbonacci_generator():
     prev, curr = 0, 1
     zero_member = True
     while True:
-        if zero_member == True:
+        if zero_member:
             zero_member = False  # So this edge case happens only once.
             yield 0
             continue  # So we don't do the following yield in this edge case.

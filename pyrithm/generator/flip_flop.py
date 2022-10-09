@@ -49,7 +49,7 @@ def binary_flip_flop_generator(max_flip_flops=0):
             state = 1
         count += 1
         if not (max_flip_flops == 0):
-            if (count >= max_flip_flops):
+            if count >= max_flip_flops:
                 iterate = False
         yield state
 
