@@ -44,7 +44,7 @@ class Fibonacci:
             return member_value
 
 
-class FibbonacciIterator():
+class FibbonacciIterator:
 
     """
 
@@ -95,7 +95,7 @@ class FibbonacciIterator():
         return return_val  # We had to save it to be able to return it here.
 
 
-class FibbonacciIteratorOneBased():
+class FibbonacciIteratorOneBased:
 
     """
 
@@ -129,7 +129,7 @@ class FibbonacciIteratorOneBased():
         return value
 
 
-class FibbonacciIteratorZeroBasedSimple():
+class FibbonacciIteratorZeroBasedSimple:
 
     """
 
@@ -181,7 +181,7 @@ def fibbonacci_generator():
 # you want a 0-based series. I just think 0-based is more correct for multiple
 # reasons, however, you can see here how if you want a 1-based Fibbonacci
 # series, the implementations get cleaner/simpler. This is the cleanest
-# implementation I know of. (Assuming you are ok with 1-based.)
+# implementation I know of, assuming you are ok with 1-based.
 
 # Fibbonacci as a generator. Simpler but less-desirable 1-based style:
 def fibbonacci_generator_one_based():
