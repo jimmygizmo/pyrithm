@@ -10,12 +10,16 @@ print(f"-  --------------------------------------------------")
 maximum = 200
 for n in range(1, maximum + 1):  # Plus 1 so we include the maximum value itself.
     if VERBOSE:
-        print(f"{n}  { 'PRIME' if prime.Prime.is_prime(n) else '- - -' }")
+        print(f"{n}  { 'PRIME' if prime.Prime._is_prime(n) else '- - -' }")
     else:
-        if prime.Prime.is_prime(n):  # This is a static use. A class static method is called directly.
+        # Normally we don't call _protected members directly, but this is educational demo code and the fact is,
+        # Python does not stop you from such access, but your IDE will likely give a warning here, but Python won't.
+        if prime.Prime._is_prime(n):  # This is a static use. A class static, protected method is called directly.
             print(n, end="")
-        if n < maximum:
-            print(", ", end="")
+            if n < maximum - 1:  # This is just for proper comma formatting as the processing output completes.
+                print(", ", end="")
+            else:
+                print()
 print()
 
 # For the non-verbose output, we want comma-separated values on a single line with no extra comma on the end.

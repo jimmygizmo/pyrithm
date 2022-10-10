@@ -25,16 +25,15 @@ print("Created an instance with a large pre_compute of 1000.")
 prime_class_instance_1000 = prime.Prime(1000)
 print()
 
-print("Created an instance with an extra-large pre_compute of 40000. Hold on a sec for this one ...")
+print("Created an instance with an extra-large pre_compute of 40000. Please wait 5-10 seconds for this one ...")
 prime_class_instance_20000 = prime.Prime(40000)
 print("Whew! That one actually took a noticeable amount of hard work by the CPU for a few seconds there.")
 print()
 
 
-print("Looking closer at the instance with the pre_compute of 1000; Let's direct;y access this cache and have"
-      "a look. \n")
+print("Looking closer at the instance with the pre_compute of 1000; Let's directly access this cache object.\n")
 print("How many actual prime numbers are in this cache? Lets count the cache entries:")
-print(len(prime_class_instance_1000.cache))  # IDEs may warn here about accessing a protected class member.
+print(len(prime_class_instance_1000.cache))
 print(f"What is the last and therefore highest cache entry (prime number): "
       f"{prime_class_instance_1000.cache[-1]}")
 print("\n")
@@ -46,16 +45,18 @@ print("\n")
 
 
 print("Now we'll recreate the same example as the static usage in the other script, but call the is_prime() method "
-      "through the instance we created.\n")
+      "through the instance we created.")
+print("Also, we will use the instance with a pre_compute of only 30, so we can see both cache hits and cache misses "
+      "occurring.\n")
 print(f"n  All prime numbers between zero and 200, inclusive.")
 print(f"-  --------------------------------------------------")
 
 maximum = 200
 for n in range(1, maximum + 1):  # Plus 1 so we include the maximum value itself.
     if VERBOSE:
-        print(f"{n}  { 'PRIME' if prime_class_instance_1000.is_prime(n) else '- - -' }")
+        print(f"{n}  { 'PRIME' if prime_class_instance_30.is_prime(n) else '- - -' }")
     else:
-        if prime_class_instance_1000.is_prime(n):  # A static method called through an instance.
+        if prime_class_instance_30.is_prime(n):  # A static method called through an instance.
             print(n, end="")
             if n < maximum - 1:  # This is just for proper comma formatting as the processing output completes.
                 print(", ", end="")
@@ -63,12 +64,6 @@ for n in range(1, maximum + 1):  # Plus 1 so we include the maximum value itself
                 print()
 
 print("\n")
-
-# For the non-verbose output, we want comma-separated values on a single line with no extra comma on the end.
-# We could easily get something like this by pre-calculating everything into an array and then just printing the array.
-# However, we don't want to require pre-calculation and thus waiting in this case (regardless of how fast or slow)
-# so the way we did it, we will output as the numbers are calculated, but will still have the proper formatting
-# for the last item. There are almost always edge-cases to handle in every requirement.
 
 
 # Try an invalid pre_compute value. It should throw an exception as a ValueError.
