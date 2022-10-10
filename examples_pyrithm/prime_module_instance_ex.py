@@ -10,7 +10,7 @@ print(f"This example script creates an instance of the Prime class, in contrast 
 print(f"Each instance of Prime can have its own cache of pre-computed prime numbers for a performance boost over "
       f"that range. This is a generic concept for you to learn from and adapt to other OOP use-cases.")
 print(f"When creating an instance, we can specify the maximum value up to which to pre-compute (search for) "
-      f"prime number values.")
+      f"prime number values which will be stored in the instance's own cache.")
 print()
 
 print("Created an instance with a small pre_compute of 30.")
@@ -25,9 +25,10 @@ print("Created an instance with a large pre_compute of 1000.")
 prime_class_instance_1000 = prime.Prime(1000)
 print()
 
-print("Created an instance with an extra-large pre_compute of 40000. Please wait 5-10 seconds for this one ...")
-prime_class_instance_20000 = prime.Prime(40000)
-print("Whew! That one actually took a noticeable amount of hard work by the CPU for a few seconds there.")
+print("Created an instance with an extra-large pre_compute of 20000. Please wait 3-5 seconds for this one ...")
+prime_class_instance_20000 = prime.Prime(20000)
+print("Whew! That one actually took a noticeable amount of hard work by the CPU for a few seconds there. Depending"
+      "on what you are doing, a cache can help you reduce unnecessary computation.")
 print()
 
 

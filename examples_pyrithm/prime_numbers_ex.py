@@ -12,7 +12,7 @@ for n in range(1, maximum + 1):  # Plus 1 so we include the maximum value itself
     if VERBOSE:
         print(f"{n}  { 'PRIME' if prime.Prime._is_prime(n) else '- - -' }")
     else:
-        # Normally we don't call _protected members directly, but this is educational demo code and the fact is,
+        # Normally we don't call _protected members directly, but this is an educational demo code and the fact is,
         # Python does not stop you from such access, but your IDE will likely give a warning here, but Python won't.
         if prime.Prime._is_prime(n):  # This is a static use. A class static, protected method is called directly.
             print(n, end="")

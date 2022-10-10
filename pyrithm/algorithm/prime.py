@@ -19,12 +19,12 @@ class Prime:
         return dividend % divisor == 0
 
 
-    # TODO: We should add computed values to the cache. We could insert the value into its sequential position, but
-    # that would be expensive but would allow determination of the max value etc. Or, we could just append the new
-    # values and give up on any order that any pre-computed values might have. The cache membership check will work
-    # in either case, but our example that checks that maximum would not work as it currently is. In other words,
-    # the maximum prime number in the cache would not no longer also be guaranteed to be the last value in the cache
-    # list.
+    # TODO: We should add computed values from _is_prime() to the cache.
+    # We could insert the value into its sequential position, but that would be expensive but would allow
+    # determination of the max value etc. Or, we could just append the new values and give up on any order that
+    # any pre-computed values might have. The cache membership check will work in either case, but our example
+    # that checks that maximum would not work as it currently is. In other words, the maximum prime number in the
+    # cache would no longer also be guaranteed to be the last value in the cache list.
 
 
     @staticmethod
@@ -39,6 +39,9 @@ class Prime:
                     print(f"{divisor} is a factor of {x} so {x} cannot be a prime number. "
                           f"No additional factors need to be tried.")
                 return False
+
+        if Prime.DEBUG:
+            print(f"{x} is a prime number. Determined via factor analysis.")
         return True
 
 
