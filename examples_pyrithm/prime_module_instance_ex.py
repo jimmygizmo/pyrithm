@@ -27,7 +27,7 @@ print()
 
 print("Created an instance with an extra-large pre_compute of 20000. Please wait 3-5 seconds for this one ...")
 prime_class_instance_20000 = prime.Prime(20000)
-print("Whew! That one actually took a noticeable amount of hard work by the CPU for a few seconds there. Depending"
+print("Whew! That one actually took a noticeable amount of hard work by the CPU for a few seconds there. Depending "
       "on what you are doing, a cache can help you reduce unnecessary computation.")
 print()
 
