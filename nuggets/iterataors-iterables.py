@@ -62,15 +62,13 @@ for item in my_iterator3:
 
 print("\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
 
-# Or you can pass it an object that is already an iterator.
+
+print("\nWe can make an iterator from a string which is also an iterable and iterate over each character.\n")
+
+a_string_is_also_an_iterable = "abcdefg"
+string_iterator = iter(a_string_is_also_an_iterable)
 
 
-
-
-
-
-a_string_is_also_an_iterator = "abcdefg"
-
-
-
+for item in string_iterator:
+    print(item)
 
