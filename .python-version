@@ -1,2 +1,18 @@
+# The latest python version used for development/testing in Pyrithm is: 3.12.4
+# You should use Pyenv to install Python 3.12.4 and select it for the creation of your Pyenv Virtualenv for this
+# project. This .python-version file is used by Pyenv for automatic activation of your virtual env.
+# All of my projects follow a similar naming convention, so I name this virtual env: ve.pyrithm
+
 ve.pyrithm
+
+# PREREQUISITES:
+# 1. Install the python correct Python version using Pyenv:
+#     pyenv install 3.12.4
+# 2. Create the required Pyenv Virtualenv:
+#     pyenv virtualenv 3.12.4 ve.pyrithm
+# Your virtual env will activate automatically. See other docs in the project for more detail on this.
+
+
+##
+#
 

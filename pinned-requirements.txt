@@ -4,10 +4,16 @@
 
 # See python-builds.txt for instructions.
 # This is the file you will use for standard builds.
+# TODO: Expand here with additional context, similar to that added to requirements.txt.
+# TODO: Expand the text decoration #### to a wider col width, probably to 120.
 
 ################################################################################
 
 
 # colorama - Used in decorator_ex.py in examples_standalone
 colorama==0.4.5
+
+
+##
+#
 

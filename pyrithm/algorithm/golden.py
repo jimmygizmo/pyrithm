@@ -1,6 +1,6 @@
 
 import pyrithm.algorithm.fibonacci as fibonacci
-
+# TODO: Why is this import here? Below see error needing to return a str and int. (Types)
 
 class Golden:
 
@@ -51,3 +51,4 @@ class Golden:
         lb = len(b)
         identical_digits = 0
         # TODO: Finish this method
+

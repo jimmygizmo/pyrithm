@@ -11,7 +11,9 @@
 # There really is no other way for a professional developer to maintain
 # project-specific Python versions and project-specific virtual environments
 # and their isolated module libraries and to do it correctly and efficiently,
-# without using Pyenv. It works simply and very well on all platforms.
+# without using Pyenv. I recommend avoiding ALL other tools like this. Use
+# Pyenv as it is the only clean solution which is in sync with the Python
+# ecosystem. Pyenv works in a simple way and very well on all platforms.
 # https://github.com/pyenv/pyenv
 
 # Python version currently used for development, testing and deployment:
@@ -70,7 +72,7 @@ pip install --upgrade setuptools
 #       (Not necessarily for Pyrithm, but this is the init-project.sh file I
 #       will be using for all Python projects, including many that run in
 #       containers and for which you want stable images with changes under
-#       control.)
+#       source control.)
 pip install --upgrade wheel
 # This should install wheel 0.37.1
 

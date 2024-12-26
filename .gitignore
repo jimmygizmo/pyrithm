@@ -1,6 +1,10 @@
 # IDEs
 .idea/
 
+temp-notes.txt
+
+_trial_temp/
+
 .vscode
 .run
 
@@ -40,7 +44,4 @@ pip-delete-this-directory.txt
 
 # Virtual Environment
 .venv
-
-
-
 

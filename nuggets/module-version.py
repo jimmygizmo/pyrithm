@@ -9,15 +9,16 @@ import time
 # since I have not looked at the docs yet. This script, as with those scripts in the /nuggets/ dir in general,
 # is here to test a few things regarding this question and document the results, prior to a more formal
 # example or illustrative script. Sometimes When I nail down important but small concepts, I will just incorporate
-# those into other Pyrithm example scripts and modules, as it makes sense.
-
+# those into other Pyrithm example scripts and modules, whatever makes the most sense.
 print()
 
 print("time.__version__  ERROR - no such attribute")
+# UNCOMMENT NEXT LINE TO DEMONSTRATE:
 # print(time.__version__)  # ERROR: AttributeError: module 'time' has no attribute '__version__'
 print()
 
 print("time.version.VERSION  ERROR - no such attribute")
+# UNCOMMENT NEXT LINE TO DEMONSTRATE:
 # print(time.version.VERSION)  # ERROR: AttributeError: module 'time' has no attribute 'version.VERSION'
 print()
 

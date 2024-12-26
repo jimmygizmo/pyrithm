@@ -3,11 +3,23 @@
 ################################################################################
 
 # See python-builds.txt for instructions on when to use this file.
-# Normally, you should use pinned-requirements.txt.
+# Normally, you should use pinned-requirements.txt to guarantee maximum
+# compatibility with the latest version of Python used with this project
+# as recommended in the README. In practice though, Python and its modules
+# are all highly compatible across versions except in special areas like
+# the latest AI/ML work where you do see stricter version requirements.
+# Pyrithm teaches industrial-strength best-practices, so I cover topics like
+# this, even when Python fundamentals/basics is the focus. In fact, you won't
+# have many version compatibility issues in a project like Pyrithm, but you
+# should still always match versions in the professional way I teach you here.
 
 ################################################################################
 
 
 # colorama - Used in decorator_ex.py in examples_standalone
 colorama
+
+
+##
+#
 

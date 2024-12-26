@@ -5,6 +5,7 @@ import unittest
 
 import algebra  # Local module to be tested
 
+
 class TestAlgebra(unittest.TestCase):
 
     def test_add(self):

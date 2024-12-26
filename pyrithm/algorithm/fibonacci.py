@@ -175,13 +175,11 @@ def fibbonacci_generator():
         yield curr
         prev, curr = curr, prev + curr
 
-
-# I don't personally like Fibbonacci series which are 1-based but it seems
-# you always have to have edge-case code in any kind of implementation when
-# you want a 0-based series. I just think 0-based is more correct for multiple
-# reasons, however, you can see here how if you want a 1-based Fibbonacci
-# series, the implementations get cleaner/simpler. This is the cleanest
-# implementation I know of, assuming you are ok with 1-based.
+# Based at 0 is more correct, but notice how simple the implementation is when you base the sequence at 1.
+# I don't personally like the Fibbonacci sequence to be 1-based but it seems you always have to have edge-case code
+# in any kind of implementation when you want a 0-based sequence. I just think 0-based is more correct for multiple
+# reasons, however, you can see here how if you want a 1-based Fibbonacci sequence, the implementations get
+# cleaner/simpler. This is the cleanest implementation I know of, assuming you are ok with 1-based.
 
 # Fibbonacci as a generator. Simpler but less-desirable 1-based style:
 def fibbonacci_generator_one_based():
