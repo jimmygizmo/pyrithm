@@ -2,6 +2,7 @@
 
 import pyrithm
 
+
 dll = pyrithm.structure.linked_list.DoublyLinkedList()
 
 # ######## About import strategies/styles
