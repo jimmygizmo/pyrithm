@@ -41,14 +41,11 @@ class BinarySearchIterative():
             print(f"list length: {len(self.s_list)}")
         attempt = 0
         looking = True
-        min_index = 0  # We might not need min_index for anything and can remove it later.
+        min_index = 0
         max_index = len(self.s_list) - 1
         mid_index = (len(self.s_list) // 2) - 1
         while looking:
             attempt += 1
-            if attempt > 10:
-                print(f"THROTTLED before attempt {attempt}. Must be a runaway!")
-                return None  # DEBUG - REMOVE
             if DEMO:
                 print(f"attempt: {attempt}")
                 print(f"min_index: {min_index}")
@@ -57,10 +54,10 @@ class BinarySearchIterative():
 
             # These two checks may end the iterations with either success and the index or failure to locate.
             if self.s_list[mid_index] == term:
-                looking = False  # Can drop this line
+                looking = False  # Can drop this line. The loop will stop when we return.
                 return mid_index
-            if mid_index == 0:  ## OR IF mid_index IS ONE LESS THAN MAX???
-                looking = False  # Can drop this line
+            if min_index == max_index or mid_index > max_index or mid_index < min_index:  # Might not need all these casees but its good coverage for any edge cases.
+                looking = False  # Can drop this line. The loop will stop when we return.
                 return None
 
             # This check selects which side, left or right, the term belongs in and makes the adjustments to values to
@@ -73,18 +70,28 @@ class BinarySearchIterative():
                 if DEMO:
                     print(f"Choosing RIGHT side for next step. right_length: {right_length}")
                 # TODO: Check for an edge case regarding mid_index + 1 when near the end or starting list is small.
-                min_index = mid_index + 1  # + 1 because we already checked mid_index itself. TODO: edge case at max?
-                # TODO: I'm guessing there is no edge-case problem on the right, BECAUSE we are using floor division.
-                mid_index = mid_index + (right_length // 2)
-                # max_index remains unchanged when we choose the right side. mid_index ++ one floor-half of right_length
+                min_index = mid_index + 1  # Move min index to start of right side
+                mid_index = mid_index + (right_length // 2)  # Locate new 'floor-half' mid_index
+                # max_index remains unchanged when we choose the right side.
+                if mid_index == max_index:
+                    # This means we think we need to look in the RIGHT side, but it is now size zero. Search exhausted.
+                    looking = False  # Can drop this line. The loop will stop when we return.
+                    return None
+
             else:
                 # Choose left side, discard right side, set up for search of left side next.
-                left_length = mid_index - min_index
+                left_length = mid_index - min_index + 1  # SEEMS LIKE WE NEED THE PLUS ONE. TODO: Explain.
+                # TODO: Can we say? "Since we do floor division, left side needs the plus one?"
                 if DEMO:
                     print(f"Choosing LEFT side for next step. left_length: {left_length}")
-                max_index = mid_index  # Must set this prior to changing mid_index in the next line.
+                max_index = mid_index  # Can we optimize here? We actually already checked mid_index itself, but our pattern is to search the whole 'side'. Possibly.
                 # min_index remains unchanged when we choose the left side.
-                mid_index = min_index + (left_length // 2)  # TODO: Check this more but it looks ok.
+                mid_index = (min_index - 1) + (left_length // 2)  # Start at min - 1 to get correct mid_index. (we add a length to an index .. so)
+                # TODO: Explain the above better. NOTE: This is where mid_index can become less than min_index. This might matter for some possible exit logic.
+                if mid_index == min_index:
+                    # This means we think we need to look in the LEFT side, but it is now size zero. Search exhausted.
+                    looking = False  # Can drop this line. The loop will stop when we return.
+                    return None
 
 
 

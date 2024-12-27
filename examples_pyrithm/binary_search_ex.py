@@ -10,7 +10,7 @@ bsearch_recur = pyrithm.algorithm.search.binary.BinarySearchRecursive(my_sorted_
 
 print(f"Sorted list to search:\n{', '.join(map(str, my_sorted_list))}")
 
-search_term_1 = 21  # This is at index 11.
+search_term_1 = 20  # This is at index 11.
 search_term = search_term_1
 
 print(f"I want the zero-based index; the position of: {search_term}")
