@@ -24,6 +24,38 @@
 # TODO: Complete the analogy explanation here, for checking matching and how the search can end with no find, what the
 #          edge cases look like. Good analogies are especially valuable when they explain the edge cases well!
 
+# UPDATE - NEW PLAN: Initially I was considering the mid_index element to be part of the LEFT side in some of my
+# calculations, but this looks like one of my main problems. IN FACT, after we check the mid_index element for == term,
+# we need never check it again. Thus, it needed not be part of ANY side and should not be. It is aparent now to me
+# that this is logically critical and I should build my side-choice-adjustment calculations based on this now-
+# clarified premise. I have been surprised by the struggles I encountered with binary search. If you you get off on the
+# wrong foot with your model of the problem or general concepts, you can find yourself with some edge-case problems.
+# I'm only having edge-casees fail, but you can't have any cases fail. This is not that complex of a problem but one
+# just needs to model it correctly and view each step in a logical manner (close up) and go step by step through runs
+# with different data .. ESPECIALLY with your data that fails tests. You need to break down EXACTLY what is happening
+# and some cases this leads to the discover that you have started out with a bad mistake in your model or logic.
+# This is a great way to learn though. By hitting walls in some areas, you learn the tough areas of specific algorithms
+# or data structures and you develop an intuition about where the tough edge-cases live when you are dealing with
+# certain kinds of symmetries and certain kinds of processing.
+# Where the edge-cases get interesting is where you have a change in symmetries between data and your processing,
+# such as the behavior of odd vs even input or the behavior at limits when there is no longer symnmetry on the sides
+# of things etc. Think about symmetry and symmetry changes when thinking about edge cases. And note there are differet
+# variations on symmetry. You might say that an odd number of things is not symmetrical, BUT if you pick the middle
+# element, then you have symmetry on either side of it for lists with big middles, BUT if that is a list with an
+# even number of things, you cannot pick any element with symmetry on both sides. There are many many ways of looking
+# at symmetry and when it changes along with other conditions. I'm just saying those are also interesting places to try
+# to predict edge cases that will need a little bit of extra code to be handled without a problem. Hey, in cases like
+# this you need a ROBUST set of unit tests. I have realized that for binary-search and btree and similar processing/
+# structures, you need a LOT of unit tests because there are a lot of little edge cases. The data has a big effect on
+# how the graph-traversal occurs and what edge-limits you encounter during the variations in traversal and data
+# conditions, so you need a lot of UNIT tests to expose all the different code pathways and test them all. Don't leave
+# any code pathway untested. Even more importantly, THOROUGHLY test problems like this, becuase you might be missing
+# a little code and not realize it. So when I started working on binary search, I did not learn any other solutions
+# and I have not looked at any during this process. I wanted to  fall into the pits on my own and get bitten by the
+# tougher parts of this problem. Now I think by treating the mid_index element as SEPARATE from the left or right side
+# we will divide into if we keep looking, that will result in better logic. I will be adding a lot more unit tests as
+# well.
+
 VERBOSE = True
 
 

@@ -67,6 +67,78 @@ class TestBinarySearch(unittest.TestCase):
         ).search(10), None)
         #
 
+
+
+        # 8 Elements
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (0) @ index None
+        ).search(0), None)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (1) @ index 0
+        ).search(1), 0)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (2) @ index 1
+        ).search(2), 1)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (3) @ index None
+        ).search(3), None)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (4) @ index 2
+        ).search(4), 2)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (5) @ index 3
+        ).search(5), 3)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (6) @ index 4
+        ).search(6), 4)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (7) @ index None
+        ).search(7), None)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (8) @ index 5
+        ).search(8), 5)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (9) @ index 6
+        ).search(9), 6)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (10) @ index None
+        ).search(10), None)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (11) @ index 7
+        ).search(11), 7)
+        #
+        self.assertEqual(bsearch(
+            #0  1  2  3  4  5  6   7   # Indices
+            [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (12) @ index None
+        ).search(12), None)
+        #
+        
+
+
         # 18 Elements
         #
         self.assertEqual(bsearch(
