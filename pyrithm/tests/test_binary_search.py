@@ -10,6 +10,12 @@ class TestBinarySearch(unittest.TestCase):
 
     # 1 Element Tests
 
+    def test_algorithm_search_binary__1e_tM1_iN(self):
+        self.assertEqual(bsearch(
+            #0   # Indices
+            [1, ]  # 1 element, term (-1) @ index None
+        ).search(-1), None)
+
     def test_algorithm_search_binary__1e_t0_iN(self):
         self.assertEqual(bsearch(
             #0   # Indices
@@ -22,8 +28,20 @@ class TestBinarySearch(unittest.TestCase):
             [1, ]  # 1 element, term (1) @ index 0
         ).search(1), 0)
 
+    def test_algorithm_search_binary__1e_t2_iN(self):
+        self.assertEqual(bsearch(
+            #0   # Indices
+            [1, ]  # 1 element, term (2) @ index None
+        ).search(2), None)
+
 
     # 2 Element Tests
+
+    def test_algorithm_search_binary__2e_tM1_iN(self):
+        self.assertEqual(bsearch(
+            #0  1   # Indices
+            [1, 2, ]  # 2 elements, term (-1) @ index None
+        ).search(-1), None)
 
     def test_algorithm_search_binary__2e_t0_iN(self):
         self.assertEqual(bsearch(
@@ -94,16 +112,52 @@ class TestBinarySearch(unittest.TestCase):
         ).search(5), None)
 
 
-    # TODO: 4 Element Tests, 5 Element Tests, 6 Element Tests
+    # 4 Element Tests
 
-
-    # 7 Element Tests
-
-    def test_algorithm_search_binary__7e_t0_iN(self):
+    def test_algorithm_search_binary__4e_t0_iN(self):
         self.assertEqual(bsearch(
-            #0  1  2  3  4  5  6   # Indices
-            [1, 2, 4, 5, 6, 8, 9, ]  # 7 elements, term (0) @ index None
+            #0  1  2  3   # Indices
+            [1, 2, 4, 5, ]  # 4 elements, term (0) @ index None
         ).search(0), None)
+
+    def test_algorithm_search_binary__4e_t1_i0(self):
+        self.assertEqual(bsearch(
+            #0  1  2  3   # Indices
+            [1, 2, 4, 5, ]  # 4 elements, term (1) @ index 0
+        ).search(1), 0)
+
+    def test_algorithm_search_binary__4e_t2_i1(self):
+        self.assertEqual(bsearch(
+            #0  1  2  3   # Indices
+            [1, 2, 4, 5, ]  # 4 elements, term (2) @ index 1
+        ).search(2), 1)
+
+    def test_algorithm_search_binary__4e_t3_iN(self):
+        self.assertEqual(bsearch(
+            #0  1  2  3   # Indices
+            [1, 2, 4, 5, ]  # 4 elements, term (3) @ index None
+        ).search(3), None)
+
+    def test_algorithm_search_binary__4e_t4_i2(self):
+        self.assertEqual(bsearch(
+            #0  1  2  3   # Indices
+            [1, 2, 4, 5, ]  # 4 elements, term (4) @ index 2
+        ).search(4), 2)
+
+    def test_algorithm_search_binary__4e_t5_i3(self):
+        self.assertEqual(bsearch(
+            #0  1  2  3   # Indices
+            [1, 2, 4, 5, ]  # 4 elements, term (5) @ index 3
+        ).search(5), 3)
+
+    def test_algorithm_search_binary__4e_t6_iN(self):
+        self.assertEqual(bsearch(
+            #0  1  2  3   # Indices
+            [1, 2, 4, 5, ]  # 4 elements, term (6) @ index None
+        ).search(6), None)
+
+
+    # TODO: 5 Element Tests, 6 Element Tests
 
 
     # 7 Element Tests
