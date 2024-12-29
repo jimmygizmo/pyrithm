@@ -43,6 +43,11 @@ class TestBinarySearch(unittest.TestCase):
             [1, 2, ]  # 2 elements, term (2) @ index 1
         ).search(2), 1)
 
+    # THIS IS THE EDGE CASE FAILING WITH "list index out of range".
+    # UNIQUE FACTORS: The term is not in the list and is >> last element. It is a 2 element list and this means that
+    # the mid index will fall on min or max. NOW, for solution, focusing on how in the case of 2 elements, the // 2
+    # integer division results in the mid_index == max_index and so the left side has one element and the right side has none.
+    # SOLUTION ??? I don't know yet.
     def test_algorithm_search_binary__2e_t3_iN(self):
         self.assertEqual(bsearch(
             #0  1   # Indices
@@ -50,7 +55,46 @@ class TestBinarySearch(unittest.TestCase):
         ).search(3), None)
 
 
-    # TODO: 3 Element Tests, 4 Element Tests, 5 Element Tests, 6 Element Tests
+    # 3 Element Tests
+
+    def test_algorithm_search_binary__3e_t0_iN(self):
+        self.assertEqual(bsearch(
+            #0  1  2   # Indices
+            [1, 2, 4, ]  # 3 elements, term (0) @ index None
+        ).search(0), None)
+
+    def test_algorithm_search_binary__3e_t1_i0(self):
+        self.assertEqual(bsearch(
+            #0  1  2   # Indices
+            [1, 2, 4, ]  # 3 elements, term (1) @ index 0
+        ).search(1), 0)
+
+    def test_algorithm_search_binary__3e_t2_i1(self):
+        self.assertEqual(bsearch(
+            #0  1  2   # Indices
+            [1, 2, 4, ]  # 3 elements, term (2) @ index 1
+        ).search(2), 1)
+
+    def test_algorithm_search_binary__3e_t3_iN(self):
+        self.assertEqual(bsearch(
+            #0  1  2   # Indices
+            [1, 2, 4, ]  # 3 elements, term (3) @ index None
+        ).search(3), None)
+
+    def test_algorithm_search_binary__3e_t4_i2(self):
+        self.assertEqual(bsearch(
+            #0  1  2   # Indices
+            [1, 2, 4, ]  # 3 elements, term (4) @ index 2
+        ).search(4), 2)
+
+    def test_algorithm_search_binary__3e_t5_iN(self):
+        self.assertEqual(bsearch(
+            #0  1  2   # Indices
+            [1, 2, 4, ]  # 3 elements, term (5) @ index None
+        ).search(5), None)
+
+
+    # TODO: 4 Element Tests, 5 Element Tests, 6 Element Tests
 
 
     # 7 Element Tests

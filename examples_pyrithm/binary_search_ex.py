@@ -3,14 +3,19 @@
 import pyrithm
 
 # Index:          0  1  2  3  4  5  6  7   8   9  10  11  12  13  14  15  16  17
-my_sorted_list = [1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 15, 21, 22, 23, 25, 28, 29, 30, ]  # 18 elements
+# my_sorted_list = [1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 15, 21, 22, 23, 25, 28, 29, 30, ]  # 18 elements
+
+# Index:          0  1
+my_sorted_list = [1, 2, ]  # 1 elements
+
 
 bsearch_iter = pyrithm.algorithm.search.binary.BinarySearchIterative(my_sorted_list)
 bsearch_recur = pyrithm.algorithm.search.binary.BinarySearchRecursive(my_sorted_list)
 
 print(f"Sorted list to search:\n{', '.join(map(str, my_sorted_list))}")
 
-search_term_1 = 20  # This is at index 11.
+search_term_1 = 3  # Not in list and >> than last element. (Off to the right.)
+# search_term_1 = 20  # This is at index 11.
 search_term = search_term_1
 
 print(f"I want the zero-based index; the position of: {search_term}")
@@ -25,5 +30,6 @@ else:
     print(f"The search term was not located in the supplied list.")
 
 
-
+##
+#
 

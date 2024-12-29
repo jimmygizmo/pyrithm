@@ -56,7 +56,7 @@
 # we will divide into if we keep looking, that will result in better logic. I will be adding a lot more unit tests as
 # well.
 
-VERBOSE = True
+VERBOSE = False
 
 
 class BinarySearchIterative:
