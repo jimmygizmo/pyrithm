@@ -64,6 +64,7 @@ class BinarySearchIterative:
 
     def __init__(self, sorted_int_list: list[int]):
         self.s_list = sorted_int_list
+        self.traversal = []  # A record of the LEFT-vs-RIGHT traversal decisions for a search. This varies with input.
         if len(self.s_list) == 0:
             raise ValueError("You must initialize with a sorted integer list of at least one integer.")
 
@@ -75,14 +76,12 @@ class BinarySearchIterative:
         looking = True
         min_index = 0
         max_index = len(self.s_list) - 1
-        mid_index = (len(self.s_list) // 2) - 1
+        mid_index = (len(self.s_list) // 2)
         while looking:
             attempt += 1
             if VERBOSE:
                 print(f"attempt: {attempt}")
-                print(f"min_index: {min_index}")
-                print(f"max_index: {max_index}")
-                print(f"mid_index: {mid_index}")
+                print(f"ATTEMPT: min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}")
 
             # These two checks may end the iterations with either success and the index or failure to locate.
             if self.s_list[mid_index] == term:
@@ -92,9 +91,10 @@ class BinarySearchIterative:
                 return mid_index
 
 
+            # TODO: Analyzing edge case PROBLEM when term = 0 (< first element) Our test data has 1 as minimum at pos 0.
+            #          so the element cant be in this list. Should return None but it did not. This was old prob. Prior to refactor.
 
 
-            # Broke out the edge cases with logging. TODO: Analyzing dge case PROBLEM when term = 0 (< first element)
             if min_index == max_index:
                 if VERBOSE:
                     print(f"EXIT SEARCH: min_index == max_index")
@@ -118,44 +118,55 @@ class BinarySearchIterative:
             # search only in the chosen 'side' during the next step and 'discard' the other 'side' of the list.
             # We don't actually change the original sorted list in any way. We only adjust the three pointers to
             # indices in this list which we use to manage all processing.
+
             if self.s_list[mid_index] < term:
                 # Choose right side, discard left side, set up for search of right side next.
+                # Right side will not include the mid_index element as we have now checked that element explicitly.
+                # In fact, because we use floor division, I think that means the mid_index element would NEVER
+                # be considered for the right side, separate from the fact that we choose not to include the mid_index
+                # element on ANY side. Our model/design is to exclude the mid_index element from ANY side membership
+                # For one thing, this elminates a wasted check on an element we already checked; slightly more efficient.
+                # Most importantly, though, is that to exclude the mid_index element like this is the MOST CORRECT design.
+                # And will likely lead to the simplest edge-case code additions. This is all part of our refactor thinking.
                 right_length = max_index - mid_index
                 if VERBOSE:
-                    print(f"The term > the element at mid_index. Next step will search RIGHT side. right_length: {right_length}")
+                    print(f"The term ({term}) > the mid_index element value ({self.s_list[mid_index]}).")
+                    print(f"Next step will search RIGHT side. right_length: {right_length}")
                 # TODO: Check for an edge case regarding mid_index + 1 when near the end or starting list is small.
-                min_index = mid_index + 1  # Move min index to start of right side
-                mid_index = mid_index + (right_length // 2)  # Locate new 'floor-half' mid_index
+                min_index = mid_index + 1  # We exclude the old mid_index element from the new RIGHT (or ANY) side.
+                mid_index = (mid_index + 1) + (right_length // 2)  # Locate new 'floor-half' mid_index, based on starting ONE element AFTER the old mid_index
                 # max_index remains unchanged when we choose the right side.
                 if VERBOSE:
                     print(f"ADJUSTED: min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}")
-                if mid_index == max_index:
-                    if VERBOSE:
-                        print(f"EXIT SEARCH via CHOOSE-RIGHT CHECK: mid_index == max_index")
-                    # This means we think we need to look in the RIGHT side, but it is now size zero. Search exhausted.
-                    looking = False  # Can drop this line. The loop will stop when we return.
-                    return None
+                # if mid_index == max_index:
+                #     if VERBOSE:
+                #         print(f"EXIT SEARCH via CHOOSE-RIGHT CHECK: mid_index == max_index")
+                #     # This means we think we need to look in the RIGHT side, but it is now size zero. Search exhausted.
+                #     looking = False  # Can drop this line. The loop will stop when we return.
+                #     return None
 
-                # TODO: Fix might be to make these two end checks do GREATER OR LESS AS WELL AS EQUAL:  CHECK <= and =>
+                # TODO: (THINKKING NO ON THIS NOW) -> Fix might be to make these two end checks do GREATER OR LESS AS WELL AS EQUAL:  CHECK <= and =>
+                # OR .. MAYBE NO CHECKS CAN HAPPEN HERE --IF-- WE HAVE AT LEAST A NEW mid_index ELEMENT TO CHECK NEXT LOOP.
 
             else:
                 # Choose left side, discard right side, set up for search of left side next.
-                left_length = mid_index - min_index + 1  # SEEMS LIKE WE NEED THE PLUS ONE. TODO: Explain.
-                # TODO: Can we say? "Since we do floor division, left side needs the plus one?"
+                # Left side will not include the mid_index element as we have now checked that element explicitly.
+                left_length = mid_index - min_index
                 if VERBOSE:
-                    print(f"The term < the element at mid_index. Next step will search LEFT side. left_length: {left_length}")
-                max_index = mid_index  # Can we optimize here? We actually already checked mid_index itself, but our pattern is to search the whole 'side'. Possibly.
+                    print(f"The term ({term}) < the mid_index element value ({self.s_list[mid_index]}).")
+                    print(f"Next step will search LEFT side. left_length: {left_length}")
+                max_index = mid_index - 1  # We exclude the old mid_index element from the new LEFT (or ANY) side.
                 # min_index remains unchanged when we choose the left side.
-                mid_index = (min_index - 1) + (left_length // 2)  # Start at min - 1 to get correct mid_index. (we add a length to an index .. so)
+                mid_index = min_index + (left_length // 2)
                 # TODO: Explain the above better. NOTE: This is where mid_index can become less than min_index. This might matter for some possible exit logic.
                 if VERBOSE:
                     print(f"ADJUSTED: min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}")
-                if mid_index == min_index:
-                    if VERBOSE:
-                        print(f"EXIT SEARCH via CHOOSE-LEFT CHECK: mid_index == min_index")
-                    # This means we think we need to look in the LEFT side, but it is now size zero. Search exhausted.
-                    looking = False  # Can drop this line. The loop will stop when we return.
-                    return None
+                # if mid_index == min_index:
+                #     if VERBOSE:
+                #         print(f"EXIT SEARCH via CHOOSE-LEFT CHECK: mid_index == min_index")
+                #     # This means we think we need to look in the LEFT side, but it is now size zero. Search exhausted.
+                #     looking = False  # Can drop this line. The loop will stop when we return.
+                #     return None
 
 
 

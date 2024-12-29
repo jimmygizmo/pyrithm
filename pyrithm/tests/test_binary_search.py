@@ -7,8 +7,8 @@ import pyrithm.algorithm.search.binary as bsearch  # Local module to be tested
 bsearch = bsearch.BinarySearchIterative  # TODO: Also test the recursive version, later when we have it.
 
 class TestBinarySearch(unittest.TestCase):
-    def test_algorithm_search_binary(self):
-
+    def test_algorithm_search_binary__7_element(self):
+        #
         # 7 Elements
         #
         self.assertEqual(bsearch(
@@ -67,8 +67,8 @@ class TestBinarySearch(unittest.TestCase):
         ).search(10), None)
         #
 
-
-
+    def test_algorithm_search_binary__8_element(self):
+        #
         # 8 Elements
         #
         self.assertEqual(bsearch(
@@ -136,7 +136,7 @@ class TestBinarySearch(unittest.TestCase):
             [1, 2, 4, 5, 6, 8, 9, 11, ]  # 8 elements, term (12) @ index None
         ).search(12), None)
         #
-        
+
 
 
         # 18 Elements
