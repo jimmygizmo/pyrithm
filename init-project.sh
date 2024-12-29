@@ -1,6 +1,5 @@
 #! /usr/bin/env bash
 
-
 ################################################################################
 
 # PYENV INSTALLATION OF PYTHON AND CREATION OF VIRTUAL ENVIRONMENT
@@ -17,7 +16,7 @@
 # https://github.com/pyenv/pyenv
 
 # Python version currently used for development, testing and deployment:
-# Python 3.10.4
+# Python 3.10.4  TODO: Now up to 3.12.4 but much of the project needs testing. TODO: ADD UNIT TESTS EVERYWHERE
 
 # A .python-version file at the root of project is used to select the
 # Pyenv virtual environment to activate.
@@ -25,7 +24,7 @@
 # Do this before anything else.
 
 # If necessary, have Pyenv install the required/preferred version of Python.
-# pyenv install 3.10.4
+# pyenv install 3.10.4     TODO: Now up to 3.12.4
 #
 # * In practice, many versions of Python and libraries will likely work fine,
 # but some testing and deployment procedures might require exact version
@@ -34,7 +33,7 @@
 # in a precise manner. In the long run, the benefits pay off a great deal.
 
 # Now create the virtual environment with the required name:
-# pyenv virtualenv 3.10.4 ve.pyrithm
+# pyenv virtualenv 3.10.4 ve.pyrithm     TODO: Now up to 3.12.4
 
 # Once this is done, the ve.pyrithm virtual environment will be active
 # in any directory or sub-directory anywhere within the project, all thanks
@@ -62,9 +61,12 @@
 # to the latest versions.
 pip install --upgrade pip
 # This should take pip from version 22.0.4 to 22.2.2
+# TODO: Update docs for 3.12.4 after testing full project:
+#          This should take pip from version 24.0 to 24.3.1
 
 pip install --upgrade setuptools
 # This should take setuptools from version 58.1.0 to 65.1.0
+# TODO: For 3.12.4: This should take setuptools to 75.6.0
 
 # TODO: We're getting into wheel installs and pre-building/storing the
 #       archives needed to build a container for a python app. Eliminate remote
@@ -75,6 +77,7 @@ pip install --upgrade setuptools
 #       source control.)
 pip install --upgrade wheel
 # This should install wheel 0.37.1
+# TODO: For 3.12.4: This should take wheel to 0.45.1
 
 
 # INSTALL MODULES WHICH ENHANCE PYTHON SOFTWARE DEVELOPMENT AND TESTING
@@ -88,6 +91,16 @@ pip install --upgrade wheel
 #       to clarify which modules activate or are required for which features
 #       in each IDE. Now in 2022, some of this has no doubt changed and
 #       needs to be updated.
+
+
+# TODO: MOST of these versions will likely have changed now that we are on Python 3.12.4
+
+# TODO: There are a lot of other good Python linters available now as we enter 2025. Check out this article:
+# https://inventwithpython.com/blog/2022/11/19/python-linter-comparison-2022-pylint-vs-pyflakes-vs-flake8-vs-autopep8-vs-bandit-vs-prospector-vs-pylama-vs-pyroma-vs-black-vs-mypy-vs-radon-vs-mccabe/
+# TODO: All of the below needs to be updated in light of this. We might come up with a whole new set of linters to use now.
+# But I have not critical need for additional linting, but its always good to look at new stuff like this. PyCharm does fine with linting,
+# and I use MyPy a lot also. In the recent past, PyCharm used to seem to detect some of these other linters I install
+# here in this older setup script, but I don't know all the details about PyCharm's linting now in 2025. I'll bring this up to date shortly.
 
 
 pip install pylint  # Static code analysis for Python
@@ -150,7 +163,7 @@ pip install -r pinned-requirements.txt
 # make changes to the module which will be picked up upon each new execution
 # using the module.
 pip install -e .
-
+# TODO: Things seem to be working fine without doing this, but maybe the IDE is helping. Looking into this later.
 
 ################################################################################
 

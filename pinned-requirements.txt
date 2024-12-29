@@ -11,7 +11,16 @@
 
 
 # colorama - Used in decorator_ex.py in examples_standalone
-colorama==0.4.5
+colorama==0.4.6
+
+# Python code linting from command line and via IDE integration
+mypy==1.14.0
+mypy-extensions==1.0.0
+typing_extensions==4.12.2
+
+# Python/Pip modules for module installations/upgrades, via manual uprgades
+setuptools==75.6.0
+wheel==0.45.1
 
 
 ##

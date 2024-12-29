@@ -19,6 +19,9 @@
 # colorama - Used in decorator_ex.py in examples_standalone
 colorama
 
+# Python code linting from command line and via IDE integration
+mypy
+
 
 ##
 #

@@ -56,62 +56,48 @@
 # we will divide into if we keep looking, that will result in better logic. I will be adding a lot more unit tests as
 # well.
 
-VERBOSE = False
+V_: bool = False  # Verbose logging flag. Nothing printed when false. Set true for testing/troubleshooting.
+# TODO: Make this configurable so it can be turned on by the caller, particularly for unit tests.
 
 
 class BinarySearchIterative:
-    """Simple iterative implementation of the classic binary search algorithm."""
+    """Binary search algorithm, iterative implementation, full-featured but simple. No special optimizations."""
 
     def __init__(self, sorted_int_list: list[int]):
-        self.s_list = sorted_int_list
-        self.traversal = []  # A record of the LEFT-vs-RIGHT traversal decisions for a search. This varies with input.
+        self.s_list: list[int] = sorted_int_list
+        self.traversal: list[str] = []  # A record of the LEFT-vs-RIGHT traversal decisions for a search. This varies with input.
         if len(self.s_list) == 0:
             raise ValueError("You must initialize with a sorted integer list of at least one integer.")
 
     def search(self, term: int) -> int|None:
-        if VERBOSE:
-            print(f"\nBinarySearchIterative running. Search term: {term}")
-            print(f"List element count (length): {len(self.s_list)}")
-        attempt = 0
-        looking = True
-        min_index = 0
-        max_index = len(self.s_list) - 1
-        mid_index = (len(self.s_list) // 2)
-        while looking:
+        if V_: print(f"\nBinarySearchIterative running...    Search term: {term}\n"
+                     f"List element count (length): {len(self.s_list)}")
+        attempt: int = 0
+        min_index: int = 0
+        max_index: int = len(self.s_list) - 1
+        mid_index: int = (len(self.s_list) // 2)
+        while True:
             attempt += 1
-            if VERBOSE:
-                print(f"attempt: {attempt}")
-                print(f"ATTEMPT: min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}")
+            if V_: print(f"ATTEMPT ({attempt}): "
+                         f"min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}")
 
             # These two checks may end the iterations with either success and the index or failure to locate.
             if self.s_list[mid_index] == term:
-                looking = False  # Can drop this line. The loop will stop when we return.
-                if VERBOSE:
-                    print(f"FOUND the search term ({term}) at index: {mid_index}    Steps/attempts: {attempt}")
+                if V_: print(f"FOUND the search term ({term}) at index: {mid_index}    Steps/attempts: {attempt}")
                 return mid_index
-
 
             # TODO: Analyzing edge case PROBLEM when term = 0 (< first element) Our test data has 1 as minimum at pos 0.
             #          so the element cant be in this list. Should return None but it did not. This was old prob. Prior to refactor.
 
-
             if min_index == max_index:
-                if VERBOSE:
-                    print(f"EXIT SEARCH: min_index == max_index")
-                looking = False  # TODO: Drop this.
+                if V_: print(f"EXIT SEARCH: min_index == max_index")
                 return None
             if mid_index > max_index:
-                if VERBOSE:
-                    print(f"EXIT SEARCH: mid_index > max_index")
-                looking = False  # TODO: Drop this.
+                if V_: print(f"EXIT SEARCH: mid_index > max_index")
                 return None
             if mid_index < min_index:
-                if VERBOSE:
-                    print(f"EXIT SEARCH: mid_index < min_index")
-                looking = False  # TODO: Drop this.
+                if V_: print(f"EXIT SEARCH: mid_index < min_index")
                 return None
-
-
 
 
             # This check selects which side, left or right, the term belongs in and makes the adjustments to values to
@@ -120,26 +106,25 @@ class BinarySearchIterative:
             # indices in this list which we use to manage all processing.
 
             if self.s_list[mid_index] < term:
-                # Choose right side, discard left side, set up for search of right side next.
+                # Choose --RIGHT-- side, discard left side, set up for search of right side on next iteration.
                 # Right side will not include the mid_index element as we have now checked that element explicitly.
                 # In fact, because we use floor division, I think that means the mid_index element would NEVER
                 # be considered for the right side, separate from the fact that we choose not to include the mid_index
                 # element on ANY side. Our model/design is to exclude the mid_index element from ANY side membership
-                # For one thing, this elminates a wasted check on an element we already checked; slightly more efficient.
-                # Most importantly, though, is that to exclude the mid_index element like this is the MOST CORRECT design.
-                # And will likely lead to the simplest edge-case code additions. This is all part of our refactor thinking.
-                right_length = max_index - mid_index
-                if VERBOSE:
-                    print(f"The term ({term}) > the mid_index element value ({self.s_list[mid_index]}).")
-                    print(f"Next step will search RIGHT side. right_length: {right_length}")
+                # For one thing, this elminates a wasted check on an element we already checked; slightly more efficient on average.
+                # Most importantly, though, is that to exclude the mid_index element like this most-closely follows the model/concept/design.
+                # This will likely lead to the simplest edge-case code additions. This is all part of our refactor thinking.
+                right_length: int = max_index - mid_index
+                if V_: print(f"The term ({term}) > the mid_index element value ({self.s_list[mid_index]})."
+                             f"Next step will search RIGHT side. right_length: {right_length}")
                 # TODO: Check for an edge case regarding mid_index + 1 when near the end or starting list is small.
                 min_index = mid_index + 1  # We exclude the old mid_index element from the new RIGHT (or ANY) side.
                 mid_index = (mid_index + 1) + (right_length // 2)  # Locate new 'floor-half' mid_index, based on starting ONE element AFTER the old mid_index
                 # max_index remains unchanged when we choose the right side.
-                if VERBOSE:
-                    print(f"ADJUSTED: min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}")
+                if V_: print(f"ADJUSTED: min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}")
+
                 # if mid_index == max_index:
-                #     if VERBOSE:
+                #     if V_:
                 #         print(f"EXIT SEARCH via CHOOSE-RIGHT CHECK: mid_index == max_index")
                 #     # This means we think we need to look in the RIGHT side, but it is now size zero. Search exhausted.
                 #     looking = False  # Can drop this line. The loop will stop when we return.
@@ -149,33 +134,32 @@ class BinarySearchIterative:
                 # OR .. MAYBE NO CHECKS CAN HAPPEN HERE --IF-- WE HAVE AT LEAST A NEW mid_index ELEMENT TO CHECK NEXT LOOP.
 
             else:
-                # Choose left side, discard right side, set up for search of left side next.
+                # Choose --LEFT-- side, discard right side, set up for search of left side on next iteration.
                 # Left side will not include the mid_index element as we have now checked that element explicitly.
-                left_length = mid_index - min_index
-                if VERBOSE:
-                    print(f"The term ({term}) < the mid_index element value ({self.s_list[mid_index]}).")
-                    print(f"Next step will search LEFT side. left_length: {left_length}")
+                left_length: int = mid_index - min_index
+                if V_: print(f"The term ({term}) < the mid_index element value ({self.s_list[mid_index]})."
+                             f"Next step will search LEFT side. left_length: {left_length}")
                 max_index = mid_index - 1  # We exclude the old mid_index element from the new LEFT (or ANY) side.
                 # min_index remains unchanged when we choose the left side.
                 mid_index = min_index + (left_length // 2)
                 # TODO: Explain the above better. NOTE: This is where mid_index can become less than min_index. This might matter for some possible exit logic.
-                if VERBOSE:
-                    print(f"ADJUSTED: min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}")
+                if V_: print(f"ADJUSTED: min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}")
+
                 # if mid_index == min_index:
-                #     if VERBOSE:
+                #     if V_:
                 #         print(f"EXIT SEARCH via CHOOSE-LEFT CHECK: mid_index == min_index")
                 #     # This means we think we need to look in the LEFT side, but it is now size zero. Search exhausted.
                 #     looking = False  # Can drop this line. The loop will stop when we return.
                 #     return None
 
 
-
-
+# TODO: We could make a parent class to cover a little bit of common code but it does not seem critical that we do so.
 class BinarySearchRecursive:
     """Simple recursive implementation of the classic binary search algorithm."""
 
     def __init__(self, sorted_int_list: list[int]):
-        self.sorted_int_list = sorted_int_list
+        self.sorted_int_list: list[int] = sorted_int_list
+        self.traversal: list[str] = []  # A record of the LEFT-vs-RIGHT traversal decisions for a search. This varies with input.
         if len(self.sorted_int_list) == 0:
             raise ValueError("You must initialize with a sorted integer list of at least one integer.")
 
