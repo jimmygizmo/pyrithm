@@ -22,6 +22,7 @@ class TestBinarySearch(unittest.TestCase):
             [1, ]  # 1 element, term (0) @ index None
         ).search(0), None)
 
+    # TODO: Our new edge case. Returns index -1. WEIRD!
     def test_algorithm_search_binary__1e_t1_i0(self):
         self.assertEqual(bsearch(
             #0   # Indices
@@ -66,6 +67,7 @@ class TestBinarySearch(unittest.TestCase):
     # the mid index will fall on min or max. NOW, for solution, focusing on how in the case of 2 elements, the // 2
     # integer division results in the mid_index == max_index and so the left side has one element and the right side has none.
     # SOLUTION ??? I don't know yet.
+    # TODO: UPDATE: Solved. Now we have only 1 edge case left .. a different one. And we exposed 2 others but solved all 3, creating a new one.
     def test_algorithm_search_binary__2e_t3_iN(self):
         self.assertEqual(bsearch(
             #0  1   # Indices
