@@ -49,24 +49,26 @@ class BinarySearchIterative:
                 right_length: int = max_index - mid_index  # --RIGHT-- side selected for next search step.
                 if V_: print(f"   The term ({term}) > the mid_index element value ({self.s_list[mid_index]}).  "
                              f"Next search: RIGHT side. right_length: {right_length}")
-                new_min_index: int = mid_index + 1
-                if new_min_index > max_index:  # min cant move right past max for new right
-                    new_min_index = max_index
-                new_mid_index: int = (mid_index + 1) + (right_length // 2)  # This plus 1 moves us past the now-checked mid_index.
-                if new_mid_index > max_index:  # mid cant move right past max for new right
-                    new_mid_index = max_index
-                min_index = new_min_index
-                mid_index = new_mid_index
+                new_right_min_index: int = mid_index + 1
+                if new_right_min_index > max_index:  # min can't move right past max for new right side
+                    new_right_min_index = max_index
+                new_right_mid_index: int = (mid_index + 1) + (right_length // 2)  # This plus 1 moves us past the now-checked mid_index.
+                if new_right_mid_index > max_index:  # mid can't move right past max for new right side
+                    new_right_mid_index = max_index
+                min_index = new_right_min_index
+                mid_index = new_right_mid_index
                 # TODO: Possibly maintain left_length and right_length in vars so we can use them for our exit checks.
             else:
                 left_length: int = mid_index - min_index  # --LEFT-- side selected for next search step.
                 if V_: print(f"   The term ({term}) < the mid_index element value ({self.s_list[mid_index]}).  "
                              f"Next search: LEFT side. left_length: {left_length}")
-                new_max_index: int = mid_index - 1
-                if new_max_index < min_index:  # max cant move left past min for new left side
-                    new_max_index = min_index
-                new_mid_index: int = min_index + (left_length // 2)
-                max_index = new_max_index
-                mid_index = new_mid_index
+                new_left_max_index: int = mid_index - 1
+                if new_left_max_index < min_index:  # max can't move left past min for new left side
+                    new_left_max_index = min_index
+                new_left_mid_index: int = min_index + (left_length // 2)
+                if new_left_mid_index < min_index:  # mid can't move left past min for new left side
+                    new_left_mid_index = min_index
+                max_index = new_left_max_index
+                mid_index = new_left_mid_index
                 # TODO: Possibly maintain left_length and right_length in vars so we can use them for our exit checks.
 
