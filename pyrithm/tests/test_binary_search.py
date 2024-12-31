@@ -3,54 +3,29 @@
 import unittest
 # https://docs.python.org/3/library/unittest.html
 
-import inspect  # So we can inspect the stack and determine the name of each function for helpful logging.
-
 import pyrithm.algorithm.search.binary as bsearch  # Local module to be tested
 
 
-V_ = False  # Verbose logging switch
+V_ = True  # Verbose logging switch
 
 bsearch = bsearch.BinarySearchIterative  # TODO: Also test the recursive version, later when we have it.
 
-# NOTE REGARDING:     inspect.stack()[0][3]
-# This is a trick to see the name of the function/test in a convenient manner. I also use configurable verbose
-# output from the module iteself and this technique intersperses that output with the descriptive test names. Of
-# course part of the value with all this comes from using good, descriptive test names. In my case, these test
-# function names are also hierarchically accurate.
-
-# SIDENOTE: If you want to see the functions CALLER:
-# inspect.stack()[1][3]
-# If we try to implement this more cleanly using a decorator, we might need this.
-# TODO: Try implementing these before and after agnostic prints as a decorator. It is a classic use case, but with
-# the added complexity of the inspect call needed to see the inner function, not the decorator wrapper function.
-# It might just work, or we might need to use the caller version, or this idea might not even work. If it does, it will
-# remove a LOT of repeated text from this file, so it would be nice to do.
 
 # Utility function in module space (not in the class). This is a decorator. TODO: Any reason to make it a class func?
 def verbose_test(decorated_func):
     """For helping unit tests show their names, show function name with ascii header and footer."""
-    if V_:
+    if V_:  # Adds test function name and separator lines for each test
         def wrapper(*args, **kwargs):
-            print(f"\n- - - - - - - - - - - - - - - -  UNIT TEST: {decorated_func.__name__}\n")
+            print(f"\n- - - - - - - - - - - - - - - -  UNIT TEST: {decorated_func.__name__}")
             result = decorated_func(*args, **kwargs)
             print(f"- - - - - - - - - - - - - - - -")
             return result
-    else:
+    else:  # Adds only a blank line between output from each test
         def wrapper(*args, **kwargs):
             print()
             result = decorated_func(*args, **kwargs)
             return result
     return wrapper
-
-# TODO: UPDATE: The decorator idea is not working well with inspect but was worth a try and fun. This is what we get:
-# inspect.stack()[0][3]    says the function name is 'wrapper'
-# inspect.stack()[1][3]    sasys the funtion name is '_callTestMethod'
-# This makes sense .. of course we must be INSIDE the function to inspect it and decorators WRAP functions,
-# they don' infiltrate them. So this might not ever work with a decorator and it is not a critical feature. But there
-# might be some other way to look into later. Alas, this is all because the unittest module does not offer great
-# logging or verbosity options for excatly what I want to do in this case.
-# TODO: UPDATE - UPDATE: decorator/wrapper working well now using decorated_func.__name__   also, made this
-#                           a configurable decorator. Nice.
 
 
 class TestBinarySearch(unittest.TestCase):
@@ -470,7 +445,8 @@ class TestBinarySearch(unittest.TestCase):
     # processing traverses and can hit edge cases (limits) in many different scenarios (with a variety of exposure
     # to different kinds of bugs, which additionally can only occur in a few unexpected edge cases) this is why we
     # need very thorough coverage in unit tests for this module/algorithm. Also note, that we want to make a thorough
-    # comparison of different implementations in this project and even with other libraries.
+    # comparison of different implementations in this project and even with other libraries. Hence there are many
+    # reasons for great unit test coverage and numerous tests with varying input, in this specific case.
 
     @verbose_test
     def test_algorithm_search_binary__8e_missBeforeList(self):

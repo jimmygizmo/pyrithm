@@ -7,7 +7,6 @@ class BinarySearchIterative:
 
     def __init__(self, sorted_int_list: list[int]):
         self.s_list: list[int] = sorted_int_list
-        self.traversal: list[str] = []
         if len(self.s_list) == 0:
             raise ValueError("You must initialize with a sorted integer list of at least one integer.")
 
@@ -16,6 +15,7 @@ class BinarySearchIterative:
                      f"List element count (length): {len(self.s_list)}")
         # TODO: Move these vars to instance vars?
         attempt: int = 0
+        traversal: list[str] = []
         min_index: int = 0
         max_index: int = len(self.s_list) - 1
         # BIG SURPRISE!!! Things seem to be working but I see mid_index-related calcs are off. Attempting fix below here.
@@ -35,9 +35,12 @@ class BinarySearchIterative:
         left_length: int = max_index - min_index
         right_length: int = max_index - min_index
         selected_side: str|None = 'START'
+        side_code: str = 'S'
         while True:
             attempt += 1
-            if V_: print(f"ATTEMPT ({attempt}):  "
+            # traversal.append(side_code)
+            traversal.append(selected_side[0])  # because string[0] is the first character of the string (also a list)
+            if V_: print(f"ATTEMPT: ({attempt}    current side: {selected_side}    traversal: {''.join(traversal)}):\n"
                          f"min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}\n"
                          f"side: {selected_side}    left_length: {left_length}    right_length: {right_length}")
 
@@ -48,12 +51,18 @@ class BinarySearchIterative:
             if min_index == max_index:
                 if V_: print(f"[~ term NOT found ~] ({term})  Exit rule:  min_index == max_index")
                 return None
-            if mid_index > max_index:
-                if V_: print(f"[~ term NOT found ~] ({term})  Exit rule:  mid_index > max_index")
-                return None
-            if mid_index < min_index:
-                if V_: print(f"[~ term NOT found ~] ({term})  Exit rule:  mid_index < min_index")
-                return None
+            # ***** Disabled these other exit rules because now that all of our other logic is solid and stable with
+            # 65 diverse unit tests all passing, we can see clearly that we do not need these.
+            # NOTE: We also might not need the proposed left/right length data for exit checks (idea being we might
+            # save a step here and there for a small average improvement in efficiency)  BUT for the length issue
+            # we still need to study the specifc cases it would assist. So for now, these two checks can be deleted:
+            #
+            # if mid_index > max_index:
+            #     if V_: print(f"[~ term NOT found ~] ({term})  Exit rule:  mid_index > max_index")
+            #     return None
+            # if mid_index < min_index:
+            #     if V_: print(f"[~ term NOT found ~] ({term})  Exit rule:  mid_index < min_index")
+            #     return None
 
             if self.s_list[mid_index] < term:
                 right_length = max_index - mid_index  # --RIGHT-- side selected for next search step.
@@ -68,6 +77,7 @@ class BinarySearchIterative:
                 min_index = new_right_min_index
                 mid_index = new_right_mid_index
                 selected_side = 'RIGHT'
+                # side_code  = 'R'
             else:
                 left_length = mid_index - min_index  # --LEFT-- side selected for next search step.
                 if V_: print(f"   The term ({term}) < the mid_index element value ({self.s_list[mid_index]}).  "
@@ -81,4 +91,6 @@ class BinarySearchIterative:
                 max_index = new_left_max_index
                 mid_index = new_left_mid_index
                 selected_side = 'LEFT'
+                # side_code  = 'L'
+
 
