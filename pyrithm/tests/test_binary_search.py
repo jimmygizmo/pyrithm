@@ -8,10 +8,12 @@ import pyrithm.algorithm.search.binary as bsearch  # Local module to be tested
 
 V_ = True  # Verbose logging switch
 
-bsearch = bsearch.BinarySearchIterative  # TODO: Also test the recursive version, later when we have it.
+# bsearch = bsearch.BinarySearchIterative  # TODO: Also test the recursive version, later when we have it.
+bsearch = bsearch.StandardLibraryBisectWrapper  # TODO: Also test the recursive version, later when we have it.
 
 
-# Utility function in module space (not in the class). This is a decorator. TODO: Any reason to make it a class func?
+# Utility function in module space (not in the class). This is a decorator.
+# TODO: Any reason to make it a class func?  ANSWER: Only in a base class if we make one. No plans to subclass at the moment, so leave it here.
 def verbose_test(decorated_func):
     """For helping unit tests show their names, show function name with ascii header and footer."""
     if V_:  # Adds test function name and separator lines for each test

@@ -52,3 +52,34 @@ Of course, when the count is even .. you cannot easily pick ONE which is in the 
    apply to commercial code involved in business and the lesson is that it is worth it to invest in a quality code
    base and quality developers. (This is the exception, not the rule, hence I mention it here.)
 
+
+# Now that I have implemented this my own way from scratch without looking at anyone else's implementation, I will
+# compare mine to some others. Here is one:
+def binary_search(a, x, lo=0, hi=None):
+    if hi is None:
+        hi = len(a)
+    while lo < hi:
+        mid = (lo+hi)//2
+        midval = a[mid]
+        if midval < x:
+            lo = mid+1
+        elif midval > x:
+            hi = mid
+        else:
+            return mid
+    return -1
+
+From:
+https://stackoverflow.com/questions/212358/binary-search-bisection-in-python
+(* I'm not cheating at my self-assigned homework/project. I did my own implementation with no influences and now I compare mine to many others.)
+
+This is a decent look at bisect in context of binary search:
+https://www.geeksforgeeks.org/binary-search-bisect-in-python/
+
+NOTE: I think the difference between bisect_left and bisect_right in StdLib's bisect is probably that left uses floor division
+    to find the mid index and right uses ceiling division to find the mid index. The code only changes slightly.
+    TODO: Maybe I should make a right and left version of my own implementation?  (my initial one is a LEFT = floor div)
+
+
+
+

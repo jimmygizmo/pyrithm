@@ -1,7 +1,17 @@
 
+import bisect  # Bisect is part of Python's Standard Library, which we use here for comparison to Pyrithm modules.
+# NOTE: We provide a wrapper class, StandardLibraryBisectWrapper for compatibility with our unit tests for this module.
+
+
 V_: bool = True
 
-# TODO: Subclass ?
+
+class BinarySearch:
+    pass
+    # Planned base class. We might have 4 different binary search classes in this file and they share common code
+    #     which will go into the base class.
+
+
 class BinarySearchIterative:
     """Binary search algorithm, iterative implementation, full-featured but simple. No special optimizations."""
 
@@ -69,4 +79,37 @@ class BinarySearchIterative:
                 mid_index = new_left_mid_index
                 selected_side = 'LEFT'
                 selected_side_length = left_length
+
+
+class StandardLibraryBisectWrapper:
+    """TODO"""
+    # NOTE: All unit tests passing with this wrapper.
+
+    def __init__(self, sorted_int_list: list[int]):
+        self.s_list: list[int] = sorted_int_list
+        if len(self.s_list) == 0:
+            raise ValueError("You must initialize with a sorted integer list of at least one integer.")
+
+    def search(self, term: int) -> int|None:
+        if V_:
+            print(f"StandardLibraryBisectWrapper running...    Search term: {term}\n"
+                     f"List element count (length): {len(self.s_list)}")
+            print(f"[{', '.join(str(x) for x in self.s_list)}, ]")
+
+        return self.bisect_left_wrapper(term)
+
+    def bisect_left_wrapper(self, term: int) -> int|None:
+        i = bisect.bisect_left(self.s_list, term)
+        if i != len(self.s_list) and self.s_list[i] == term:
+            if V_:
+                print(f"StdLib's bisect.bisect_left: [* FOUND *] term at index: {i}\n")
+            return i
+        else:
+            if V_:
+                print(f"StdLib's bisect.bisect_left: [~ term NOT found ~]\n")
+            return None
+
+
+
+
 
