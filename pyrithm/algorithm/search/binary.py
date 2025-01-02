@@ -117,24 +117,22 @@ class BinarySearchIterativeMinimal:
             if imin == imax:
                 return None
 
-            if self.s_list[imid] < term:  # --RIGHT-- side selected for next search step.
-                new_right_min = imid + 1
-                if new_right_min > imax:  # min can't move right past max for new right side
-                    new_right_min = imax
+            if self.s_list[imid] < term:  # --RIGHT-- side selected for next search step
+                imin = imid + 1  # new imin is set for next step
+                if imin > imax:  # min can't move right past max for new right side
+                    imin = imax
                 new_right_mid = (imid + 1) + ((imax - imid) // 2)  # imax - imid is the new right side length
                 if new_right_mid > imax:  # mid can't move right past max for new right side
                     new_right_mid = imax
-                imin = new_right_min
                 imid = new_right_mid
-            else:  # --LEFT-- side selected for next search step.
-                new_left_max = imid - 1
-                if new_left_max < imin:  # max can't move left past min for new left side
-                    new_left_max = imin
+            else:  # --LEFT-- side selected for next search step
+                imax = imid - 1  # new imax is set for next step
+                if imax < imin:  # max can't move left past min for new left side
+                    imax = imin
                 new_left_mid = imin + ((imid - imin) // 2)  # imid - imin is new left side length
                 if new_left_mid < imin:  # mid can't move left past min for new left side
                     new_left_mid = imin
-                imax = new_left_max
-                imid = new_left_mid
+                imid = new_left_mid  # new imid is set for next step. imin does not change for LEFT selects.
 
 
 class StandardLibraryBisectWrapper(BinarySearch):
