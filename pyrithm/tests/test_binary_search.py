@@ -6,10 +6,11 @@ import unittest
 import pyrithm.algorithm.search.binary as bsearch  # Local module to be tested
 
 
-V_ = True  # Verbose logging switch
+V_: bool = True  # Verbose logging switch
 
-# bsearch = bsearch.BinarySearchIterative  # TODO: Also test the recursive version, later when we have it.
-bsearch = bsearch.StandardLibraryBisectWrapper  # TODO: Also test the recursive version, later when we have it.
+# bsearch = bsearch.BinarySearchIterative
+bsearch = bsearch.StandardLibraryBisectWrapper
+# TODO: Also test the recursive version, later when we have it.
 
 
 # Utility function in module space (not in the class). This is a decorator.

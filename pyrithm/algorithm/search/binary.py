@@ -1,32 +1,50 @@
 
-import bisect  # Bisect is part of Python's Standard Library, which we use here for comparison to Pyrithm modules.
+import bisect  # Bisect is part of Python's Standard Library, which we use here for comparison to our Pyrithm modules.
 # NOTE: We provide a wrapper class, StandardLibraryBisectWrapper for compatibility with our unit tests for this module.
 
 
-V_: bool = True
+V_: bool = True  # Verbose flag
 
-
+# New Super Class/Base Class. There is a little bit of code from our 4 implementation classes which we de-duplicate
+# here as a best practice. This is one type of refactoring.
 class BinarySearch:
-    pass
-    # Planned base class. We might have 4 different binary search classes in this file and they share common code
-    #     which will go into the base class.
-
-
-class BinarySearchIterative:
-    """Binary search algorithm, iterative implementation, full-featured but simple. No special optimizations."""
+    """Base class for binary search algorithm implementations which holds common attributes and code to support
+    the 4 different implementations of binary search we have in this module. Validates initialization data."""
 
     def __init__(self, sorted_int_list: list[int]):
         self.s_list: list[int] = sorted_int_list
         if len(self.s_list) == 0:
-            raise ValueError("You must initialize with a sorted integer list of at least one integer.")
+            raise ValueError("You must initialize with a sorted integer list (ascending) of at least one integer. "
+                             "The supplied list is empty.")
+        if not self.verify_sorted():
+            raise ValueError("You must initialize with a sorted integer list (ascending). "
+                             "The supplied list is not sorted properly.")
+        print(f"DEV EXPERIMENT: Base class reports current class as: {__class__.__name__}")
+
+    def verify_sorted(self) -> bool:
+        if V_: "Verifying that the list provided for initialization is sorted properly. (Has no out-of-order elements.)"
+        result = True
+        for i, x in enumerate(self.s_list, start=0):
+            # if V_: print(f"{i}: {x}")
+            if i > 0:
+                if self.s_list[i-1] > self.s_list[i]:
+                    result = False
+        return result
+
+    def verbose_summarize(self, child_class: str, term: int) -> None:
+        print(f"{child_class} running...    Search term: {term}\n"
+                 f"List element count (length): {len(self.s_list)}")
+        print(f"[{', '.join(str(x) for x in self.s_list)}, ]")
+
+
+class BinarySearchIterative(BinarySearch):
+    """Binary search algorithm, iterative implementation, full-featured but simple. No special optimizations."""
+    def __init__(self, sorted_int_list: list[int]):
+        super().__init__(sorted_int_list)
 
     def search(self, term: int) -> int|None:
-        if V_:
-            print(f"BinarySearchIterative running...    Search term: {term}\n"
-                     f"List element count (length): {len(self.s_list)}")
-            print(f"[{', '.join(str(x) for x in self.s_list)}, ]")
+        if V_: self.verbose_summarize(__class__.__name__, term)
 
-        # TODO: Move these vars to instance vars?
         attempt: int = 0
         traversal: list[str] = []
         min_index: int = 0
@@ -81,21 +99,14 @@ class BinarySearchIterative:
                 selected_side_length = left_length
 
 
-class StandardLibraryBisectWrapper:
-    """TODO"""
-    # NOTE: All unit tests passing with this wrapper.
-
+class StandardLibraryBisectWrapper(BinarySearch):
+    """TODO: Write this docstring"""
     def __init__(self, sorted_int_list: list[int]):
         self.s_list: list[int] = sorted_int_list
-        if len(self.s_list) == 0:
-            raise ValueError("You must initialize with a sorted integer list of at least one integer.")
+        super().__init__(sorted_int_list)
 
     def search(self, term: int) -> int|None:
-        if V_:
-            print(f"StandardLibraryBisectWrapper running...    Search term: {term}\n"
-                     f"List element count (length): {len(self.s_list)}")
-            print(f"[{', '.join(str(x) for x in self.s_list)}, ]")
-
+        if V_: self.verbose_summarize(__class__.__name__, term)
         return self.bisect_left_wrapper(term)
 
     def bisect_left_wrapper(self, term: int) -> int|None:
