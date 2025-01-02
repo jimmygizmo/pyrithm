@@ -165,6 +165,10 @@ class BinarySearchRecursive(BinarySearch):
                      f"  min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}\n"
                      f"  selected_side_length: {self.selected_side_length}")
 
+        new_min_index: int|None = None
+        new_mid_index: int|None = None
+        new_max_index: int|None = None
+
         if self.s_list[mid_index] == self.term:
             if V_: print(f"[* FOUND *] term ({self.term}) at index: {mid_index}    Steps/attempts: {self.attempt}")
             return mid_index
@@ -177,32 +181,30 @@ class BinarySearchRecursive(BinarySearch):
             right_length: int = max_index - mid_index  # --RIGHT-- side selected for next search step.
             if V_: print(f"    The term ({self.term}) > the mid_index element value ({self.s_list[mid_index]}).\n"
                          f"    Next search: RIGHT side. right_length: {right_length}")
-            new_right_min_index: int = mid_index + 1
-            if new_right_min_index > max_index:  # min can't move right past max for new right side
-                new_right_min_index = max_index
-            new_right_mid_index: int = (mid_index + 1) + (right_length // 2)  # This plus 1 moves us past the now-checked mid_index.
-            if new_right_mid_index > max_index:  # mid can't move right past max for new right side
-                new_right_mid_index = max_index
-            min_index = new_right_min_index
-            mid_index = new_right_mid_index
+            new_max_index = max_index  # Does not change when RIGHT selected. Included for clarity.
+            new_min_index: int = mid_index + 1
+            if new_min_index > max_index:  # min can't move right past max for new right side
+                new_min_index = max_index
+            new_mid_index: int = (mid_index + 1) + (right_length // 2)  # This plus 1 moves us past the now-checked mid_index.
+            if new_mid_index > max_index:  # mid can't move right past max for new right side
+                new_mid_index = max_index
             self.selected_side = 'RIGHT'
             self.selected_side_length = right_length
-            self.traverse(min_index, mid_index, max_index)  # RECURSE. Add another call onto the call stack.
+            self.traverse(new_min_index, new_mid_index, new_max_index)  # RECURSE. Add another call onto the call stack.
         else:
             left_length: int = mid_index - min_index  # --LEFT-- side selected for next search step.
             if V_: print(f"    The term ({self.term}) < the mid_index element value ({self.s_list[mid_index]}).\n"
                          f"    Next search: LEFT side. left_length: {left_length}")
-            new_left_max_index: int = mid_index - 1
-            if new_left_max_index < min_index:  # max can't move left past min for new left side
-                new_left_max_index = min_index
-            new_left_mid_index: int = min_index + (left_length // 2)
-            if new_left_mid_index < min_index:  # mid can't move left past min for new left side
-                new_left_mid_index = min_index
-            max_index = new_left_max_index
-            mid_index = new_left_mid_index
+            new_min_index = min_index  # Does not change when LEFT selected. Included for clarity.
+            new_max_index: int = mid_index - 1
+            if new_max_index < min_index:  # max can't move left past min for new left side
+                new_max_index = min_index
+            new_mid_index: int = min_index + (left_length // 2)
+            if new_mid_index < min_index:  # mid can't move left past min for new left side
+                new_mid_index = min_index
             self.selected_side = 'LEFT'
             self.selected_side_length = left_length
-            self.traverse(min_index, mid_index, max_index)  # RECURSE. Add another call onto the call stack.
+            self.traverse(new_min_index, new_mid_index, new_max_index)  # RECURSE. Add another call onto the call stack.
 
 
 class StandardLibraryBisectWrapper(BinarySearch):
