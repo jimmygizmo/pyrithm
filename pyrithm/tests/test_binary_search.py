@@ -9,7 +9,8 @@ import pyrithm.algorithm.search.binary as bsearch  # Local module to be tested
 V_: bool = True  # Verbose logging switch
 
 # bsearch = bsearch.BinarySearchIterative
-bsearch = bsearch.BinarySearchIterativeMinimal
+# bsearch = bsearch.BinarySearchIterativeMinimal
+bsearch = bsearch.BinarySearchRecursive
 # bsearch = bsearch.StandardLibraryBisectWrapper
 # TODO: Also test the recursive version, later when we have it.
 

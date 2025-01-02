@@ -11,8 +11,8 @@ my_sorted_list: list[int] = [1, 2, ]  # 1 elements
 
 # bsearch = pyrithm.algorithm.search.binary.BinarySearchIterative(my_sorted_list)
 # bsearch = pyrithm.algorithm.search.binary.BinarySearchIterativeMinimal(my_sorted_list)
-# bsearch = pyrithm.algorithm.search.binary.BinarySearchRecursive(my_sorted_list)
-bsearch = pyrithm.algorithm.search.binary.StandardLibraryBisectWrapper(my_sorted_list)
+bsearch = pyrithm.algorithm.search.binary.BinarySearchRecursive(my_sorted_list)
+# bsearch = pyrithm.algorithm.search.binary.StandardLibraryBisectWrapper(my_sorted_list)
 
 print(f"Sorted list to search:\n{', '.join(map(str, my_sorted_list))}")
 

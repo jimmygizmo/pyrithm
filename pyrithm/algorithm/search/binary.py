@@ -121,22 +121,94 @@ class BinarySearchIterativeMinimal:
                 imin = imid + 1  # new imin is set for next step
                 if imin > imax:  # min can't move right past max for new right side
                     imin = imax
-                new_right_mid = (imid + 1) + ((imax - imid) // 2)  # imax - imid is the new right side length
-                if new_right_mid > imax:  # mid can't move right past max for new right side
-                    new_right_mid = imax
-                imid = new_right_mid
+                new_imid = (imid + 1) + ((imax - imid) // 2)  # imax - imid is the new right side length
+                if new_imid > imax:  # mid can't move right past max for new right side
+                    new_imid = imax
+                imid = new_imid
             else:  # --LEFT-- side selected for next search step
                 imax = imid - 1  # new imax is set for next step
                 if imax < imin:  # max can't move left past min for new left side
                     imax = imin
-                new_left_mid = imin + ((imid - imin) // 2)  # imid - imin is new left side length
-                if new_left_mid < imin:  # mid can't move left past min for new left side
-                    new_left_mid = imin
-                imid = new_left_mid  # new imid is set for next step. imin does not change for LEFT selects.
+                new_imid = imin + ((imid - imin) // 2)  # imid - imin is new left side length
+                if new_imid < imin:  # mid can't move left past min for new left side
+                    new_imid = imin
+                imid = new_imid  # new imid is set for next step. imin does not change for LEFT selects.
+
+
+class BinarySearchRecursive(BinarySearch):
+    """Binary search algorithm, recursive implementation, full-featured but simple. No special optimizations.
+    In the recursive implementation which is not minimal and has logging, rather than pass a lot of arguments to
+    the inner recursive function (traverse), we choose to move many local variables to instance variables. This is being
+    considered for the other classes in this module, but this recursive class has a stronger reason to do that."""
+    def __init__(self, sorted_int_list: list[int]):
+        self.term: int|None = None  # TODO: If we move to instance variables for other classes, many can go into the base class.
+        self.attempt: int = 0  # Only for verbose logging
+        self.traversal: list[str] = []  # Only for verbose logging
+        self.selected_side: str = 'START'  # Only for verbose logging
+        super().__init__(sorted_int_list)
+        self.selected_side_length: int = len(self.s_list)  # Only for verbose logging. (Must be after super init.)
+
+    def search(self, term: int) -> int|None:
+        self.term = term
+        if V_: self.verbose_summarize(__class__.__name__, term)
+        min_index: int = 0
+        max_index: int = len(self.s_list) - 1
+        mid_index: int = (len(self.s_list) // 2)
+        if mid_index < min_index:
+            mid_index = min_index  # In this case, always 0
+        return self.traverse(min_index, max_index, mid_index)
+
+    def traverse(self, min_index: int, mid_index: int, max_index: int) -> int|None:
+        self.attempt += 1
+        self.traversal.append(self.selected_side[0])  # because string[0] is the first character of the string (also a list)
+        if V_: print(f"ATTEMPT: ({self.attempt})    current side: {self.selected_side}    traversal: {''.join(self.traversal)}\n"
+                     f"  min_index: {min_index}    mid_index: {mid_index}    max_index: {max_index}\n"
+                     f"  selected_side_length: {self.selected_side_length}")
+
+        if self.s_list[mid_index] == self.term:
+            if V_: print(f"[* FOUND *] term ({self.term}) at index: {mid_index}    Steps/attempts: {self.attempt}")
+            return mid_index
+
+        if min_index == max_index:
+            if V_: print(f"[~ term NOT found ~] ({self.term})  Exit rule:  min_index == max_index")
+            return None
+
+        if self.s_list[mid_index] < self.term:
+            right_length: int = max_index - mid_index  # --RIGHT-- side selected for next search step.
+            if V_: print(f"    The term ({self.term}) > the mid_index element value ({self.s_list[mid_index]}).\n"
+                         f"    Next search: RIGHT side. right_length: {right_length}")
+            new_right_min_index: int = mid_index + 1
+            if new_right_min_index > max_index:  # min can't move right past max for new right side
+                new_right_min_index = max_index
+            new_right_mid_index: int = (mid_index + 1) + (right_length // 2)  # This plus 1 moves us past the now-checked mid_index.
+            if new_right_mid_index > max_index:  # mid can't move right past max for new right side
+                new_right_mid_index = max_index
+            min_index = new_right_min_index
+            mid_index = new_right_mid_index
+            self.selected_side = 'RIGHT'
+            self.selected_side_length = right_length
+            self.traverse(min_index, mid_index, max_index)  # RECURSE. Add another call onto the call stack.
+        else:
+            left_length: int = mid_index - min_index  # --LEFT-- side selected for next search step.
+            if V_: print(f"    The term ({self.term}) < the mid_index element value ({self.s_list[mid_index]}).\n"
+                         f"    Next search: LEFT side. left_length: {left_length}")
+            new_left_max_index: int = mid_index - 1
+            if new_left_max_index < min_index:  # max can't move left past min for new left side
+                new_left_max_index = min_index
+            new_left_mid_index: int = min_index + (left_length // 2)
+            if new_left_mid_index < min_index:  # mid can't move left past min for new left side
+                new_left_mid_index = min_index
+            max_index = new_left_max_index
+            mid_index = new_left_mid_index
+            self.selected_side = 'LEFT'
+            self.selected_side_length = left_length
+            self.traverse(min_index, mid_index, max_index)  # RECURSE. Add another call onto the call stack.
 
 
 class StandardLibraryBisectWrapper(BinarySearch):
-    """TODO: Write this docstring"""
+    """This wrapper provides to the Standard Library bisect module, the same interface used by Pyrithm's binary search
+    module. This allows the large set of unit tests we have for this module to be run against bisect for a nice
+    comparison and to firther validate both the unit tests as well as Pyrithm's binary search."""
     def __init__(self, sorted_int_list: list[int]):
         self.s_list: list[int] = sorted_int_list
         super().__init__(sorted_int_list)
