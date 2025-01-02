@@ -1,12 +1,11 @@
 
 import bisect  # Bisect is part of Python's Standard Library, which we use here for comparison to our Pyrithm modules.
-# NOTE: We provide a wrapper class, StandardLibraryBisectWrapper for compatibility with our unit tests for this module.
+# StandardLibraryBisectWrapper is a wrapper class which enables bisect to work with our unit tests for this module.
 
 
 V_: bool = True  # Verbose flag
 
-# New Super Class/Base Class. There is a little bit of code from our 4 implementation classes which we de-duplicate
-# here as a best practice. This is one type of refactoring.
+
 class BinarySearch:
     """Base class for binary search algorithm implementations which holds common attributes and code to support
     the 4 different implementations of binary search we have in this module. Validates initialization data."""
@@ -19,13 +18,11 @@ class BinarySearch:
         if not self.verify_sorted():
             raise ValueError("You must initialize with a sorted integer list (ascending). "
                              "The supplied list is not sorted properly.")
-        print(f"DEV EXPERIMENT: Base class reports current class as: {__class__.__name__}")
 
     def verify_sorted(self) -> bool:
         if V_: "Verifying that the list provided for initialization is sorted properly. (Has no out-of-order elements.)"
         result = True
         for i, x in enumerate(self.s_list, start=0):
-            # if V_: print(f"{i}: {x}")
             if i > 0:
                 if self.s_list[i-1] > self.s_list[i]:
                     result = False
@@ -99,6 +96,47 @@ class BinarySearchIterative(BinarySearch):
                 selected_side_length = left_length
 
 
+class BinarySearchIterativeMinimal:
+    """Binary search algorithm, iterative implementation, simplfied code style often used in coding tests.
+    This is the identical functionality to the inerative version in this module which uses a mature code style.
+    In coding tests, time is often of the essence, so I have stripped out everything but the essentials, including
+    type hints which I recommend leaving out of timed coding tests unless requested. This class does not even inherit
+    the BinarySearch base class. This is as simple as possible, even using shorter variable names."""
+    def __init__(self, sorted_int_list):
+        self.s_list = sorted_int_list
+
+    def search(self, term):
+        imin = 0
+        imax = len(self.s_list) - 1
+        imid = (len(self.s_list) // 2)
+        if imid < imin:
+            imid = imin  # In this case, always 0
+        while True:
+            if self.s_list[imid] == term:
+                return imid
+            if imin == imax:
+                return None
+
+            if self.s_list[imid] < term:  # --RIGHT-- side selected for next search step.
+                new_right_min = imid + 1
+                if new_right_min > imax:  # min can't move right past max for new right side
+                    new_right_min = imax
+                new_right_mid = (imid + 1) + ((imax - imid) // 2)  # imax - imid is the new right side length
+                if new_right_mid > imax:  # mid can't move right past max for new right side
+                    new_right_mid = imax
+                imin = new_right_min
+                imid = new_right_mid
+            else:  # --LEFT-- side selected for next search step.
+                new_left_max = imid - 1
+                if new_left_max < imin:  # max can't move left past min for new left side
+                    new_left_max = imin
+                new_left_mid = imin + ((imid - imin) // 2)  # imid - imin is new left side length
+                if new_left_mid < imin:  # mid can't move left past min for new left side
+                    new_left_mid = imin
+                imax = new_left_max
+                imid = new_left_mid
+
+
 class StandardLibraryBisectWrapper(BinarySearch):
     """TODO: Write this docstring"""
     def __init__(self, sorted_int_list: list[int]):
@@ -121,6 +159,6 @@ class StandardLibraryBisectWrapper(BinarySearch):
             return None
 
 
-
-
+##
+#
 
