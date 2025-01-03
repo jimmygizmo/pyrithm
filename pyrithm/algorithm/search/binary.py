@@ -3,7 +3,7 @@ import bisect  # Bisect is part of Python's Standard Library, which we use here 
 # StandardLibraryBisectWrapper is a wrapper class which enables bisect to work with our unit tests for this module.
 
 
-V_: bool = True  # Verbose flag
+V_: bool = True  # Verbose logging
 
 
 class BinarySearch:
@@ -177,7 +177,7 @@ class BinarySearchRecursive(BinarySearch):
             right_length: int = max_index - mid_index  # --RIGHT-- side selected for next search step.
             if V_: print(f"    The term ({self.term}) > the mid_index element value ({self.s_list[mid_index]}).\n"
                          f"    Next search: RIGHT side. right_length: {right_length}")
-            new_max_index: int = max_index  # Does not change when RIGHT selected. Included for clarity.
+            new_max_index: int = max_index  # Does not change when RIGHT selected.
             new_min_index: int = mid_index + 1
             if new_min_index > max_index:  # min can't move right past max for new right side
                 new_min_index = max_index
@@ -190,7 +190,7 @@ class BinarySearchRecursive(BinarySearch):
             left_length: int = mid_index - min_index  # --LEFT-- side selected for next search step.
             if V_: print(f"    The term ({self.term}) < the mid_index element value ({self.s_list[mid_index]}).\n"
                          f"    Next search: LEFT side. left_length: {left_length}")
-            new_min_index: int = min_index  # Does not change when LEFT selected. Included for clarity.
+            new_min_index: int = min_index  # Does not change when LEFT selected.
             new_max_index: int = mid_index - 1
             if new_max_index < min_index:  # max can't move left past min for new left side
                 new_max_index = min_index
@@ -200,12 +200,57 @@ class BinarySearchRecursive(BinarySearch):
             self.selected_side = 'LEFT'
             self.selected_side_length = left_length
 
-        # if self.s_list[new_mid_index] == self.term:  # NOTE: REPEATED CHECK. This is first pass at porting interative to recursive.
-        #     if V_: print(f"[* FOUND *] term ({self.term}) at index: {new_mid_index}    Steps/attempts: {self.attempt}")
-        #     return new_mid_index
-        # else:
-        #     return self.traverse(new_min_index, new_mid_index, new_max_index)  # RECURSE. Add another call onto the call stack.
-        return self.traverse(new_min_index, new_mid_index, new_max_index)  # RECURSE. Add another call onto the call stack.
+        return self.traverse(new_min_index, new_mid_index, new_max_index)  # RECURSE. Push another call onto call stack.
+
+
+class BinarySearchRecursiveMinimal():
+    """Binary search algorithm, recursive implementation, full-featured but simple. No special optimizations.
+    In the recursive implementation which is not minimal and has logging, rather than pass a lot of arguments to
+    the inner recursive function (traverse), we choose to move many local variables to instance variables. This is being
+    considered for the other classes in this module, but this recursive class has a stronger reason to do that.
+
+    This is the identical functionality to the inerative version in this module which uses a mature code style.
+    In coding tests, time is often of the essence, so I have stripped out everything but the essentials, including
+    type hints which I recommend leaving out of timed coding tests unless requested. This class does not even inherit
+    the BinarySearch base class. This is as simple as possible, even using shorter variable names."""
+    def __init__(self, sorted_int_list: list[int]):
+        self.s_list: list[int] = sorted_int_list
+        self.term: int|None = None
+
+    def search(self, term: int) -> int|None:
+        self.term = term
+        imin: int = 0
+        imax: int = len(self.s_list) - 1
+        imid: int = (len(self.s_list) // 2)
+        if imid < imin:
+            imid = imin  # In this case, always 0
+        return self.traverse(imin, imax, imid)
+
+    def traverse(self, imin: int, imid: int, imax: int) -> int|None:
+        if self.s_list[imid] == self.term:
+            return imid
+
+        if imin == imax:
+            return None
+
+        if self.s_list[imid] < self.term:  # --RIGHT-- side selected for next search step.
+            new_imax: int = imax  # Does not change when RIGHT selected.
+            new_imin: int = imid + 1
+            if new_imin > imax:  # min can't move right past max for new right side
+                new_imin = imax
+            new_imid: int = (imid + 1) + ((imax - imid) // 2)  # imid+1 moves us past now-checked imid. (imax - imid) is the new right side length
+            if new_imid > imax:  # mid can't move right past max for new right side
+                new_imid = imax
+        else:  # --LEFT-- side selected for next search step.
+            new_imin: int = imin  # Does not change when LEFT selected.
+            new_imax: int = imid - 1
+            if new_imax < imin:  # max can't move left past min for new left side
+                new_imax = imin
+            new_imid: int = imin + ((imid - imin) // 2)  # (imid - imin) is new left side length
+            if new_imid < imin:  # mid can't move left past min for new left side
+                new_imid = imin
+
+        return self.traverse(new_imin, new_imid, new_imax)  # RECURSE. Push another call onto call stack.
 
 
 class StandardLibraryBisectWrapper(BinarySearch):

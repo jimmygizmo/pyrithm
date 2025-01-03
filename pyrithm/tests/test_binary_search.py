@@ -1,22 +1,21 @@
 #! /usr/bin/env python
 
 import unittest
-# https://docs.python.org/3/library/unittest.html
-
 import pyrithm.algorithm.search.binary as bsearch  # Local module to be tested
 
 
-V_: bool = True  # Verbose logging switch
+V_: bool = True  # Set to True to enhance test output with descsriptive test function names and better formatting.
+# When setting this True, you should also set the same to True in the module file as it has good verbose logging.
 
 # bsearch = bsearch.BinarySearchIterative
 # bsearch = bsearch.BinarySearchIterativeMinimal
-bsearch = bsearch.BinarySearchRecursive
+# bsearch = bsearch.BinarySearchRecursive
+bsearch = bsearch.BinarySearchRecursiveMinimal
 # bsearch = bsearch.StandardLibraryBisectWrapper
-# TODO: Also test the recursive version, later when we have it.
 
 
-# Utility function in module space (not in the class). This is a decorator.
-# TODO: Any reason to make it a class func?  ANSWER: Only in a base class if we make one. No plans to subclass at the moment, so leave it here.
+# Utility function in module space (not in the class). This decorator formats unit test + module output for
+#     readability and importantly, shows the test funtion name in the output, which summarizes each test's parameters.
 def verbose_test(decorated_func):
     """For helping unit tests show their names, show function name with ascii header and footer."""
     if V_:  # Adds test function name and separator lines for each test
@@ -199,9 +198,6 @@ class TestBinarySearch(unittest.TestCase):
             #0  1  2  3   # Indices
             [1, 2, 4, 5, ]  # 4 elements, term (6) @ index None
         ).search(6), None)
-
-
-    # TODO: 5 Element Tests, 6 Element Tests
 
 
     # 7 Element Tests
@@ -522,7 +518,6 @@ class TestBinarySearch(unittest.TestCase):
             #0  1  2  3  4  5  6  7   # Indices
             [1, 2, 3, 4, 5, 6, 7, 8, ]  # 8 elements, term (9) @ index None
         ).search(9), None)
-
 
 
     # Higher Element Tests
