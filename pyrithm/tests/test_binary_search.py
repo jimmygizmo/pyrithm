@@ -4,14 +4,18 @@ import unittest
 import pyrithm.algorithm.search.binary as bsearch  # Local module to be tested
 
 
+# TODO: Eventually we will probably move unit tests into a directory/file structure which matches the module itself.
+# Current path:    pyrithm/tests/test_binary_search.py
+
 V_: bool = True  # Set to True to enhance test output with descsriptive test function names and better formatting.
 # When setting this True, you should also set the same to True in the module file as it has good verbose logging.
 
 # bsearch = bsearch.BinarySearchIterative
 # bsearch = bsearch.BinarySearchIterativeMinimal
 # bsearch = bsearch.BinarySearchRecursive
-bsearch = bsearch.BinarySearchRecursiveMinimal
+# bsearch = bsearch.BinarySearchRecursiveMinimal
 # bsearch = bsearch.StandardLibraryBisectWrapper
+bsearch = bsearch.BinarySearchIterativeAlternate
 
 
 # Utility function in module space (not in the class). This decorator formats unit test + module output for

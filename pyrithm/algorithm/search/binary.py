@@ -3,6 +3,11 @@ import bisect  # Bisect is part of Python's Standard Library, which we use here 
 # StandardLibraryBisectWrapper is a wrapper class which enables bisect to work with our unit tests for this module.
 
 
+# This module has 4 classes implementing binary search and a 5th wrapper class for comparison to Python's binary search.
+# We have 65 unit tests which thoroughly stress binary search and these can be used on any class here.
+# UNIT TESTS for this module:    pyrithm/tests/test_binary_search.py
+# TODO: Eventually we will probably move unit tests into a directory/file structure which matches the module itself.
+
 V_: bool = True  # Verbose logging
 
 
@@ -222,7 +227,7 @@ class BinarySearchRecursiveMinimal():
         imin: int = 0
         imax: int = len(self.s_list) - 1
         imid: int = (len(self.s_list) // 2)
-        if imid < imin:
+        if imid < imin:  # TODO: Can we remove this check?
             imid = imin  # In this case, always 0
         return self.traverse(imin, imax, imid)
 
@@ -233,7 +238,7 @@ class BinarySearchRecursiveMinimal():
         if imin == imax:
             return None
 
-        if self.s_list[imid] < self.term:  # --RIGHT-- side selected for next search step.
+        if self.s_list[imid] < self.term:  # --RIGHT-- side selected for next search recursion.
             new_imax: int = imax  # Does not change when RIGHT selected.
             new_imin: int = imid + 1
             if new_imin > imax:  # min can't move right past max for new right side
@@ -241,7 +246,7 @@ class BinarySearchRecursiveMinimal():
             new_imid: int = (imid + 1) + ((imax - imid) // 2)  # imid+1 moves us past now-checked imid. (imax - imid) is the new right side length
             if new_imid > imax:  # mid can't move right past max for new right side
                 new_imid = imax
-        else:  # --LEFT-- side selected for next search step.
+        else:  # --LEFT-- side selected for next search recursion.
             new_imin: int = imin  # Does not change when LEFT selected.
             new_imax: int = imid - 1
             if new_imax < imin:  # max can't move left past min for new left side
@@ -275,6 +280,28 @@ class StandardLibraryBisectWrapper(BinarySearch):
             if V_:
                 print(f"StdLib's bisect.bisect_left: [~ term NOT found ~]\n")
             return None
+
+
+class BinarySearchIterativeAlternate:
+    """Binary search algorithm, iterative implementation, alternate logic structure. This is very similar to the
+    iterative version above, just with some limit logic and exit logic combined into the while loop. This is just a
+    different way to code it which operates very similarly. This one is done in the minimal style (no logging etc.)
+    TODO: Compare any advantage or disadvantage"""
+    def __init__(self, sorted_int_list):
+        self.s_list = sorted_int_list
+
+    def search(self, term):
+        imin = 0
+        imax = len(self.s_list) - 1
+        while imin <= imax:
+            imid = imin + (imax - imin) // 2
+            if self.s_list[imid] == term:
+                return imid
+            elif term < self.s_list[imid]:
+                imax = imid - 1
+            else:
+                imin = imid + 1
+        return None
 
 
 ##
