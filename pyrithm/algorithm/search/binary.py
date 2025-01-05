@@ -286,7 +286,7 @@ class BinarySearchIterativeAlternate:
     """Binary search algorithm, iterative implementation, alternate logic structure. This is very similar to the
     iterative version above, just with some limit logic and exit logic combined into the while loop. This is just a
     different way to code it which operates very similarly. This one is done in the minimal style (no logging etc.)
-    TODO: Compare any advantage or disadvantage"""
+    This version has quite a bit less code and is much simpler than the 'minimal' iterative version above."""
     def __init__(self, sorted_int_list):
         self.s_list = sorted_int_list
 
@@ -302,6 +302,43 @@ class BinarySearchIterativeAlternate:
             else:
                 imin = imid + 1
         return None
+
+
+# Work on another important strategy is occuring below here ############################################################
+
+# I think this work is going to lead to more powerful bisect_left and bisect_right functions based on this new
+# approach. Ultimately these will still be very similar to the iterative classes above, but there is value in finding
+# the best conceptualization of the problem and pairing that with the best resulting code (simplest code with simplest
+# edge case logic which is also overall easy to understand). Also, at this point, I might go from supporting only int
+# to supporting other types in a general sense (which holds some caveats), so we will see. I have not yet looked at
+# the code for the bisect module in the Python Standard Library, but it seems we might be approaching that. This is a
+# great study of an important algorithm and there is a lot of value in exploring all the different approaches and the
+# trade-offs in the pros and cons of each.
+
+# TODO: Another approach to binary search, which simplifies conceptualization of the solution, from some perspectives:
+#       Start with the idea: Where would I insert the 'term' into the sorted list so as to maintain the sort order?
+#       If the term exists in the list, where would I insert the term so that it would be the first occurance,
+#       if there would be multiple occurances of that term after the insert?    From: https://youtu.be/tgVSkMA8joQ
+#       If you take this approach and this insert point is less than 0 or greater than the original max index,
+#       then you would return None for a search result because the insert is proposed, outside of the original list.
+#       Similarly, if the insert point is greater XXXX than or equal to 0 and less than the original max index,
+#       then you would return the search result as the insert point plus 1.
+#       TODO: Fix flaws in the above comments.
+
+# THINK: Where would I insert the term so that it would be the first occurance of this term in the list, whether or not
+# the term is in the list. In fact, we need only think about terms being sorted correctly with respect to the term
+# itself. Some elements in the list can even be out of order as long as this does not occur adjacent to the insert
+# position for the term. We will apply a test and look for the first place that test changes from True to False,
+# assuming there is only one place this happens.  TTTTTFFF
+
+
+class BinarySearchInsertApproach:
+    """Binary search algorithm, insert approach. TODO: Write this desc."""
+    def __init__(self, sorted_int_list):
+        self.s_list = sorted_int_list
+
+    def search(self, term):
+        pass
 
 
 ##
