@@ -20,7 +20,7 @@ typing_extensions==4.12.2
 
 # Python/Pip modules for module installations/upgrades, via manual uprgades
 setuptools==75.6.0
-wheel==0.45.1
+wheel==0.46.2
 
 
 ##
